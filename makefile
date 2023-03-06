@@ -1,4 +1,4 @@
-#Primer makefileholaholahola
+#Primer makefile
 #David Pérez Tobarra
 
 AUTOR = David
