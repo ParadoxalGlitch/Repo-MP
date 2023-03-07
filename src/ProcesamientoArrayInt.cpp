@@ -94,3 +94,38 @@ int * PosMayor (int *pv, int izda, int dcha)
 
 
 /*****************************************************************************/
+
+
+/*****************************************************************************/
+// Ordena un vector mediante el sistema de selección. En cada iteración,
+// se busca el componente más pequeño del sub-vector derecho y se coloca
+// en el sub-vector izquierdo
+// Parámetros: int *v, puntero que apunta a una casilla del vector a procesar.
+//			   pos_inic, extremo izquierdo del intervalo a procesar.
+//			   pos_fin, extremo derecho del intervalo a procesar.
+//
+
+void OrdenaSeleccion (int *v, int pos_inic, int pos_fin)
+{
+
+    int* ptr = v + pos_inic;
+    int* ultimo = v + pos_fin;
+    int* pos_min = nullptr;
+    int num_pos = pos_fin - pos_inic + 1;
+    int intercambia;
+
+
+    while ( ptr < ultimo ){
+        for (int i = 0; i < num_pos; i++){
+            pos_min = ptr + i;
+            for (int j = i + 1; j < num_pos ; j++){
+                if (*(ptr + j) < *pos_min){
+                    intercambia = *ptr;
+                    *ptr = *pos_min;
+                    *pos_min = intercambia;
+                }
+            }
+        }
+    }
+
+}
