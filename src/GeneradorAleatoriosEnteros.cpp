@@ -23,7 +23,7 @@ public:
 	
 	/************************************************************************/
 		
-	GeneradorAleatorioEnteros() : GeneradorAleatorioEnteros(0, 1) 
+	GeneradorAleatorioEnteros() : GeneradorAleatorioEnteros(0, 1)
 	{ }
 	
 	/************************************************************************/  
