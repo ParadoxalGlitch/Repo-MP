@@ -108,24 +108,51 @@ int * PosMayor (int *pv, int izda, int dcha)
 void OrdenaSeleccion (int *v, int pos_inic, int pos_fin)
 {
 
-    int* ptr = v + pos_inic;
-    int* ultimo = v + pos_fin;
-    int* pos_min = nullptr;
-    int num_pos = pos_fin - pos_inic + 1;
+    int pos_min;
+    int min;
     int intercambia;
 
-
-    while ( ptr < ultimo ){
-        for (int i = 0; i < num_pos; i++){
-            pos_min = ptr + i;
-            for (int j = i + 1; j < num_pos ; j++){
-                if (*(ptr + j) < *pos_min){
-                    intercambia = *ptr;
-                    *ptr = *pos_min;
-                    *pos_min = intercambia;
-                }
+    for (int izda = 0 ; izda < pos_fin-1; izda++){
+        min = *(v+izda);
+        pos_min = izda;
+        for (int i = izda + 1; i < pos_fin; i++){
+            if (*(v+i) < min){
+                min = *(v+i);
+                pos_min = i;
             }
         }
+        intercambia = *(v+izda);
+        *(v+izda) = min;
+        *(v+pos_min) = intercambia;
+    }
+}
+
+
+/*****************************************************************************/
+
+
+/*****************************************************************************/
+// Ordena un vector mediante el sistema de inserción. Se divide el vector
+// en dos sub-vectores, el ordenado (izquierda) y el desordenado (derecha).
+// Se busca el primer elemento del sector desordenado y se coloca de
+// forma ordenada en el sector ordenado
+// Parámetros: int *v, puntero que apunta a una casilla del vector a procesar.
+//			   pos_inic, extremo izquierdo del intervalo a procesar.
+//			   pos_fin, extremo derecho del intervalo a procesar.
+//
+
+void OrdenaInsercion (int *v, int pos_inic, int pos_fin){
+
+    int a_desplazar;
+    int i;
+
+    for (int izda = 1; izda < pos_fin; izda++){
+        a_desplazar = *(v+izda);
+
+        for (i = izda; i > 0 && a_desplazar < *(v+i-1); i--)
+            *(v+i) = *(v+i-1);
+
+        *(v+i) = a_desplazar;
     }
 
 }

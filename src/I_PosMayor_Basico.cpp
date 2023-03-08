@@ -42,7 +42,14 @@ int main()
     while(max < 1 || max > TOPE){
         cout << "El valor introducido es inválido" << endl;
         cout << "Inténtalo de nuevo: ";
-        cin >> max;
+        cin >> max; 
+        /*
+        
+        
+        MODULARIZAR
+        
+        
+        */
     }
 
     // Una vez comprobado, relleno el vector con
@@ -51,6 +58,17 @@ int main()
     for (int i=0; i<max; i++){
         vector[i] = aleatorio.Siguiente();
         util_v++;
+
+
+
+        /*
+        
+        
+        MODULARIZAR
+        
+        
+        
+        */
     }
 
     // Pregunto al usuario el intervalo donde quiere
@@ -79,6 +97,16 @@ int main()
         cout << "El valor introducido es inválido." << endl;
         cout << "Inténtalo de nuevo: ";
         cin >> dcha;
+
+
+
+        /*
+        
+        
+        MODULARIZAR
+        
+        
+        */
     }
 
 
