@@ -10,6 +10,7 @@
 /*****************************************************************************/
 
 #include "ProcesamientoArrayInt.h"
+#include <iostream>
 using namespace std;
 
 
@@ -112,10 +113,10 @@ void OrdenaSeleccion (int *v, int pos_inic, int pos_fin)
     int min;
     int intercambia;
 
-    for (int izda = 0 ; izda < pos_fin-1; izda++){
+    for (int izda = pos_inic ; izda <= pos_fin; izda++){
         min = *(v+izda);
         pos_min = izda;
-        for (int i = izda + 1; i < pos_fin; i++){
+        for (int i = izda + 1; i <= pos_fin; i++){
             if (*(v+i) < min){
                 min = *(v+i);
                 pos_min = i;
@@ -146,13 +147,178 @@ void OrdenaInsercion (int *v, int pos_inic, int pos_fin){
     int a_desplazar;
     int i;
 
-    for (int izda = 1; izda < pos_fin; izda++){
+    for (int izda = pos_inic; izda <= pos_fin; izda++){
         a_desplazar = *(v+izda);
 
-        for (i = izda; i > 0 && a_desplazar < *(v+i-1); i--)
+        for (i = izda; i > pos_inic && a_desplazar < *(v+i-1); i--)
             *(v+i) = *(v+i-1);
 
         *(v+i) = a_desplazar;
     }
+}
+
+/*****************************************************************************/
+
+/*****************************************************************************/
+// Ordena un vector mediante el sistema de intercambio directo. Se divide
+// el vector en dos sectores, el izquierdo ordenado y el derecho desordenado.
+// En el vector derecho se van comparando desde el final 2 a 2 y se va
+// moviendo el mas pequeño, y así en repetidas iteraciones.
+// Parámetros: int *v, puntero que apunta a una casilla del vector a procesar.
+//			   pos_inic, extremo izquierdo del intervalo a procesar.
+//			   pos_fin, extremo derecho del intervalo a procesar.
+//
+
+void OrdenaIntercambio (int *v, int pos_inic, int pos_fin){
+
+
+    int intercambia;
+
+    for (int izda = pos_inic; izda < pos_fin; izda++){
+        for (int i = pos_fin ; i > izda ; i--){
+            if (*(v+i) < *(v+i-1)){
+                intercambia = *(v+i);
+                *(v+i) = *(v+i-1);
+                *(v+i-1) = intercambia;
+            }
+        }
+    }
+}
+
+/*****************************************************************************/
+
+/*****************************************************************************/
+// Rellena el vector usando la función GenerarAleatoriosEnteros, según los
+// parámetros indicados por el usuario. 
+// Parámetros: int *p, puntero que apunta a una casilla del vector a rellenar.
+//             num_datos, cantidad de casillas a rellenar.
+//             min_aleat, el número mas pequeño entre los que se elegirá
+//                        para generar el contenido del vector.
+//             max_aleat, el número mas grande entre los que se elegirá
+//                        para generar el contenido del vector.
+//
+
+void RellenaVector (int *p, int num_datos, int min_aleat, int max_aleat){
+
+    GeneradorAleatorioEnteros aleatorio(min_aleat, max_aleat);
+
+    for (int i=0; i<num_datos; i++){
+        *(p+i) = aleatorio.Siguiente();
+    }
+}
+
+/*****************************************************************************/
+
+/*****************************************************************************/
+// Comprueba si los datos proporcionados para rellenar el vector son correctos
+// Parámetros: num_datos, cantidad de casillas que se quieren rellenar.
+//             tope, capacidad máxima del vector.
+//
+
+bool ComprobarNumDatos (int num_datos, int tope){
+
+    bool Correcto = true;
+
+    if (num_datos < 2){
+        Correcto = false;
+        cout << "El vector debe tener almenos dos casillas" << endl;
+    }
+    if (num_datos > tope){
+        Correcto = false;
+        cout << "El vector no puede tener mas de " << tope << " casillas\n";
+    }
+
+    if (!Correcto)
+        cout << "Por favor, inténtelo de nuevo" << endl;
+    
+    return Correcto;
+
 
 }
+
+/*****************************************************************************/
+
+/*****************************************************************************/
+// Comprueba si los datos proporcionados sobre el intervalo son correctos.
+// Parámetros: izda, extremo inferior del intervalo.
+//             dcha, extremo superior del intervalo.
+//             num_Datos, cantidad de casillas que posee el vector.
+//
+
+bool ComprobarIntervalo (int izda, int dcha, int num_datos){
+    bool Correcto = true;
+
+    if (izda < 0){
+        Correcto = false;
+        cout << "El extremo inferior debe ser igual o superior a 0" << endl;
+    }
+    if (dcha > num_datos-1){
+        Correcto = false;
+        cout << "El extremo superior debe ser inferior o igual a ";
+        cout << num_datos-1 << endl;
+    }
+    if (izda > dcha){
+        Correcto = false;
+        cout << "El extremo inferior no debe ser superior al extremo superior";
+        cout << endl;
+    }
+    
+    if (!Correcto)
+        cout << "Por favor, inténtalo de nuevo" << endl;
+
+    return Correcto;
+
+
+}
+
+/*****************************************************************************/
+
+/*****************************************************************************/
+// Comprueba si ha sido elegida de forma correcta una forma de ordenación del
+// intervalo.
+// Parametros: opcion, opcion elegida en relación a las distintas formas
+//                     de ordenar el intervalo
+//
+
+bool ComprobarOpcion (int opcion){
+    bool Correcto = true;
+
+    if (opcion < 1 || opcion > 3){
+        Correcto = false;
+        cout << "No ha introducido una opción correcta." << endl;
+        cout << "Por favor, inténtelo de nuevo";
+    }
+
+    return Correcto;
+}
+
+/*****************************************************************************/
+
+/*****************************************************************************/
+// Recibe 3 vectores, 2 los cuales entremezclará y guardará en el tercero,
+// sobreescribiendo principalmente lo que haya en este. La idea es que el
+// tercer vector venga vacío y preparado con el tamaño exacto necesario.
+// Parametros: 
+
+void MezclarVectores (int *v1, int *v2, int *res, int tam_v1, int tam_v2, int tam_res){
+
+
+    int i = 0;
+    int j = 0;
+    int k = 0;
+
+    while (i < tam_v1 || j < tam_v2){
+        *(res + j) = *(v1 + i);
+        i++;
+        j++;
+    
+
+
+    }
+        
+
+
+
+
+}
+

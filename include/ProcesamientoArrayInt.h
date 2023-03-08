@@ -109,4 +109,63 @@ void OrdenaInsercion (int *v, int pos_inic, int pos_fin);
 
 void OrdenaIntercambio (int *v, int pos_inic, int pos_fin);
 
+/*****************************************************************************/
+
+///////////////////////////////////////////////////////////////////////////////
+
+/*****************************************************************************/
+// Rellena el vector usando la función GenerarAleatoriosEnteros, según los
+// parámetros indicados por el usuario. 
+// Parámetros: int *p, puntero que apunta a una casilla del vector a rellenar.
+//             num_datos, cantidad de casillas a rellenar.
+//             min_aleat, el número mas pequeño entre los que se elegirá
+//                        para generar el contenido del vector.
+//             max_aleat, el número mas grande entre los que se elegirá
+//                        para generar el contenido del vector.
+//
+
+void RellenaVector (int *p, int num_datos, int min_aleat, int max_aleat);
+
+/*****************************************************************************/
+
+///////////////////////////////////////////////////////////////////////////////
+
+/*****************************************************************************/
+// Comprueba si los datlos proporcionados para rellenar el vector son correctos
+// Parámetros: num_datos, cantidad de casillas que se quieren rellenar.
+//             tope, capacidad máxima del vector.
+//
+
+bool ComprobarNumDatos (int num_datos, int tope);
+
+/*****************************************************************************/
+
+///////////////////////////////////////////////////////////////////////////////
+
+/*****************************************************************************/
+// Comprueba si los datos proporcionados sobre el intervalo son correctos.
+// Parámetros: izda, extremo inferior del intervalo.
+//             dcha, extremo superior del intervalo.
+//             num_Datos, cantidad de casillas que posee el vector.
+//
+
+bool ComprobarIntervalo (int izda, int dcha, int num_datos);
+
+/*****************************************************************************/
+
+///////////////////////////////////////////////////////////////////////////////
+
+/*****************************************************************************/
+// Comprueba si ha sido elegida de forma correcta una forma de ordenación del
+// intervalo.
+// Parametros: opcion, opcion elegida en relación a las distintas formas
+//                     de ordenar el intervalo
+//
+
+bool ComprobarOpcion (int opcion);
+
+/*****************************************************************************/
+
+
+
 #endif
