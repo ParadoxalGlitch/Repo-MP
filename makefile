@@ -1,4 +1,4 @@
-#Primer Makefile
+#Makefile Ejercicios Primera Entrega
 #David Pérez Tobarra
 
 AUTOR = David
@@ -10,20 +10,33 @@ LIB = $(HOME)/lib
 OBJ = $(HOME)/obj
 BIN = $(HOME)/bin
 
-all: presentacion $(BIN)/saludo $(BIN)/saludo_en_dos_pasos clean
+all: presentacion $(BIN)/I_PosMayor_Basico $(BIN)/I_OrdenaVector $(BIN)/I_OrdenayMezclaVectores clean
 	@echo Terminado
-
-bin/saludo : $(SRC)/saludo.cpp
-	g++ -o $(BIN)/saludo $(SRC)/saludo.cpp
+		
+obj/ProcesamientoArrayInt.o : $(SRC)/ProcesamientoArrayInt.cpp $(INCLUDE)/ProcesamientoArrayInt.h
+	g++ -c -o obj/ProcesamientoArrayInt.o src/ProcesamientoArrayInt.cpp -I./include -std=c++11
+		
 	
-obj/saludo.o : $(SRC)/saludo.cpp
-	g++ -c -o $(OBJ)/saludo.o $(SRC)/saludo.cpp
+obj/I_PosMayor_Basico.o : $(SRC)/I_PosMayor_Basico.cpp $(INCLUDE)/ProcesamientoArrayInt.h
+	g++ -c -o obj/I_PosMayor_Basico.o  src/I_PosMayor_Basico.cpp -I./include -std=c++11
 	
-bin/saludo_en_dos_pasos : $(OBJ)/saludo.o
-	g++ -o $(BIN)/saludo_en_dos_pasos $(OBJ)/saludo.o
+bin/I_PosMayor_Basico : $(OBJ)/I_PosMayor_Basico.o $(OBJ)/ProcesamientoArrayInt.o
+	g++ -o bin/I_PosMayor_Basico obj/ProcesamientoArrayInt.o obj/I_PosMayor_Basico.o
+	
+obj/I_OrdenaVector.o : $(SRC)/I_OrdenaVector.cpp $(INCLUDE)/ProcesamientoArrayInt.h
+	g++ -c -o obj/I_OrdenaVector.o  src/I_OrdenaVector.cpp -I./include -std=c++11
+	
+bin/I_OrdenaVector : $(OBJ)/I_OrdenaVector.o $(OBJ)/ProcesamientoArrayInt.o
+	g++ -o bin/I_OrdenaVector obj/ProcesamientoArrayInt.o obj/I_OrdenaVector.o
+	
+obj/I_OrdenayMezclaVectores.o : $(SRC)/I_OrdenayMezclaVectores.cpp $(INCLUDE)/ProcesamientoArrayInt.h
+	g++ -c -o obj/I_OrdenayMezclaVectores.o  src/I_OrdenayMezclaVectores.cpp -I./include -std=c++11
+	
+bin/I_OrdenayMezclaVectores : $(OBJ)/I_OrdenayMezclaVectores.o $(OBJ)/ProcesamientoArrayInt.o
+	g++ -o bin/I_OrdenayMezclaVectores obj/ProcesamientoArrayInt.o obj/I_OrdenayMezclaVectores.o
 	
 clean:
-	rm $(OBJ)/*
+	-rm $(OBJ)/*
 	@echo objetos eliminados
 		
 mr.proper: clean

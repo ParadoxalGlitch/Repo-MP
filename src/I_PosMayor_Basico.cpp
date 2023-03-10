@@ -49,11 +49,16 @@ int main()
     cin >> menor;
     cout << "Mayor: ";
     cin >> mayor;
+    cout << endl;
 
     // Relleno el vector
 
     RellenaVector(vector, num_datos, menor, mayor);
 
+    // Muestro el vector generado por pantalla
+    
+    MuestraVector(vector, num_datos);
+    cout << endl;
 
     // Pregunto al usuario el intervalo donde quiere
     // buscar el máximo, asegurándome de que dicho intervalo
@@ -72,9 +77,7 @@ int main()
 
     }
 
-    for (int i=0; i<util_v; i++){
-        cout << "[" << vector[i] << "]";
-    }
+
 
     // Llamo a la función PosMayor pasándole el vector y los extremos
     // para que calcule el mayor de ese intervalo.

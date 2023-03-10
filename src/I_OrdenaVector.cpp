@@ -20,7 +20,7 @@ int main(){
     int num_datos;
     int dcha, izda;
     int menor, mayor;
-    int opcion;
+    int opcion = 0;
 
 
     // Le pregunto al usuario con cuantas casillas quiere
@@ -53,6 +53,12 @@ int main(){
 
     RellenaVector(vector, num_datos, menor, mayor);
 
+    // Imprimo el vector generado sin ordenar
+
+    cout << "El vector generado es el siguiente:" << endl;
+    MuestraVector(vector, num_datos);
+    cout << endl;
+
     // Pregunto al usuario el intervalo que quiere ordenar,
     // asegurándome de que dicho intervalo sea correcto
     // y adecuado al programa.
@@ -70,12 +76,7 @@ int main(){
 
     }
 
-    // Imprimo el vector generado sin ordenar
 
-    cout << "El vector generado es el siguiente:" << endl;
-    for (int i=0; i<util_v; i++)
-        cout << "[" << vector[i] << "]";
-    cout << endl;
             
 
     // Le pregunto al usuario de qué manera quiere
@@ -91,25 +92,22 @@ int main(){
     while (!ComprobarOpcion(opcion)){
         cin >> opcion;
     }
-    if (opcion = 1){
+    if (opcion == 1){
         OrdenaSeleccion(vector, izda, dcha);
         cout << "Vector ordenado por Selección:" << endl;
-        for (int i=0; i<util_v; i++)
-            cout << "[" << vector[i] << "]";
+        MuestraVector(vector, num_datos);
     }
 
-    else if (opcion = 2){
+    else if (opcion == 2){
         OrdenaInsercion(vector, izda, dcha);
         cout << "Vector ordenado por Insercción:" << endl;
-        for (int i=0; i<util_v; i++)
-            cout << "[" << vector[i] << "]";
+        MuestraVector(vector, num_datos);
     }
      
-    else if (opcion = 3){
-        OrdenaSeleccion(vector, izda, dcha);
+    else if (opcion == 3){
+        OrdenaIntercambio(vector, izda, dcha);
         cout << "Vector ordenado por Intercambio:" << endl;
-        for (int i=0; i<util_v; i++)
-            cout << "[" << vector[i] << "]";
+        MuestraVector(vector, num_datos);
     }
 
 }

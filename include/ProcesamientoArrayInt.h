@@ -166,6 +166,30 @@ bool ComprobarOpcion (int opcion);
 
 /*****************************************************************************/
 
+///////////////////////////////////////////////////////////////////////////////
 
+/*****************************************************************************/
+// Recibe 3 vectores, 2 los cuales entremezclará y guardará en el tercero,
+// sobreescribiendo principalmente lo que haya en este. La idea es que el
+// tercer vector venga vacío y preparado con el tamaño exacto necesario.
+// El algoritmo irá introduciendo cada vez 1 elemento de 1 vector y 1 de
+// otor, intercalándolos.
+// Parametros: 
+
+void MezclarVectores (int *v1, int *v2, int *res, int tam_v1, int tam_v2);
+
+/*****************************************************************************/
+
+///////////////////////////////////////////////////////////////////////////////
+
+/*****************************************************************************/
+// Muestra un vector en pantalla
+//Parametros: int *p, vector a mostrar.
+//            int n_datos, tamaño del vector
+//
+
+void MuestraVector (int *p, int n_datos);
+
+/*****************************************************************************/
 
 #endif

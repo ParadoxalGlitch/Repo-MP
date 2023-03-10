@@ -22,6 +22,7 @@ int main(){
     int tam_res; // 0 <= tam_res < 2*TOPE
     int menor, mayor;
     int opcion;
+    int pos_ini = 0;
 
 
 
@@ -43,7 +44,7 @@ int main(){
     cout << "Introduce el número de casillas a rellenar del vector v2: ";
     cin >> tam_v2;
 
-    while(!ComprobarNumDatos(tam_v1, TOPE)){
+    while(!ComprobarNumDatos(tam_v2, TOPE)){
         cin >> tam_v2;
     }
 
@@ -100,48 +101,59 @@ int main(){
     while (!ComprobarOpcion(opcion)){
         cin >> opcion;
     }
-    if (opcion = 1){
-        OrdenaSeleccion(v1, 0, tam_v1);
+    if (opcion == 1){
+        OrdenaSeleccion(v1, pos_ini, tam_v1);
         cout << "Vector ordenado por Selección:" << endl;
-        for (int i=0; i<tam_v1; i++)
-            cout << "[" << v1[i] << "]";
+        MuestraVector(v1, tam_v1);
 
         cout << endl;
 
-        OrdenaSeleccion(v2, 0, tam_v2);
+        OrdenaSeleccion(v2, pos_ini, tam_v2);
         cout << "Vector ordenado por Selección:" << endl;
-        for (int i=0; i<tam_v2; i++)
-            cout << "[" << v2[i] << "]";
+        MuestraVector(v2, tam_v2);
 
+        cout << endl << endl;
     }
 
-    else if (opcion = 2){
-        OrdenaInsercion(v1, 0, tam_v1);
+    else if (opcion == 2){
+        OrdenaInsercion(v1, pos_ini, tam_v1);
         cout << "Vector ordenado por Insercción:" << endl;
-        for (int i=0; i<tam_v1; i++)
-            cout << "[" << v1[i] << "]";
+        MuestraVector(v1, tam_v1);
 
         cout << endl;
 
-        OrdenaInsercion(v2, 0, tam_v2);
+        OrdenaInsercion(v2, pos_ini, tam_v2);
         cout << "Vector ordenado por Insercción:" << endl;
-        for (int i=0; i<tam_v2; i++)
-            cout << "[" << v2[i] << "]";
+        MuestraVector(v2, tam_v2);
+
+        cout << endl << endl;
     }
      
-    else if (opcion = 3){
-        OrdenaSeleccion(v1, 0, tam_v1);
+    else if (opcion == 3){
+        OrdenaIntercambio(v1, pos_ini, tam_v1);
         cout << "Vector ordenado por Intercambio:" << endl;
-        for (int i=0; i<tam_v1; i++)
-            cout << "[" << v1[i] << "]";
+        MuestraVector(v1, tam_v1);
 
         cout << endl;
 
-        OrdenaSeleccion(v2, 0, tam_v2);
+        OrdenaIntercambio(v2, pos_ini, tam_v2);
         cout << "Vector ordenado por Intercambio:" << endl;
-        for (int i=0; i<tam_v2; i++)
-            cout << "[" << v2[i] << "]";
+        MuestraVector(v2, tam_v2);
+
+        cout << endl << endl;
     }
+
+    cout << endl;
+
+    // Mezclo los dos vectores y muestro el resultado por pantalla
+
+    MezclarVectores(v1, v2, res, tam_v1, tam_v2);
+
+    
+    cout << "El vector resultante de mezclar ambos vectores v1 y v2 es: ";
+    MuestraVector(res, tam_res);
 }
+
+
 
 

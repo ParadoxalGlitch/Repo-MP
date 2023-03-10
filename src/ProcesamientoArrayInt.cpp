@@ -147,7 +147,7 @@ void OrdenaInsercion (int *v, int pos_inic, int pos_fin){
     int a_desplazar;
     int i;
 
-    for (int izda = pos_inic; izda <= pos_fin; izda++){
+    for (int izda = pos_inic; izda < pos_fin; izda++){
         a_desplazar = *(v+izda);
 
         for (i = izda; i > pos_inic && a_desplazar < *(v+i-1); i--)
@@ -172,10 +172,10 @@ void OrdenaInsercion (int *v, int pos_inic, int pos_fin){
 void OrdenaIntercambio (int *v, int pos_inic, int pos_fin){
 
 
-    int intercambia;
+    int intercambia = 0;
 
     for (int izda = pos_inic; izda < pos_fin; izda++){
-        for (int i = pos_fin ; i > izda ; i--){
+        for (int i = pos_fin-1 ; i > izda ; i--){
             if (*(v+i) < *(v+i-1)){
                 intercambia = *(v+i);
                 *(v+i) = *(v+i-1);
@@ -298,27 +298,73 @@ bool ComprobarOpcion (int opcion){
 // Recibe 3 vectores, 2 los cuales entremezclará y guardará en el tercero,
 // sobreescribiendo principalmente lo que haya en este. La idea es que el
 // tercer vector venga vacío y preparado con el tamaño exacto necesario.
-// Parametros: 
+// El algoritmo irá introduciendo cada vez 1 elemento de 1 vector y 1 de
+// otor, intercalándolos.
+// Parametros: int *v1, vector 1 a mezclar
+//             int *v2, vector 2 a mezclar
+//             int *res, vector donde se mezclan
+//             int tam_v1, tamaño del vector 1
+//             int tam_v2, tamaño del vector 2
+//
 
-void MezclarVectores (int *v1, int *v2, int *res, int tam_v1, int tam_v2, int tam_res){
+void MezclarVectores (int *v1, int *v2, int *res, int tam_v1, int tam_v2){
 
 
     int i = 0;
     int j = 0;
     int k = 0;
 
+    //intercalo los elementos de ambos vectores hasta que uno acabe
+
     while (i < tam_v1 || j < tam_v2){
-        *(res + j) = *(v1 + i);
-        i++;
-        j++;
+        if (i < tam_v1){
+            *(res + k) = *(v1 + i);
+            i++;
+            k++;
+        }
+        if (j < tam_v2){
+            *(res + k) = *(v2 + j);
+            j++;
+            k++;
+        }
+    }
+
+    // compruebo cual vector es el que ha acabado y continuo con el
+    // correspondiente. Si han acabado a la vez, no se ejecuta nada.
+
+    if ( i == tam_v1){
+
+        while(j < tam_v2){
+            *(res + k) = *(v2 + j);
+            k++;
+            i++;
+        }
+    }
+
+    else if (j == tam_v2){
+        
+        while(i < tam_v1){
+            *(res + k) = *(v1 + i);
+            i++;
+            k++;
+        }
+    }
     
 
+}
 
-    }
-        
+/*****************************************************************************/
 
+/*****************************************************************************/
+// Muestra un vector en pantalla
+//Parametros: int *p, vector a mostrar.
+//            int n_datos, tamaño del vector
+//
 
+void MuestraVector (int *p, int n_datos){
 
+    for (int i=0; i < n_datos; i++)
+        cout << "[" << *(p+i) << "]";
 
 }
 
