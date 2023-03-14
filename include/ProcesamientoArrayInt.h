@@ -14,7 +14,6 @@
 
 #include <random>  // para la generación de números pseudoaleatorios
 #include <chrono>  // para la semilla
-using namespace std;
 
 ///////////////////////////////////////////////////////////////////////////////
 class GeneradorAleatorioEnteros
@@ -56,12 +55,12 @@ private:
 
 ///////////////////////////////////////////////////////////////////////////////
 
-/*****************************************************************************/
 // Busca el valor más alto en un array de enteros dado un intervalo.
 // Parámetros:  *pv, puntero que apunta a una casilla del vector a procesar.
 //              izda, extremo izquierdo del intervalo a procesar.
 //              dcha, extremo derecho del intervalo a procesar.
 //
+/*****************************************************************************/
 
 int * PosMayor (int *pv, int izda, int dcha);
 

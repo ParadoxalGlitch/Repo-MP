@@ -74,7 +74,7 @@ int main()
         cin >> izda;
         cout << "Mayor: ";
         cin >> dcha;
-
+ 
     }
 
 
