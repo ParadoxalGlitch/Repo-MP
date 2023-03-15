@@ -10,7 +10,7 @@
 
 
 #include <iostream>
-#include <ProcesamientoArrayInt.h>
+#include "ProcesamientoArrayInt.h"
 using namespace std;
 
 

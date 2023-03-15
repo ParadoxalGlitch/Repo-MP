@@ -9,8 +9,8 @@
 //
 /*****************************************************************************/
 
-#ifndef FUNCIONES_PROCESS_ARRAY
-#define FUNCIONES_PROCESS_ARRAY
+#ifndef MI_CADENA_CLASICA
+#define MI_CADENA_CLASICA
 
 /***************************************************************************/
 /***************************************************************************/
@@ -45,11 +45,43 @@ int compara_cadenas (const char *cad1, const char *cad2);
 //		TRUE, si la cadena es palíndromo
 //		FALSE, si la cadena NO es palíndromo
 
-bool es_palindromo (const char *cad, int long_cad);
+bool es_palindromo (const char *cad);
+
+/*****************************************************************************/
+/*****************************************************************************/
+// Copia una cadena en otra
+// Recibe:
+// 		origen, cadena que se va a copiar
+//		destino, cadena donde se va a copiar la cadena origen
+//
+//
+
+char * copiar_cadena(char* destino, const char* origen);
+
+/*****************************************************************************/
+/*****************************************************************************/
+// Invierte una cadena y devuelve una nueva con ese contenido
+// Recibe:
+//		origen, cadena que se va a invertir
+//		destino, cadena donde se va a copiar la inversión
+//
 
 
+char * invertir_cadena(char * resultado, const char * origen);
 
+/*****************************************************************************/
+/*****************************************************************************/
+// Busca las palabras de una cadena y guarda en un vector de punteros
+// las primeras letras de estos.
+// Recibe: 
+//		palabras, vector de datos char * que apuntan a la primera
+// 				  letra de cada palabra
+//		cadena, cadena donde se van a buscar las palabras
+//
+// Devuelve:
+//		numero de palabras que contiene la cadena.
 
+int encuentra_palabras (char ** palabras, const char * cadena);
 
 
 
