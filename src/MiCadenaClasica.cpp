@@ -5,7 +5,7 @@
 // Fichero: MiCadenaClasica.cpp
 //
 // Contiene la definición de las funciones usadas en
-//          I_MostrarInicioPalabras.cpp
+//          I_EncuentranicioPalabras.cpp y I_PruebaFunciones.cpp
 //
 /*****************************************************************************/
 
@@ -129,7 +129,8 @@ char * invertir_cadena(char * resultado, const char * origen)
 	int i = longitud_cadena(origen)-1;
 	int j = 0;
 
-	while (i >= 0){
+	while (i >= 0)
+	{
 		*(resultado + j) = *(origen + i);
 		i--;
 		j++;
@@ -139,63 +140,5 @@ char * invertir_cadena(char * resultado, const char * origen)
 
 	return (resultado);
 }
-
-
-/*****************************************************************************/
-/*****************************************************************************/
-// Busca las palabras de una cadena y guarda en un vector de punteros
-// las primeras letras de estos.
-// Recibe: 
-//		palabras, vector de datos char * que apuntan a la primera
-// 				  letra de cada palabra
-//		cadena, cadena donde se van a buscar las palabras
-//
-// Devuelve:
-//		numero de palabras que contiene la cadena.
-
-int encuentra_palabras (char ** palabras, const char * cadena, int max_num)
-{
-
-	char **ptr_palabras = palabras;
-	bool dentro_palabra = false;
-	char **ptr_lim_palabras = palabras + max_num;
-	int num_palabras = 0;
-
-
-	// Mientras se encuentre fuera de una palbabra, y esté en un espacio, 
-	// no cambiará el condicional.
-	// Lo mismo mientras esté dentro de una palabra y no encuentre espacios.
-	for (const char* ptr = cadena; *ptr != '\0'; ptr++){
-	
-		// Si está fuera y deja de encontrar espacios, 
-		// es que está dentro de una palabra.
-		// Guarda la primera letra y continúa hasta encontrar un espacio
-		if (!dentro_palabra && *ptr != ' '){
-			dentro_palabra = true;
-			/*
-				
-			Poner un filtro de que no se llene ptr_palabras;
-				
-			*/
-			*(ptr_palabras) = (char *) ptr;
-			ptr_palabras++;
-			num_palabras++;
-
-	}
-
-		// Si está dentro de una palabra y encuentra un espacio, 
-		// es que está ya fuera de la palabra
-		//
-		// Seguirá comprobando que esté en espacios 
-		// hasta llegar a la siguiente palabra.
-		else if (dentro_palabra && *ptr == ' '){
-			dentro_palabra = false;
-		}
-	}
-
-	return(num_palabras);
-
-}
-
 
 

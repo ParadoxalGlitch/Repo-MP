@@ -69,20 +69,6 @@ char * copiar_cadena(char* destino, const char* origen);
 
 char * invertir_cadena(char * resultado, const char * origen);
 
-/*****************************************************************************/
-/*****************************************************************************/
-// Busca las palabras de una cadena y guarda en un vector de punteros
-// las primeras letras de estos.
-// Recibe: 
-//		palabras, vector de datos char * que apuntan a la primera
-// 				  letra de cada palabra
-//		cadena, cadena donde se van a buscar las palabras
-//
-// Devuelve:
-//		numero de palabras que contiene la cadena.
-
-int encuentra_palabras (char ** palabras, const char * cadena);
-
 
 
 
