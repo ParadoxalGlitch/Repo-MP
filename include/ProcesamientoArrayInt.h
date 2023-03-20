@@ -14,6 +14,7 @@
 
 #include <random>  // para la generación de números pseudoaleatorios
 #include <chrono>  // para la semilla
+using namespace std;
 
 ///////////////////////////////////////////////////////////////////////////////
 class GeneradorAleatorioEnteros
@@ -69,9 +70,7 @@ int * PosMayor (int *pv, int izda, int dcha);
 ///////////////////////////////////////////////////////////////////////////////
 
 /*****************************************************************************/
-// Ordena un vector mediante el sistema de selección. En cada iteración,
-// se busca el componente más pequeño del sub-vector derecho y se coloca
-// en el sub-vector izquierdo
+// Ordena un vector mediante el sistema de selección.
 // Parámetros: int *v, puntero que apunta a una casilla del vector a procesar.
 //			   pos_inic, extremo izquierdo del intervalo a procesar.
 //			   pos_fin, extremo derecho del intervalo a procesar.
@@ -84,10 +83,7 @@ void OrdenaSeleccion (int *v, int pos_inic, int pos_fin);
 ///////////////////////////////////////////////////////////////////////////////
 
 /*****************************************************************************/
-// Ordena un vector mediante el sistema de inserción. Se divide el vector
-// en dos sub-vectores, el ordenado (izquierda) y el desordenado (derecha).
-// Se busca el primer elemento del sector desordenado y se coloca de
-// forma ordenada en el sector ordenado
+// Ordena un vector mediante el sistema de inserción.
 // Parámetros: int *v, puntero que apunta a una casilla del vector a procesar.
 //			   pos_inic, extremo izquierdo del intervalo a procesar.
 //			   pos_fin, extremo derecho del intervalo a procesar.
@@ -100,10 +96,7 @@ void OrdenaInsercion (int *v, int pos_inic, int pos_fin);
 ///////////////////////////////////////////////////////////////////////////////
 
 /*****************************************************************************/
-// Ordena un vector mediante el sistema de intercambio directo. Se divide
-// el vector en dos sectores, el izquierdo ordenado y el derecho desordenado.
-// En el vector derecho se van comparando desde el final 2 a 2 y se va
-// moviendo el mas pequeño, y así en repetidas iteraciones.
+// Ordena un vector mediante el sistema de intercambio directo.
 //
 
 void OrdenaIntercambio (int *v, int pos_inic, int pos_fin);
@@ -168,11 +161,8 @@ bool ComprobarOpcion (int opcion);
 ///////////////////////////////////////////////////////////////////////////////
 
 /*****************************************************************************/
-// Recibe 3 vectores, 2 los cuales entremezclará y guardará en el tercero,
-// sobreescribiendo principalmente lo que haya en este. La idea es que el
-// tercer vector venga vacío y preparado con el tamaño exacto necesario.
-// El algoritmo irá introduciendo cada vez 1 elemento de 1 vector y 1 de
-// otor, intercalándolos.
+// Recibe 3 vectores, 2 los cuales intercalará y guardará en el tercero,
+// sobreescribiendo principalmente lo que haya en este. 
 // Parametros: 
 
 void MezclarVectores (int *v1, int *v2, int *res, int tam_v1, int tam_v2);
@@ -190,5 +180,41 @@ void MezclarVectores (int *v1, int *v2, int *res, int tam_v1, int tam_v2);
 void MuestraVector (int *p, int n_datos);
 
 /*****************************************************************************/
+
+///////////////////////////////////////////////////////////////////////////////
+
+/*****************************************************************************/
+// Recibe 3 vectores, 2 los cuales entremezclará y guardará en el tercero,
+// sobreescribiendo principalmente lo que haya en este. Ignorará cualquier
+// valor ya presente en la mezcla.
+// Parametros: int *v1, vector 1 a mezclar
+//             int *v2, vector 2 a mezclar
+//             int *res, vector donde se mezclan
+//             int tam_v1, tamaño del vector 1
+//             int tam_v2, tamaño del vector 2
+//
+
+int MezclarVectoresSelectiva (int *v1, int *v2, int *res, int tam_v1,\
+                               int tam_v2);
+
+/*****************************************************************************/
+
+///////////////////////////////////////////////////////////////////////////////
+
+/*****************************************************************************/
+// Recibe 3 vectores, 2 los cuales entremezclará y guardará en el tercero.
+// Ignorará valores ya presentes en la mezcla si así lo solicita el usuario.
+// Parametros: int *v1, vector 1 a mezclar
+//             int *v2, vector 2 a mezclar
+//             int *res, vector donde se mezclan
+//             int tam_v1, tamaño del vector 1
+//             int tam_v2, tamaño del vector 2
+//             int &util_mezcla, tamaño del vector 3
+//             const char * selectiva, opción con valor por defecto en "no"
+//
+void MezclarVectoresNuevo (int *v1, int *v2, int *res, int &util_mezcla, \
+                          int util_v1, int util_v2,\
+                          const char * selectiva);
+
 
 #endif

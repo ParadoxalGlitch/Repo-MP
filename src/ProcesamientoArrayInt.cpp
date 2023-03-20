@@ -11,7 +11,11 @@
 
 #include "ProcesamientoArrayInt.h"
 #include <iostream>
+#include <cstring>
 using namespace std;
+
+
+
 
 
 /*****************************************************************************/
@@ -318,6 +322,7 @@ void MezclarVectores (int *v1, int *v2, int *res, int tam_v1, int tam_v2){
 
     while (i < tam_v1 || j < tam_v2){
         if (i < tam_v1){
+
             *(res + k) = *(v1 + i);
             i++;
             k++;
@@ -328,29 +333,6 @@ void MezclarVectores (int *v1, int *v2, int *res, int tam_v1, int tam_v2){
             k++;
         }
     }
-
-    // compruebo cual vector es el que ha acabado y continuo con el
-    // correspondiente. Si han acabado a la vez, no se ejecuta nada.
-
-    if ( i == tam_v1){
-
-        while(j < tam_v2){
-            *(res + k) = *(v2 + j);
-            k++;
-            i++;
-        }
-    }
-
-    else if (j == tam_v2){
-        
-        while(i < tam_v1){
-            *(res + k) = *(v1 + i);
-            i++;
-            k++;
-        }
-    }
-    
-
 }
 
 /*****************************************************************************/
@@ -367,4 +349,197 @@ void MuestraVector (int *p, int n_datos){
         cout << "[" << *(p+i) << "]";
 
 }
+
+/*****************************************************************************/
+
+/*****************************************************************************/
+// Recibe 3 vectores, 2 los cuales entremezclará y guardará en el tercero,
+// sobreescribiendo principalmente lo que haya en este. Ignorará cualquier
+// valor ya presente en la mezcla.
+// Parametros: int *v1, vector 1 a mezclar
+//             int *v2, vector 2 a mezclar
+//             int *res, vector donde se mezclan
+//             int tam_v1, tamaño del vector 1
+//             int tam_v2, tamaño del vector 2
+//
+
+int MezclarVectoresSelectiva (int *v1, int *v2, int *res, int tam_v1,\
+                               int tam_v2){
+
+
+    int i = 0;
+    int j = 0;
+    int k = 0;
+    int m = 0;
+    bool repetido = false;
+    int tam_res = 0;
+
+    //intercalo los elementos de ambos vectores hasta que uno acabe
+
+    while (i < tam_v1 || j < tam_v2){ // Mientras alguno tenga elementos
+
+        
+
+        if (i < tam_v1){ // Si el primer vector aún tiene elementos
+
+            m = 0;
+            repetido = false;
+
+            while (!repetido && m < k){  // Compruebo que no esté 
+                if (*(v1+i) == *(res+m)) // ya en la mezcla.
+                    repetido = true;
+                m++;
+                    
+            }
+
+            if(!repetido){ // Si no está, lo añado
+
+                *(res + k) = *(v1 + i);
+                i++;
+                k++;
+                tam_res++;
+
+            }
+
+            else          // Si lo está, paso al siguiente
+                i++;
+
+
+        }
+
+        
+
+        if (j < tam_v2){  // Repito el mismo proceso con el segundo vector
+
+            m = 0;
+            repetido = false;
+
+            while (!repetido && m < k){
+
+                if (*(v2+j) == *(res+m))
+                    repetido = true;
+                m++;
+                    
+            }
+
+            if(!repetido){
+
+                *(res + k) = *(v2 + j);
+                j++;
+                k++;
+                tam_res++;
+
+            }
+
+            else
+                j++;
+
+        }
+    }
+
+    return(tam_res);
+}
+
+/*****************************************************************************/
+
+/*****************************************************************************/
+// Recibe 3 vectores, 2 los cuales entremezclará y guardará en el tercero.
+// Ignorará valores ya presentes en la mezcla si así lo solicita el usuario.
+// Parametros: int *v1, vector 1 a mezclar
+//             int *v2, vector 2 a mezclar
+//             int *res, vector donde se mezclan
+//             int tam_v1, tamaño del vector 1
+//             int tam_v2, tamaño del vector 2
+//             int &util_mezcla, tamaño del vector 3
+//             const char * selectiva, opción con valor por defecto en "no"
+//
+void MezclarVectoresNuevo (int *v1, int *v2, int *res, int &util_mezcla, \
+                          int util_v1, int util_v2, \
+                          const char *selectiva = "si"){
+
+    int i = 0;
+    int j = 0;
+    int k = 0;
+    int m = 0;
+    int usados_mezcla = 0;
+
+    bool repetido = false; // En el caso de elegir no selectiva, siempre
+                           // se mantendrá falso, no excluyendo valores
+                           // y evitando repetir código
+
+    //intercalo los elementos de ambos vectores hasta que uno acabe
+
+    while ((i < util_v1 || j < util_v2) && k < util_mezcla){ 
+        // Mientras alguno tenga elementos
+        // y no se llene la mezcla
+
+        
+
+        if (i < util_v1){ // Si el primer vector aún tiene elementos
+
+
+            if (selectiva == "si" || selectiva == "SI" || selectiva == "sI" || selectiva == "Si"){
+
+                m = 0;
+                repetido = false;
+
+                while (!repetido && m < k){  // Compruebo que no esté 
+                    if (*(v1+i) == *(res+m)) // ya en la mezcla.
+                        repetido = true;
+                    m++;
+                        
+                }
+            }
+
+            if(!repetido){ // Si no está, lo añado
+
+                *(res + k) = *(v1 + i);
+                i++;
+                k++;
+                usados_mezcla++;
+
+            }
+
+            else          // Si lo está, paso al siguiente
+                i++;
+
+
+        }
+
+        
+
+        if (j < util_v2){  // Repito el mismo proceso con el segundo vector
+
+            if (selectiva == "si" || selectiva == "SI" || selectiva == "sI" || selectiva == "Si"){
+
+                m = 0;
+                repetido = false;
+
+                while (!repetido && m < k){
+
+                    if (*(v2+j) == *(res+m))
+                        repetido = true;
+                    m++;
+    
+                }
+            }
+
+            if(!repetido){
+
+                *(res + k) = *(v2 + j);
+                j++;
+                k++;
+                usados_mezcla++;
+
+            }
+
+            else
+                j++;
+
+        }
+    }
+
+    cout << endl << usados_mezcla << endl;
+}
+
 
