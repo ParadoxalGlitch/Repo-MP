@@ -85,9 +85,6 @@ HACER COMPROBACIÓN
     RellenaVector(v2, tam_v2, menor, mayor);
 
 
-
-
-
     cout << "Vector  1:" << endl;
     MuestraVector(v1, tam_v1);
     cout << endl;
@@ -97,18 +94,12 @@ HACER COMPROBACIÓN
     cout << endl;
 
 
-
-
-
-
-
-
-
     
     // Ordeno los vectores por Seleccion
     
     OrdenaSeleccion(v1, 0, tam_v1-1);
     OrdenaSeleccion(v2, 0, tam_v2-1);
+    
 
 
     
@@ -144,16 +135,5 @@ HACER COMPROBACIÓN
     MuestraVector(res2, tam_res2);
 
     cout << endl;
-
-
-
-
-
-
-
-
-
-
-
 
 }
