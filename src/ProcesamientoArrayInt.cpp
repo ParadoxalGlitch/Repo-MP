@@ -284,7 +284,7 @@ bool ComprobarIntervalo (int izda, int dcha, int num_datos){
 //                     de ordenar el intervalo
 //
 
-bool ComprobarOpcion (int opcion){
+bool ComprobarOpcionMezcla (int opcion){
     bool Correcto = true;
 
     if (opcion < 1 || opcion > 3){
@@ -297,6 +297,25 @@ bool ComprobarOpcion (int opcion){
 }
 
 /*****************************************************************************/
+
+/*****************************************************************************/
+// Comprueba que los valores introducidos para el GeneradorAleatorios
+// están colocados correctamente. En caso contrario, los intercambia
+//
+// Parámetros: int &opcion_min, referencia al valor minimo a generar
+//             int &opcion_max, referencia al valor maximo a generar
+//
+
+void ComprobarOpcionAleatorios (int &opcion_min, int &opcion_max){
+
+    int temporal;
+
+    if (opcion_min > opcion_max){
+        temporal = opcion_min;
+        opcion_min = opcion_max;
+        opcion_max = temporal; 
+    }
+}
 
 /*****************************************************************************/
 // Recibe 3 vectores, 2 los cuales entremezclará y guardará en el tercero,
@@ -320,19 +339,42 @@ void MezclarVectores (int *v1, int *v2, int *res, int tam_v1, int tam_v2){
 
     //intercalo los elementos de ambos vectores hasta que uno acabe
 
-    while (i < tam_v1 || j < tam_v2){
-        if (i < tam_v1){
+    while ((i < tam_v1) && (j < tam_v2)) {
+		
+		if (*(v1+i) < *(v2+j)) {
+			*(res+k) = *(v1+i);   
+ 			i++;        
+			
+		}
+		else {
+			*(res+k) = *(v2+j);   
+			j++;
+		}
 
-            *(res + k) = *(v1 + i);
-            i++;
-            k++;
-        }
-        if (j < tam_v2){
-            *(res + k) = *(v2 + j);
-            j++;
-            k++;
-        }
-    }
+		k++;
+	}
+
+
+    // Uno de los dos vectores se ha procesado completamente. 
+	// Tenemos que copiar los que no han sido procesado del otro vector. 
+
+	// Si se ha procesado v2, copiar lo que quede en v1
+
+	while (i<tam_v1){
+
+        *(res+k) = *(v1+i);
+		i++;
+		k++;
+	} 
+	
+	// Si se ha procesado v1, copiar lo que quede en v2
+
+	while (j<tam_v2){
+
+		*(res+k) = *(v2+j);	
+		j++;
+		k++;
+	}
 }
 
 /*****************************************************************************/
@@ -363,8 +405,10 @@ void MuestraVector (int *p, int n_datos){
 //             int tam_v2, tamaño del vector 2
 //
 
-int MezclarVectoresSelectiva (int *v1, int *v2, int *res, int tam_v1,\
-                               int tam_v2){
+
+
+int MezclarVectoresSelectiva (int *v1, int *v2, int *res, \
+                              int tam_v1, int tam_v2){
 
 
     int i = 0;
@@ -376,41 +420,37 @@ int MezclarVectoresSelectiva (int *v1, int *v2, int *res, int tam_v1,\
 
     //intercalo los elementos de ambos vectores hasta que uno acabe
 
-    while (i < tam_v1 || j < tam_v2){ // Mientras alguno tenga elementos
-
-        
-
-        if (i < tam_v1){ // Si el primer vector aún tiene elementos
+    while ((i < tam_v1) && (j < tam_v2)) {
+		
+		if (*(v1+i) < *(v2+j)) {
 
             m = 0;
             repetido = false;
 
             while (!repetido && m < k){  // Compruebo que no esté 
-                if (*(v1+i) == *(res+m)) // ya en la mezcla.
+                                         // ya en la mezcla.
+                if (*(v1+i) == *(res+m)) 
                     repetido = true;
+
                 m++;
                     
             }
 
-            if(!repetido){ // Si no está, lo añado
+            if (!repetido){             // Si no está ya, lo añado
 
-                *(res + k) = *(v1 + i);
-                i++;
-                k++;
-                tam_res++;
+			    *(res+k) = *(v1+i);   
+ 			    i++;
+                k++; 
+                tam_res++;   
 
             }
 
-            else          // Si lo está, paso al siguiente
-                i++;
-
-
-        }
-
-        
-
-        if (j < tam_v2){  // Repito el mismo proceso con el segundo vector
-
+            else                        // si ya está, lo ignoro
+                i++;   
+			
+		}
+		else {                          // Repito el mismo proceso
+                                        // con el segundo vector
             m = 0;
             repetido = false;
 
@@ -418,14 +458,15 @@ int MezclarVectoresSelectiva (int *v1, int *v2, int *res, int tam_v1,\
 
                 if (*(v2+j) == *(res+m))
                     repetido = true;
+
                 m++;
                     
             }
 
-            if(!repetido){
+            if (!repetido){
 
-                *(res + k) = *(v2 + j);
-                j++;
+			    *(res+k) = *(v2+j);   
+			    j++;
                 k++;
                 tam_res++;
 
@@ -433,9 +474,71 @@ int MezclarVectoresSelectiva (int *v1, int *v2, int *res, int tam_v1,\
 
             else
                 j++;
+		}
+	}
 
+
+    // Uno de los dos vectores se ha procesado completamente. 
+	// Tenemos que copiar los que no han sido procesado del otro vector. 
+
+	// Si se ha procesado v2, copiar lo que quede en v1, siempre
+    // que cumpla las condiciones
+
+	while (i<tam_v1){
+
+        m = 0;
+        repetido = false;
+
+        while (!repetido && m < k){ // compruebo que no esté ya en la mezcla
+
+            if (*(v1+i) == *(res+m))
+                repetido = true;
+            m++;
+                    
         }
-    }
+
+        if(!repetido){              // si no está, lo añado
+        
+            *(res+k) = *(v1+i);
+		    i++;
+		    k++;
+            tam_res++;
+
+        }                           // si ya está, lo ignoro
+
+        else
+            i++;
+	} 
+	
+	// Si se ha procesado v1, copiar lo que quede en v2
+
+	while (j<tam_v2){
+
+        m = 0;
+        repetido = false;
+
+
+        while (!repetido && m < k){
+
+            if (*(v2+j) == *(res+m))
+                repetido = true;
+
+            m++;
+                    
+        }
+
+
+        if (!repetido){
+
+            *(res+k) = *(v2+j);	
+            j++;
+            k++;
+            tam_res++;
+        }
+
+        else
+            j++;
+	}
 
     return(tam_res);
 }
@@ -454,14 +557,13 @@ int MezclarVectoresSelectiva (int *v1, int *v2, int *res, int tam_v1,\
 //             const char * selectiva, opción con valor por defecto en "no"
 //
 void MezclarVectoresNuevo (int *v1, int *v2, int *res, int &util_mezcla, \
-                          int util_v1, int util_v2, \
-                          const char *selectiva = "si"){
+                          int tam_v1, int tam_v2, \
+                          const char *selectiva){
 
     int i = 0;
     int j = 0;
     int k = 0;
     int m = 0;
-    int usados_mezcla = 0;
 
     bool repetido = false; // En el caso de elegir no selectiva, siempre
                            // se mantendrá falso, no excluyendo valores
@@ -469,77 +571,155 @@ void MezclarVectoresNuevo (int *v1, int *v2, int *res, int &util_mezcla, \
 
     //intercalo los elementos de ambos vectores hasta que uno acabe
 
-    while ((i < util_v1 || j < util_v2) && k < util_mezcla){ 
-        // Mientras alguno tenga elementos
-        // y no se llene la mezcla
+    while ((i < tam_v1) && (j < tam_v2)) {
+		
+		if (*(v1+i) < *(v2+j)) {
 
-        
+            m = 0;
+            repetido = false;
 
-        if (i < util_v1){ // Si el primer vector aún tiene elementos
-
-
-            if (selectiva == "si" || selectiva == "SI" || selectiva == "sI" || selectiva == "Si"){
-
-                m = 0;
-                repetido = false;
+            if (strcmp(selectiva, "si") == 0 || \
+                strcmp(selectiva, "sI") == 0 || \
+                strcmp(selectiva, "Si") == 0 || \
+                strcmp(selectiva, "SI") == 0)
+            {
 
                 while (!repetido && m < k){  // Compruebo que no esté 
-                    if (*(v1+i) == *(res+m)) // ya en la mezcla.
+                                            // ya en la mezcla.
+                    if (*(v1+i) == *(res+m)) 
                         repetido = true;
+
                     m++;
                         
                 }
-            }
-
-            if(!repetido){ // Si no está, lo añado
-
-                *(res + k) = *(v1 + i);
-                i++;
-                k++;
-                usados_mezcla++;
 
             }
 
-            else          // Si lo está, paso al siguiente
-                i++;
+            if (!repetido){             // Si no está ya, lo añado
 
+			    *(res+k) = *(v1+i);   
+ 			    i++;
+                k++; 
+                util_mezcla++;   
 
-        }
+            }
 
-        
+            else                        // si ya está, lo ignoro
+                i++;   
+			
+		}
+		else {                          // Repito el mismo proceso
+                                        // con el segundo vector
+            m = 0;
+            repetido = false;
 
-        if (j < util_v2){  // Repito el mismo proceso con el segundo vector
-
-            if (selectiva == "si" || selectiva == "SI" || selectiva == "sI" || selectiva == "Si"){
-
-                m = 0;
-                repetido = false;
+            if (strcmp(selectiva, "si") == 0 || \
+                strcmp(selectiva, "sI") == 0 || \
+                strcmp(selectiva, "Si") == 0 || \
+                strcmp(selectiva, "SI") == 0)
+            {
 
                 while (!repetido && m < k){
 
                     if (*(v2+j) == *(res+m))
                         repetido = true;
+
                     m++;
-    
+                        
                 }
             }
 
-            if(!repetido){
+            if (!repetido){
 
-                *(res + k) = *(v2 + j);
-                j++;
+			    *(res+k) = *(v2+j);   
+			    j++;
                 k++;
-                usados_mezcla++;
+                util_mezcla++;
 
             }
 
             else
                 j++;
+		}
+	}
+
+
+    // Uno de los dos vectores se ha procesado completamente. 
+	// Tenemos que copiar los que no han sido procesado del otro vector. 
+
+	// Si se ha procesado v2, copiar lo que quede en v1, siempre
+    // que cumpla las condiciones
+
+	while (i<tam_v1){
+
+        m = 0;
+        repetido = false;
+
+        if (strcmp(selectiva, "si") == 0 || \
+            strcmp(selectiva, "sI") == 0 || \
+            strcmp(selectiva, "Si") == 0 || \
+            strcmp(selectiva, "SI") == 0)
+        {
+
+            while (!repetido && m < k){ // compruebo que no esté ya en la mezcla
+        
+                if (*(v1+i) == *(res+m))
+                    repetido = true;
+                m++;
+                            
+            }
+        }
+
+        if(!repetido){              // si no está, lo añado
+        
+            *(res+k) = *(v1+i);
+		    i++;
+		    k++;
+            util_mezcla++;
+
+        }                           // si ya está, lo ignoro
+
+        else
+            i++;
+	} 
+	
+	// Si se ha procesado v1, copiar lo que quede en v2
+    // usando el mismo proceso que en v1.
+
+	while (j<tam_v2){
+
+        m = 0;
+        repetido = false;
+
+        if (strcmp(selectiva, "si") == 0 || \
+            strcmp(selectiva, "sI") == 0 || \
+            strcmp(selectiva, "Si") == 0 || \
+            strcmp(selectiva, "SI") == 0)
+        {
+
+
+
+            while (!repetido && m < k){
+
+                if (*(v2+j) == *(res+m))
+                    repetido = true;
+
+                m++;
+                        
+            }
 
         }
-    }
 
-    cout << endl << usados_mezcla << endl;
+
+        if (!repetido){
+
+            *(res+k) = *(v2+j);	
+            j++;
+            k++;
+            util_mezcla++;
+        }
+
+        else
+            j++;
+	}
 }
-
-

@@ -154,7 +154,21 @@ bool ComprobarIntervalo (int izda, int dcha, int num_datos);
 //                     de ordenar el intervalo
 //
 
-bool ComprobarOpcion (int opcion);
+bool ComprobarOpcionMezcla (int opcion);
+
+/*****************************************************************************/
+
+///////////////////////////////////////////////////////////////////////////////
+
+/*****************************************************************************/
+// Comprueba que los valores introducidos para el GeneradorAleatorios
+// están colocados correctamente. En caso contrario, los intercambia
+//
+// Parámetros: int &opcion_min, referencia al valor minimo a generar
+//             int &opcion_max, referencia al valor maximo a generar
+//
+
+void ComprobarOpcionAleatorios (int &opcion_min, int &opcion_max);
 
 /*****************************************************************************/
 
@@ -214,7 +228,7 @@ int MezclarVectoresSelectiva (int *v1, int *v2, int *res, int tam_v1,\
 //
 void MezclarVectoresNuevo (int *v1, int *v2, int *res, int &util_mezcla, \
                           int util_v1, int util_v2,\
-                          const char * selectiva);
+                          const char * selectiva  = "no");
 
 
 #endif
