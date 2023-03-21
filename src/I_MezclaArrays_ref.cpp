@@ -13,6 +13,8 @@
 #include <iostream>
 #include <cstring>
 #include "ProcesamientoArrayInt.h"
+#include "GeneradorAleatorioEnteros.h"
+
 using namespace std;
 
 int main(int argc, char * argv[]){
