@@ -14,7 +14,7 @@
 #include "ProcesamientoArrayInt.h"
 using namespace std;
 
-int main(/*RELLENAR*/){
+int main(int argc, char * argv[]){
 
 
     const int TOPE = 100;
@@ -22,34 +22,42 @@ int main(/*RELLENAR*/){
     int v2[TOPE];
     int res[2*TOPE];
     int res2[2*TOPE];
-    int tam_v1, tam_v2; // 0 <= tam_v1, tam_v2 < TOPE
+    int tam_v1 = TOPE, tam_v2 = TOPE;
     int tam_res;
-    int tam_res2; // 0 <= tam_res < 2*TOPE
-    int menor, mayor;
+    int tam_res2;
+    int menor = 1, mayor = 200;
     int opcion;
 
 
-    // Le pregunto al usuario cuantas casillas quiere que tenga cada
-    // vector, comprobando que los datos sean correctos.
 
 
-    // Pregunto sobre el vector v1
+    // Actualizo los valores de tam_v1, tam_v2 , menor y mayor 
+    // en función de los argumentos presentados por el usuario
 
-    cout << "Introduce el número de casillas a rellenar del vector v1: ";
-    cin >> tam_v1;
-
-    while(!ComprobarNumDatos(tam_v1, TOPE)){
-        cin >> tam_v1;
+    if (argc > 4) {
+        cerr << "Error: demasiados argumentos" << endl << endl;
+        exit (1);
     }
 
-    // Pregunto sobre el vector v2
+    else if(argc > 1){
+        tam_v1 = atoi(argv[1]);
+        tam_v2 = atoi(argv[1]);
 
-    cout << "Introduce el número de casillas a rellenar del vector v2: ";
-    cin >> tam_v2;
+        if (argc > 2){
+            if (argc > 3)
+                menor = atoi(argv[3]);
 
-    while(!ComprobarNumDatos(tam_v2, TOPE)){
-        cin >> tam_v2;
+            else
+                menor = 1;
+
+            mayor = atoi(argv[2]);
+        }
     }
+
+
+
+
+
 
     // Actualizo el tamaño del vector res respecto al tamaño de los
     // otros vectores v1 y v2.
@@ -57,23 +65,19 @@ int main(/*RELLENAR*/){
     tam_res = tam_v1 + tam_v2;
     tam_res2 = tam_res;
 
-    // Relleno el vector con números aleatorios. 
-    // El usuario elije entre qué numeros generar.
-
-    cout << "Introduce entre qué numeros generar." << endl;
-    cout << "Menor: ";
-    cin >> menor;
-    cout << "Mayor: ";
-    cin >> mayor;
 
 
-/*
 
 
-HACER COMPROBACIÓN
+    // Compruebo que los valores a generar han sido proporcionados
+    // de manera correcta
 
 
-*/
+    ComprobarOpcionAleatorios(menor,mayor);
+
+
+
+
 
 
     // Relleno el primer vector
@@ -85,13 +89,18 @@ HACER COMPROBACIÓN
     RellenaVector(v2, tam_v2, menor, mayor);
 
 
+
+
+    // Los muestro por pantalla
+
     cout << "Vector  1:" << endl;
     MuestraVector(v1, tam_v1);
     cout << endl;
 
     cout << "Vector 2:" << endl;
     MuestraVector(v2, tam_v2);
-    cout << endl;
+    cout << endl << endl << endl; 
+
 
 
     
@@ -99,12 +108,12 @@ HACER COMPROBACIÓN
     
     OrdenaSeleccion(v1, 0, tam_v1-1);
     OrdenaSeleccion(v2, 0, tam_v2-1);
+
+
+
+
     
-
-
-
-    
-    // Muestro los vectores
+    // Muestro los vectores ordenados
 
     cout << "Vector Ordenado 1:" << endl;
     MuestraVector(v1, tam_v1);
@@ -112,7 +121,12 @@ HACER COMPROBACIÓN
 
     cout << "Vector Ordenado 2:" << endl;
     MuestraVector(v2, tam_v2);
-    cout << endl;
+    cout << endl << endl << endl;
+
+
+
+
+
 
 
     // Los mezclo de forma estándar.
@@ -124,12 +138,17 @@ HACER COMPROBACIÓN
     tam_res2 = MezclarVectoresSelectiva(v1, v2, res2, tam_v1, tam_v2);
 
 
+
+
+
+
+
     // Muestro los vectores mezclados
 
     cout << "Vector Mezclado normal:" << endl;
     MuestraVector(res, tam_res);
 
-    cout << endl;
+    cout << endl << endl;
 
     cout << "Vector Mezclado selectivo:" << endl;
     

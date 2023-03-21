@@ -15,7 +15,8 @@
 #include "ProcesamientoArrayInt.h"
 using namespace std;
 
-int main(/*RELLENAR*/){
+int main(int argc, char * argv[]){
+
 
 
     const int TOPE = 100;
@@ -24,62 +25,39 @@ int main(/*RELLENAR*/){
     int v2[TOPE];
     int res[2*TOPE];
     char selectiva[MAX_CHAR];
-    int tam_v1, tam_v2; // 0 <= tam_v1, tam_v2 < TOPE
-    int tam_res = 0;; // 0 <= tam_res < 2*TOPE
-    int menor, mayor;
+    int tam_v1 = TOPE, tam_v2 = TOPE;
+    int tam_res = 0;
+    int menor = 1, mayor = 200;
     int opcion;
 
 
 
 
+    // Actualizo los valores de tam_v1, tam_v2 , menor y mayor 
+    // en función de los argumentos presentados por el usuario
 
-    // Le pregunto al usuario cuantas casillas quiere que tenga cada
-    // vector, comprobando que los datos sean correctos.
-    // Pregunto sobre el vector v1
+    if (argc > 4) {
+        cerr << "Error: demasiados argumentos" << endl << endl;
+        exit (1);
+    }
 
-    cout << "Introduce el número de casillas a rellenar del vector v1: ";
-    cin >> tam_v1;
+    else if(argc > 1){
+        tam_v1 = atoi(argv[1]);
+        tam_v2 = atoi(argv[1]);
 
-    while(!ComprobarNumDatos(tam_v1, TOPE)){
-        cin >> tam_v1;
+        if (argc > 2){
+            if (argc > 3)
+                menor = atoi(argv[3]);
+
+            else
+                menor = 1;
+
+            mayor = atoi(argv[2]);
+        }
     }
 
 
-
-
-
-    // Pregunto sobre el vector v2
-
-    cout << "Introduce el número de casillas a rellenar del vector v2: ";
-    cin >> tam_v2;
-
-    while(!ComprobarNumDatos(tam_v2, TOPE)){
-        cin >> tam_v2;
-    }
-
-    cout << endl;
-
-
-
-
-
-
-    // Relleno el vector con números aleatorios. 
-    // El usuario elije entre qué numeros generar.
-
-    cout << "Introduce entre qué numeros generar:" << endl;
-    cout << "Menor: ";
-    cin >> menor;
-    cout << "Mayor: ";
-    cin >> mayor;
-
-    cout << endl << endl;
-    cin.ignore();
-
-
-
-
-    // compruebo que han sido elegidos correctamente y
+    // Compruebo que han sido elegidos correctamente y
     // los corrijo de ser necesario
 
     ComprobarOpcionAleatorios(menor,mayor);
@@ -172,7 +150,7 @@ int main(/*RELLENAR*/){
 
 
 
-
+        cout << "tamaño res: " << tam_res << endl;
 
 
     
