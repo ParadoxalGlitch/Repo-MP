@@ -69,8 +69,7 @@ $(OBJ)/I_MezclaArrays.o : $(SRC)/I_MezclaArrays.cpp \
 
 $(OBJ)/I_MezclaArrays_ref.o : $(SRC)/I_MezclaArrays_ref.cpp \
                       $(INCLUDE)/GeneradorAleatorioEnteros.h \
-                      $(INCLUDE)/ProcesamientoArrayInt.h \
-					  $(INCLUDE)/MiCadenaClasica.h
+                      $(INCLUDE)/ProcesamientoArrayInt.h
 	g++ -c -o $(OBJ)/I_MezclaArrays_ref.o $(SRC)/I_MezclaArrays_ref.cpp \
 	          -I$(INCLUDE) -std=c++14
 
