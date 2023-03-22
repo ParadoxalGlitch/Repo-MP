@@ -13,7 +13,6 @@
 #include <iostream>
 #include <cstring>
 #include "ProcesamientoArrayInt.h"
-#include "GeneradorAleatorioEnteros.h"
 
 using namespace std;
 
@@ -38,14 +37,35 @@ int main(int argc, char * argv[]){
     // Actualizo los valores de tam_v1, tam_v2 , menor y mayor 
     // en función de los argumentos presentados por el usuario
 
+
+
+    // Mensaje de error si se superan los argumentos permitidos
+
     if (argc > 4) {
-        cerr << "Error: demasiados argumentos" << endl << endl;
+        cerr << "Error: demasiados argumentos" << endl;
+
+        // Mensaje de ayuda
+        cerr << "Argumentos posibles: " << endl;
+        cerr << "arg 1: tamaño vectores" << endl;
+        cerr << "arg 2: menor a generar" << endl;
+        cerr << "arg 3: mayor a generar" << endl;
         exit (1);
     }
 
     else if(argc > 1){
+
         tam_v1 = atoi(argv[1]);
         tam_v2 = atoi(argv[1]);
+
+        
+        // Mensaje de error si se elige un tamaño de vectores incorrecto
+        if (tam_v1 < 2 || tam_v1 > 100){
+            cerr << "Error: tamaño de vectores debe ser mayor o igual a 2";
+            cerr << " y menor o igual a 100" << endl << endl;
+            exit (1);
+        }
+
+        
 
         if (argc > 2){
             if (argc > 3)
@@ -151,12 +171,8 @@ int main(int argc, char * argv[]){
 
 
 
-
-        cout << "tamaño res: " << tam_res << endl;
-
-
     
-    // Muestro los vectores mezclados
+   // Muestro los vectores mezclados
 
     cout << "Vector Mezclado:" << endl;
     MuestraVector(res, tam_res);

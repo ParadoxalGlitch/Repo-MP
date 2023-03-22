@@ -12,7 +12,7 @@
 #include <iostream>
 #include <string>
 #include <cstring>
-#include "GeneradorAleatorioEnteros.h
+#include "GeneradorAleatorioEnteros.h"
 #include "SecuenciaEnteros.h"
 using namespace std;
 
@@ -31,13 +31,12 @@ using namespace std;
     // Pre: 0 <= n_datos <= TAMANIO
     // PRE: A partir de "p" hay "n_datos" valores
 
-    SecuenciaEnteros :: SecuenciaEnteros (int *p, in n_datos) : \
+    SecuenciaEnteros :: SecuenciaEnteros (int *p, int n_datos) : \
                                           total_utilizados(0)
     {
         for (int i=0; i<n_datos; i++){
 
-            Aniade(*(p+1));
-            total_utilizados++;
+            Aniade(*(p+i));
 
         }
     }
@@ -53,7 +52,6 @@ using namespace std;
         for (int i=0; i<n_datos; i++){
 
             Aniade(valor);
-            total_utilizados++;
 
         }
 
@@ -69,12 +67,11 @@ using namespace std;
                                           int max_aleat) : total_utilizados(0)
     {
 
-        GeneradorAleatorioEnteros generador (min_aleat, max_aleat);
+        GeneradorAleatorioEnteros generador(min_aleat, max_aleat);
 
         for (int i=0; i < n_datos; i++){
 
-            Aniade(generador.Siguiente);
-            total_utilizados++;
+            Aniade(generador.Siguiente());
 
         }
 
@@ -127,8 +124,8 @@ using namespace std;
 
     void SecuenciaEnteros :: Elimina (int indice)
     {
-
-        int * ptr_indice = &(Elemento[indice]);
+        
+        int * ptr_indice = &vector_privado[indice];
 
         if ((indice >= 0) && (indice < total_utilizados)){
 
@@ -146,7 +143,7 @@ using namespace std;
 
     void SecuenciaEnteros :: Inserta (int indice, int num)
     {
-        int * ptr_indice = &(Elemento[indice]);
+        int * ptr_indice = &vector_privado[indice];
 
         if ((indice >= 0) && (indice < total_utilizados)){
 
@@ -165,10 +162,7 @@ using namespace std;
     // PRE: 0 <= indice < total_utilizados
     int& SecuenciaEnteros :: Valor (int indice)
     {
-        if ((indice >= 0) && (indice < total_utilizados))
-        {
-            return (vector_privado[indice]);
-        }
+        return (vector_privado[indice]);
     }
 
 
@@ -182,20 +176,23 @@ using namespace std;
         bool Iguales = true;
         int i=0;
 
-        if (TotalUtilizados() != otra.TotalUtilizados())
+        SecuenciaEnteros sec = const_cast < SecuenciaEnteros&>(otra);
+
+        if (TotalUtilizados() != sec.TotalUtilizados())
             bool Iguales = false;
         
         else{
-            while (i < TotalUtilizados && Iguales){
+            while (i < TotalUtilizados() && Iguales){
 
-                if (Valor(i) != otra.Valor(i))
+                if (Valor(i) != sec.Valor(i))
                     Iguales = false;
                 
                 else
                     i++;
             }
-
+        }
         return (Iguales);
+
 
     }
 
@@ -205,7 +202,7 @@ using namespace std;
     // Compone un string con todos los valores que están
     // almacenados en la secuencia y lo devuelve.
 
-    string ToString()
+    string SecuenciaEnteros :: ToString()
     {
         string cadena = "{";
 
@@ -224,38 +221,5 @@ using namespace std;
         return (cadena);
     }
 
-	/***********************************************************************/
-};
-
 /////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////
-
-/***************************************************************************/
-/***************************************************************************/
-
-int main (void)
-{
-
-    const int MIN_VALOR =  1;
-    const int MAX_VALOR = 10;
-
-    SecuenciaEnteros sec; 
-
-    // Rellenar secuencia
-
-    for (int valor=MIN_VALOR; valor<=MAX_VALOR; valor++)
-        sec.Aniade (valor);
-
-    // Mostrar secuencia
-
-
-    cout << endl; 
-    cout << sec.ToString () << endl;
-    cout << "Num. valores en la secuencia = " << sec.TotalUtilizados() << endl;     
-    cout << endl; 
-
-    return 0;
-}
-
-/***************************************************************************/
-/***************************************************************************/

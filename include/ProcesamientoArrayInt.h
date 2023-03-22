@@ -4,13 +4,13 @@
 //
 // Fichero: ProcesamientoArrayInt.h
 //
-// Contiene la declaración de las funciones usadas en
-//          I_PosMayor_Basico.cpp (por ahora)
-//
+// Contiene la declaración de las funciones de ProcesamientoArrayInt
 /*****************************************************************************/
 
 #ifndef FUNCIONES_PROCESS_ARRAY
 #define FUNCIONES_PROCESS_ARRAY
+
+#include "GeneradorAleatorioEnteros.h"
 
 using namespace std;
 

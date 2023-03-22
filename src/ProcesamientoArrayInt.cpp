@@ -10,8 +10,8 @@
 
 #include <iostream>
 #include <cstring>
-#include "GeneradorAleatorioEnteros.h"
 #include "ProcesamientoArrayInt.h"
+#include "GeneradorAleatorioEnteros.h"
 
 using namespace std;
 
