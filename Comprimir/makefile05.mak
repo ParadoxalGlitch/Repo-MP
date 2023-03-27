@@ -62,13 +62,11 @@ $(BIN)/I_Inflacion_Matriz : $(OBJ)/I_Inflacion_Matriz.o
 # OBJETOS
 	
 $(OBJ)/I_MezclaArrays.o : $(SRC)/I_MezclaArrays.cpp \
-                      	  $(INCLUDE)/GeneradorAleatorioEnteros.h \
                       	  $(INCLUDE)/ProcesamientoArrayInt.h
 	g++ -c -o $(OBJ)/I_MezclaArrays.o $(SRC)/I_MezclaArrays.cpp \
 	          -I$(INCLUDE) -std=c++14
 
 $(OBJ)/I_MezclaArrays_ref.o : $(SRC)/I_MezclaArrays_ref.cpp \
-                      $(INCLUDE)/GeneradorAleatorioEnteros.h \
                       $(INCLUDE)/ProcesamientoArrayInt.h
 	g++ -c -o $(OBJ)/I_MezclaArrays_ref.o $(SRC)/I_MezclaArrays_ref.cpp \
 	          -I$(INCLUDE) -std=c++14

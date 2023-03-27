@@ -282,7 +282,7 @@ int main(int argc, char * argv[]){
 
     cout << "Pais con dicho valor: " << NombrePais(PAISES, Mayor_pais) << endl;
     
-    cout << "Se ha calculado entre los paises " << anio_inic << " y ";
+    cout << "Se ha calculado entre los años " << anio_inic << " y ";
     cout << anio_inic + num_anios - 1 << endl << endl << endl;
 
 
@@ -294,7 +294,7 @@ int main(int argc, char * argv[]){
 
     cout << "Pais con dicho valor: " << NombrePais(PAISES, Menor_pais) << endl;
 
-    cout << "Se ha calculado entre los paises " << anio_inic << " y ";
+    cout << "Se ha calculado entre los años " << anio_inic << " y ";
     cout << anio_inic + num_anios - 1 << endl << endl << endl;
 
 
