@@ -148,7 +148,7 @@ using namespace std;
         if ((indice >= 0) && (indice < total_utilizados)){
 
             total_utilizados++;
-            memmove(ptr_indice + 1, ptr_indice, (total_utilizados-indice+1)*\
+            memmove(ptr_indice + 1, ptr_indice, (total_utilizados-indice)*\
                    sizeof(int));
 
             *(ptr_indice) = num;

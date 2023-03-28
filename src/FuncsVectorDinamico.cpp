@@ -267,6 +267,10 @@ void AniadeVectorDinamico (VectorDinamico &v, const int valor)
 void InsertaVectorDinamico (VectorDinamico &v, const TipoBase valor, \
 						   const int num_casilla)
 {
+
+
+	TipoBase * ptr_indice = v.datos+num_casilla;
+
 	// Si no cabe --> redimensionar
 
 	if (v.usados == v.capacidad) {
@@ -277,9 +281,12 @@ void InsertaVectorDinamico (VectorDinamico &v, const TipoBase valor, \
 
 	// Se haya redimensionado o no, en este punto hay sitio para la inserción
 
+	memmove( ptr_indice+1, ptr_indice, (v.usados-num_casilla)*\
+                   sizeof(TipoBase));
+
+	*(ptr_indice) = valor;
 	
-
-
+	v.usados++;
 
 }
 
@@ -296,12 +303,14 @@ void EliminaVectorDinamico (VectorDinamico &v, const int num_casilla)
 {
 
 
+	TipoBase * ptr_indice = v.datos+num_casilla;
 
+    memmove(ptr_indice, ptr_indice+1, (v.usados-num_casilla-1)*\
+	        sizeof(TipoBase));
 
+	v.usados--;
 
 }
-
-
 
 
 
