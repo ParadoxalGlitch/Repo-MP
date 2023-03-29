@@ -1,18 +1,12 @@
 /***************************************************************************/
-// METODOLOGIA DE LA PROGRAMACION
 //
-// (C) FRANCISCO JOSE CORTIJO BON
-// DEPARTAMENTO DE CIENCIAS DE LA COMPUTACION E INTELIGENCIA ARTIFICIAL
+// David Pérez Tobarra
 //
-// RELACION DE PROBLEMAS 2
+// Fichero: FuncsVectorDinamico.cpp
 //
-// Implementaci�n de las funciones b�sicas de gesti�n del tipo "VectorDinamico".
-// Declaraciones en VectorDinamico_basico.h
-//  
-// Fichero: VectorDinamico_basico.cpp
+// Contiene la definición de las funciones de VectorDinamico
 //
 /***************************************************************************/
-
 
 #include <iostream>
 #include <iomanip>
@@ -33,12 +27,12 @@ using namespace std;
 // POST: El número de casillas usadas es 0
 //       El número de casillas reservadas es "capacidad_inicial"
 
-VectorDinamico CreaVectorDinamico (int cap_inic, TipoRedimension tipo)
+VectorDinamico CreaVectorDinamico (int cap_inic, TipoRedimension tipo)    // USADO
 {
 	VectorDinamico nuevo;
 
 	// Pedir memoria para el nuevo almacen 
-	nuevo.datos = new int[cap_inic]; 
+	nuevo.datos = new TipoBase[cap_inic]; 
 
 	// Iniciar capacidad y ocupación
 	nuevo.capacidad = cap_inic;
@@ -84,7 +78,7 @@ int  UsadosVectorDinamico (const VectorDinamico & v)
 
 
 
-/***************************************************************************/
+/***************************************************************************/   // USADO
 /***************************************************************************/
 // Calcula el n�mero de casillas reservadas de un vector din�mico.
 // Argumentos: v, el vector que se va a consultar.
@@ -97,11 +91,10 @@ int  UsadosVectorDinamico (const VectorDinamico & v)
 
 
 
+/***************************************************************************/  // USADO
 /***************************************************************************/
-/***************************************************************************/
-// Deja el vector dinámico vacío
-// Argumentos: v (referencia) El vector que se va "vaciar"
-// POST: El número de casillas usadas es 0
+// Comprueba si el vector está vacío
+// Argumentos: v (referencia) El vector que se va a comprobar
 
 bool EstaVacioVectorDinamico (const VectorDinamico & v) 
 {
@@ -114,7 +107,7 @@ bool EstaVacioVectorDinamico (const VectorDinamico & v)
 }
 
 
-/***************************************************************************/
+/***************************************************************************/ // USADO
 /***************************************************************************/
 // Deja el vector dinámico vacío
 // Argumentos: v (referencia) El vector que se va "vaciar"
@@ -128,19 +121,19 @@ void EliminaTodosVectorDinamico (VectorDinamico & v)
 
 
 
-/*****************************************************************************/
+/*****************************************************************************/ // USADO
 /*****************************************************************************/
 // Inicializa el vector dinámico, sustituyendo el contenido de todas
 // las casillas usadas por el valor "valor".
-// PRE: El vector debe existir
+// PRE: El vector debe existir y estar vacío
 
 void EcualizaVectorDinamico (VectorDinamico & v, const TipoBase valor)
 {
 	
 
-	for (int i=0; i<v.usados; i++){
+	for (int i=0; i<v.capacidad; i++){
 
-		*(v.datos+i) == valor;
+		AniadeVectorDinamico(v,valor);
 
 	}
 
@@ -150,7 +143,7 @@ void EcualizaVectorDinamico (VectorDinamico & v, const TipoBase valor)
 
 
 
-/***************************************************************************/
+/***************************************************************************/ // USADO
 /***************************************************************************/
 // Consulta y modifica el valor de una casilla dada. Si se utiliza como 
 // rvalue se emplea para consultar el valor de la casilla "num_casilla". 
@@ -170,7 +163,7 @@ TipoBase & ValorVectorDinamico (const VectorDinamico & v, int num_casilla)
 
 
 
-/***************************************************************************/
+/***************************************************************************/ // USADO
 /***************************************************************************/
 // Hace una copia profunda de origen en destino
 // Si no tiene capacidad suficiente, destruye el vector y vuelve 
@@ -179,16 +172,11 @@ TipoBase & ValorVectorDinamico (const VectorDinamico & v, int num_casilla)
 void ClonaVectorDinamico (VectorDinamico & destino, \
 						  const VectorDinamico & origen)
 {
-	if (destino.capacidad < origen.capacidad){
-
-		DestruyeVectorDinamico(destino);
-		destino = CreaVectorDinamico(origen.capacidad, origen.tipo_redim);
-
-	}
+	DestruyeVectorDinamico(destino);
+	destino = CreaVectorDinamico(origen.capacidad, origen.tipo_redim);
 
 	for (int i=0; i<origen.usados; i++)
-
-		*(destino.datos+i) = *(origen.datos+i);
+		AniadeVectorDinamico(destino, *(origen.datos+i));
 
 }
 
@@ -234,7 +222,7 @@ string ToString (const VectorDinamico & v)
 // NOTA: Si no hay espacio libre, la función pide espacio adicional usando 
 //		 la función RedimensionaVectorDinamico. 
 
-void AniadeVectorDinamico (VectorDinamico &v, const int valor)
+void AniadeVectorDinamico (VectorDinamico &v, const TipoBase valor)
 {
 	// Si no cabe --> redimensionar
 
@@ -264,12 +252,9 @@ void AniadeVectorDinamico (VectorDinamico &v, const int valor)
 //		 la función RedimensionaVectorDinamico. 
 // PRE: 0<=num_casilla<UsadosVectorDInamico(v)
 
-void InsertaVectorDinamico (VectorDinamico &v, const TipoBase valor, \
+void InsertaVectorDinamico (VectorDinamico &v, const TipoBase valor,
 						   const int num_casilla)
 {
-
-
-	TipoBase * ptr_indice = v.datos+num_casilla;
 
 	// Si no cabe --> redimensionar
 
@@ -281,12 +266,15 @@ void InsertaVectorDinamico (VectorDinamico &v, const TipoBase valor, \
 
 	// Se haya redimensionado o no, en este punto hay sitio para la inserción
 
-	memmove( ptr_indice+1, ptr_indice, (v.usados-num_casilla)*\
-                   sizeof(TipoBase));
 
-	*(ptr_indice) = valor;
-	
+	memmove(v.datos+num_casilla+1, v.datos+num_casilla, \
+		   (v.usados-num_casilla)*sizeof(TipoBase));
+
+	ValorVectorDinamico(v, num_casilla) = valor;
+
 	v.usados++;
+	
+	
 
 }
 
@@ -305,8 +293,7 @@ void EliminaVectorDinamico (VectorDinamico &v, const int num_casilla)
 
 	TipoBase * ptr_indice = v.datos+num_casilla;
 
-    memmove(ptr_indice, ptr_indice+1, (v.usados-num_casilla-1)*\
-	        sizeof(TipoBase));
+    memmove(ptr_indice, ptr_indice+1,(v.usados-num_casilla-1)*sizeof(TipoBase));
 
 	v.usados--;
 
@@ -324,23 +311,32 @@ void EliminaVectorDinamico (VectorDinamico &v, const int num_casilla)
 			
 void RedimensionaVectorDinamico (VectorDinamico & v)
 {
-	int nueva_capacidad = v.capacidad + TAM_BLOQUE;
+	int nueva_capacidad = 0;
 
-    #ifdef DEBUG_FUNCS_VECTOR_DINAMICO_BASICO
+	if (v.tipo_redim == TipoRedimension::DeUnoEnUno)
+		nueva_capacidad = v.capacidad + 1;
+
+	if (v.tipo_redim == TipoRedimension::Duplicando)
+		nueva_capacidad = v.capacidad * 2;
+
+	if (v.tipo_redim == TipoRedimension::EnBloques)
+		nueva_capacidad = v.capacidad + TAM_BLOQUE;
+
+
 	cout << endl;
-	cout << "REDIMENSIONADO HASTA --> "<<nueva_capacidad << " CASILLAS"<< endl;
+	cout << "REDIMENSIONADO HASTA --> " << nueva_capacidad << " CASILLAS"<< endl;
 	cout << endl;
-	#endif
+ 
 
 	// Pedir memoria para el nuevo almacen 
-	int * tmp = new int[nueva_capacidad]; 
+	TipoBase * tmp = new TipoBase[nueva_capacidad]; 
 
 	// Copiar los datos 
 	for (int i=0; i<v.usados; i++) 
-		tmp[i] = v.datos[i]; 
+	tmp[i] = v.datos[i]; 
 		
 	// Considerar esta copia eficiente:
-	// memcpy (tmp, v.datos, v.usados*sizeof(TipoBase)); 
+	//memcpy (tmp, v.datos, v.usados*sizeof(TipoBase)); 
 	
 	// Liberar la memoria del antiguo almac�n
 	delete [] v.datos; 
@@ -369,7 +365,7 @@ void  ReajustaVectorDinamico (VectorDinamico & v)
 	cout << endl;
 
 	// Pedir memoria para el nuevo almacen 
-	int * tmp = new int[nueva_capacidad]; 
+	TipoBase* tmp = new int[nueva_capacidad]; 
 
 	// Copiar los datos 
 	for (int i=0; i<v.usados; i++) 

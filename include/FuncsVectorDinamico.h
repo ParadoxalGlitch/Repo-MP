@@ -2,9 +2,9 @@
 //
 // David Pérez Tobarra
 //
-// Fichero: GeneradorAleatorioEnteros.h
+// Fichero: FuncsVectorDinamico.h
 //
-// Contiene la declaración de la clase GeneradorAleatorioEnteros
+// Contiene la declaración de la funciones de VectorDInamico
 //
 /*****************************************************************************/
 
@@ -43,13 +43,14 @@ typedef struct {
 /***************************************************************************/
 /***************************************************************************/
 // Crear vector dinámico
-// Argumentos: capacidad_inicial, número de casillas con las que se crea el vector.
+// Argumentos: capacidad_inicial, número de casillas 
+// con las que se crea el vector.
 // Devuelve: el vector dinámico creado.
 // POST: El número de casillas usadas es 0
 //       El número de casillas reservadas es "capacidad_inicial"
 
 VectorDinamico CreaVectorDinamico (int cap_inic=TAM_INICIAL, \
-	TipoRedimension tipo=TipoRedimension::EnBloques);
+	TipoRedimension tipo=TipoRedimension::DeUnoEnUno);
 
 
 
@@ -165,7 +166,7 @@ string ToString (const VectorDinamico & v);
 // NOTA: Si no hay espacio libre, la función pide espacio adicional usando 
 //		 la función RedimensionaVectorDinamico. 
 
-void AniadeVectorDinamico (VectorDinamico &v, const int valor);
+void AniadeVectorDinamico (VectorDinamico &v, const TipoBase valor);
 
 
 
