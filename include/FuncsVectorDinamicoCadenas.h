@@ -4,7 +4,7 @@
 //
 // Fichero: FuncsVectorDinamico.h
 //
-// Contiene la declaración de la funciones de VectorDInamico
+// Contiene la declaración de la funciones de VectorDinamicoCadenas
 //
 /*****************************************************************************/
 

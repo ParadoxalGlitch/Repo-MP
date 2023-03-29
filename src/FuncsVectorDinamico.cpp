@@ -27,7 +27,7 @@ using namespace std;
 // POST: El número de casillas usadas es 0
 //       El número de casillas reservadas es "capacidad_inicial"
 
-VectorDinamico CreaVectorDinamico (int cap_inic, TipoRedimension tipo)    // USADO
+VectorDinamico CreaVectorDinamico (int cap_inic, TipoRedimension tipo) 
 {
 	VectorDinamico nuevo;
 
@@ -78,7 +78,7 @@ int  UsadosVectorDinamico (const VectorDinamico & v)
 
 
 
-/***************************************************************************/   // USADO
+/***************************************************************************/
 /***************************************************************************/
 // Calcula el n�mero de casillas reservadas de un vector din�mico.
 // Argumentos: v, el vector que se va a consultar.
@@ -91,7 +91,7 @@ int  UsadosVectorDinamico (const VectorDinamico & v)
 
 
 
-/***************************************************************************/  // USADO
+/***************************************************************************/
 /***************************************************************************/
 // Comprueba si el vector está vacío
 // Argumentos: v (referencia) El vector que se va a comprobar
@@ -107,7 +107,7 @@ bool EstaVacioVectorDinamico (const VectorDinamico & v)
 }
 
 
-/***************************************************************************/ // USADO
+/***************************************************************************/
 /***************************************************************************/
 // Deja el vector dinámico vacío
 // Argumentos: v (referencia) El vector que se va "vaciar"
@@ -121,7 +121,7 @@ void EliminaTodosVectorDinamico (VectorDinamico & v)
 
 
 
-/*****************************************************************************/ // USADO
+/*****************************************************************************/
 /*****************************************************************************/
 // Inicializa el vector dinámico, sustituyendo el contenido de todas
 // las casillas usadas por el valor "valor".
@@ -143,7 +143,7 @@ void EcualizaVectorDinamico (VectorDinamico & v, const TipoBase valor)
 
 
 
-/***************************************************************************/ // USADO
+/***************************************************************************/
 /***************************************************************************/
 // Consulta y modifica el valor de una casilla dada. Si se utiliza como 
 // rvalue se emplea para consultar el valor de la casilla "num_casilla". 
@@ -163,7 +163,7 @@ TipoBase & ValorVectorDinamico (const VectorDinamico & v, int num_casilla)
 
 
 
-/***************************************************************************/ // USADO
+/***************************************************************************/
 /***************************************************************************/
 // Hace una copia profunda de origen en destino
 // Si no tiene capacidad suficiente, destruye el vector y vuelve 
@@ -324,7 +324,7 @@ void RedimensionaVectorDinamico (VectorDinamico & v)
 
 
 	cout << endl;
-	cout << "REDIMENSIONADO HASTA --> " << nueva_capacidad << " CASILLAS"<< endl;
+	cout << "REDIMENSIONADO HASTA --> "<< nueva_capacidad << " CASILLAS"<< endl;
 	cout << endl;
  
 

@@ -4,7 +4,7 @@
 //
 // Fichero: II_Demo_VectorDinamicoCadenas.cpp
 //
-// Contiene el demo de las funciones de VectorDinamico
+// Contiene el demo de las funciones de VectorDinamicoCadenas
 //
 /***************************************************************************/
 
@@ -70,7 +70,7 @@ int main() {
     // Realizo los cálculos necesarios
 
 
-    CalculosLineasVectorDinamico(v, num_lineas, num_lineas_vacias, num_parrafos);
+    CalculosLineasVectorDinamico(v, num_lineas,num_lineas_vacias,num_parrafos);
 
     cout << "Numero de lineas: " << num_lineas;
     cout << endl;

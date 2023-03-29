@@ -2,9 +2,9 @@
 //
 // David Pérez Tobarra
 //
-// Fichero: FuncsVectorDinamico.cpp
+// Fichero: FuncsVectorDinamicoCadenas.cpp
 //
-// Contiene la definición de las funciones de VectorDinamico
+// Contiene la definición de las funciones de VectorDinamicoCadenas
 //
 /***************************************************************************/
 
@@ -115,23 +115,24 @@ void RedimensionaVectorDinamico (VectorDinamico & v)
     if (v.tipo_redim == TipoRedimension::EnBloques)
         nueva_capacidad = v.capacidad + TAM_BLOQUE;
 
-    // Pedir memoria para el nuevo almacen
+    // Pido memoria para el nuevo vector redimensionado
     char **tmp = new char*[nueva_capacidad];
 
-    // Copiar los datos
+    // Copio los datos
     for (int i = 0; i < v.usados; i++) {
-        // Pedir memoria para la nueva cadena y copiar el contenido de la cadena antigua
+        // Pido memoria para la nueva cadena y 
+		// copio el contenido de la cadena antigua
         tmp[i] = new char[strlen(v.lineas[i]) + 1];
         strcpy(tmp[i], v.lineas[i]);
     }
 
-    // Liberar la memoria del antiguo almacén
+    // Libero la memoria del antiguo vector
     for (int i = 0; i < v.usados; i++) {
         delete [] v.lineas[i];
     }
     delete [] v.lineas;
 
-    // Actualizar vector dinámico redimensionado
+    // Actualizo vector dinámico redimensionado
     v.lineas = tmp;
     v.capacidad = nueva_capacidad;
     // v.usados se mantiene como estaba
