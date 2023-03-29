@@ -5,6 +5,7 @@ El programa debería ser capaz de leer cada línea y almacenarla en el vector
 dinámico de cadenas.
 
 
-Además, el programa debería ser capaz de mostrar las cadenas almacenadas en el 
+Además, el programa debería ser capaz de mostrar las cadenas almacenadas en el
 vector y eliminar aquellas que contienen una subcadena específica.
 ¡Buena suerte!
+a

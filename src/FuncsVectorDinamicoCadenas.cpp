@@ -115,10 +115,6 @@ void RedimensionaVectorDinamico (VectorDinamico & v)
     if (v.tipo_redim == TipoRedimension::EnBloques)
         nueva_capacidad = v.capacidad + TAM_BLOQUE;
 
-    cout << endl;
-    cout << "REDIMENSIONADO HASTA --> " << nueva_capacidad << " CASILLAS"<< endl;
-    cout << endl;
-
     // Pedir memoria para el nuevo almacen
     char **tmp = new char*[nueva_capacidad];
 
@@ -237,7 +233,13 @@ void ImprimeLineaVectorDinamico(VectorDinamico v, int linea){
 
 void ImprimeTodoVectorDinamico(VectorDinamico v){
 
+
+	cout << "/////////////////////////////////////////////////////////////";
+	cout << endl;
+
 	for (int i=0; i<v.usados; i++)
 		ImprimeLineaVectorDinamico(v,i);
+
+	cout << "/////////////////////////////////////////////////////////////";	
 
 }

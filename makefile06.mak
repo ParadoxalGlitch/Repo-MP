@@ -30,15 +30,16 @@ all: presentacion $(BIN)/II_Demo_VectorDinamico \
 # EJECUTABLES
 
 $(BIN)/II_Demo_VectorDinamico : $(OBJ)/II_Demo_VectorDinamico.o \
-	                            $(OBJ)/FuncsVectorDinamico.o      
+	                            $(LIB)/libFuncsVectorDinamico.a      
 	g++ -o $(BIN)/II_Demo_VectorDinamico $(OBJ)/II_Demo_VectorDinamico.o \
-	       $(OBJ)/FuncsVectorDinamico.o
+	       $(OBJ)/FuncsVectorDinamico.o -lFuncsVectorDinamico -L$(LIB)
 	       
 $(BIN)/II_Demo-VectorDinamicoCadenas : $(OBJ)/II_Demo-VectorDinamicoCadenas.o \
-                                       $(OBJ)/FuncsVectorDinamicoCadenas.o
+                                       $(LIB)/libFuncsVectorDinamicoCadenas.a
 	g++ -o $(BIN)/II_Demo-VectorDinamicoCadenas \
 	       $(OBJ)/II_Demo-VectorDinamicoCadenas.o \
-	       $(OBJ)/FuncsVectorDinamicoCadenas.o
+	       $(OBJ)/FuncsVectorDinamicoCadenas.o -lFuncsVectorDinamicoCadenas \
+	       -L$(LIB)
 
 
 #......................................
@@ -74,8 +75,12 @@ $(OBJ)/II_Demo-VectorDinamicoCadenas.o : \
 #......................................
 # BIBLIOTECAS
 
-#$(LIB)/libSecuenciaEnteros.a : $(OBJ)/SecuenciaEnteros.o
-#	ar rvs $(LIB)/libSecuenciaEnteros.a $(OBJ)/SecuenciaEnteros.o
+$(LIB)/libFuncsVectorDinamico.a : $(OBJ)/FuncsVectorDinamico.o
+	ar rvs $(LIB)/libFuncsVectorDinamico.a $(OBJ)/FuncsVectorDinamico.o
+	
+$(LIB)/libFuncsVectorDinamicoCadenas.a : $(OBJ)/FuncsVectorDinamicoCadenas.o
+	ar rvs $(LIB)/libFuncsVectorDinamicoCadenas.a \
+	       $(OBJ)/FuncsVectorDinamicoCadenas.o
 	
 #......................................
 # LIMPIEZA

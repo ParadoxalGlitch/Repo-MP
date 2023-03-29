@@ -22,6 +22,8 @@ using namespace std;
 
 int main() {
 
+
+
     VectorDinamico v = CreaVectorDinamico(10, TipoRedimension::DeUnoEnUno);
 
 
@@ -32,14 +34,40 @@ int main() {
     const int MAX_CAD = 100;
 
     char linea[MAX_CAD];
+
+
+    // Leo el fichero de entrada
     
     while (cin.getline(linea, MAX_CAD)) {
-    
 
         AniadeVectorDinamico(v,linea);
-    
 
     }
+
+
+
+
+    // Muestro el texto que voy a procesar
+
+    cout << "El texto procesado es el siguiente: ";
+    cout << endl << endl;
+
+    ImprimeTodoVectorDinamico(v);
+
+    cout << endl << endl;
+
+
+    // Por motivos de prueba, muestro la primera linea solamente
+
+    cout << "La primera linea del texto procesado es: ";
+    cout << endl << endl;
+
+    ImprimeLineaVectorDinamico(v,0);
+
+    cout << endl << endl;
+
+
+    // Realizo los cálculos necesarios
 
 
     CalculosLineasVectorDinamico(v, num_lineas, num_lineas_vacias, num_parrafos);
@@ -54,19 +82,12 @@ int main() {
     cout << endl;
 
 
-    cout << "El texto procesado es el siguiente: ";
-    cout << endl << endl;
 
+    // Elimino el vector dinámico para ahorrar memoria
 
-    ImprimeTodoVectorDinamico(v);
-
-
-
-
+    DestruyeVectorDinamico(v);
 
     return 0;
-
-
 
 }
 
