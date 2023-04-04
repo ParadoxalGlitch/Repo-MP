@@ -174,6 +174,10 @@ void ClonaVectorDinamico (VectorDinamico & destino, \
 {
 	DestruyeVectorDinamico(destino);
 	destino = CreaVectorDinamico(origen.capacidad, origen.tipo_redim);
+	
+	// Piensa que no tiene sentido destruirlo para luego
+	// crear uno nuevo y juntarlo con la referencia
+	// Seguramente se malgaste memoria
 
 	for (int i=0; i<origen.usados; i++)
 		AniadeVectorDinamico(destino, *(origen.datos+i));
