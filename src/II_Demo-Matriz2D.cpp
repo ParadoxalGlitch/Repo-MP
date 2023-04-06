@@ -59,6 +59,7 @@ int main (void)
 
 
 
+
 	// .....................................................................
 	// Creación de una matriz (todas las casillas a cero) y mostrala 
 
@@ -92,8 +93,91 @@ int main (void)
 
 	// .....................................................................
 
+
+
+
+	// .....................................................................
+	// Creación de una matriz 5x4 con todas las casillas a 7 y mostrarla
+
+	Matriz2D m7 = CreaMatriz(5,4,7);
+
+	cout << "Matriz con todos 7: ";
+	cout << ToString(m7);
+
+
+
+	// .....................................................................
+	// Modificación de algunos valores de casillas y mostrarla
+
+
+
+	Valor(m7,0,0) = 5;
+	Valor(m7,0,2) = 3;
+	Valor(m7,2,1) = 4;
+	Valor(m7,3,3) = 2;
+	Valor(m7,4,0) = 1;
+	Valor(m7,4,3) = 0;
+
+
+	cout << "Matriz modificada: ";
+	cout << ToString(m7);
+
+
+	// .....................................................................
+	// Creo una nueva matriz vacía y clono m7 en ella
+
+	Matriz2D clon = CreaMatriz();
+
+
+	cout << "Matriz prueba vacía: ";
+	cout << ToString(clon);
+
+	Clona(clon, m7);
+
+	cout << "Matriz prueba clonada: ";
+	cout << ToString(clon);
+
+
+	// .....................................................................
+	// Elimino la fila 3 de la matriz clon
+
+	EliminaFila(clon, 3);
+
+	cout << "Matriz clon con fila 3 eliminada: ";
+	cout << ToString(clon);
+
+	// .....................................................................
+	// Elimino la columna 3 de la matriz clon
+
+	EliminaColumna(clon, 0);
+
+	cout << "Matriz clon con columna 3 eliminada: ";
+	cout << ToString(clon);
+
+
+	// .....................................................................
+	// Destruyo la matriz clon, pues ya no la voy a usar
+
+	DestruyeMatriz(clon);
+
+
+	// .....................................................................
+	// Creo una matriz nueva, llamada submatriz, donde guardaré
+	// una submatriz de m7
+
+	Matriz2D submatriz = CreaMatriz();
+
+	SubMatriz(submatriz, m7, 2, 1, 3, 3);
+
+	cout << "Submatriz de 3x3 supuestamente de m7: ";
+	cout << ToString(submatriz);
+	
+
+
 	return 0; 
 }
+
+
 
 /***************************************************************************/
 /***************************************************************************/

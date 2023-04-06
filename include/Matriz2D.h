@@ -27,7 +27,7 @@ using namespace std;
 typedef int TipoBase;
 
 // Valor por defecto del tipo de los datos almacenados
-TipoBase VALOR_DEF = 0;
+const TipoBase VALOR_DEF = 0;
 
 /***************************************************************************/
 // Definiciones de tipos
@@ -165,6 +165,41 @@ void Clona (Matriz2D & destino, const Matriz2D & origen);
 //			   otra, la segunda matriz
 
 bool SonIguales (const Matriz2D & una, const Matriz2D & otra);
+
+
+/***************************************************************************/
+/***************************************************************************/
+// Elimina una fila de la matriz
+// Parámetros: matriz, la matriz
+//			   num_fila, fila a eliminar
+// PRE: matriz NO vacía
+
+void EliminaFila (Matriz2D & matriz, int num_fila);
+
+
+/***************************************************************************/
+/***************************************************************************/
+// Elimina una columna de la matriz
+// Parámetros: matriz, la matriz
+//			   num_col, fila a eliminar
+// PRE: matriz NO vacía
+
+void EliminaColumna (Matriz2D & matriz, int num_col);
+
+/***************************************************************************/
+/***************************************************************************/
+// Extrae una submatriz de original y la deja en resultado
+// Parámetros: resultado, la submatriz resultante
+//			   original, matriz original
+//			   fila_inic, fila desde donde se extrae la submatriz
+//			   col_inic, columa desde donde se extrae la submatriz
+//		       num_filas, tamaño de filas de la submatriz
+//			   num_cols, tamaño de columnas de la submatriz
+// PRE: matriz NO vacía, valor de columna válido
+
+void SubMatriz (Matriz2D & resultado, const Matriz2D & original, \
+				int fila_inic, int col_inic, int num_filas, int num_cols);
+
 
 
 
