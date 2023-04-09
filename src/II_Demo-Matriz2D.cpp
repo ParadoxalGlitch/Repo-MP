@@ -139,9 +139,9 @@ int main (void)
 
 
 	// .....................................................................
-	// Elimino la fila 3 de la matriz clon
+	// Elimino la fila 0 de la matriz clon
 
-	EliminaFila(clon, 3);
+	EliminaFila(clon, 0);
 
 	cout << "Matriz clon con fila 3 eliminada: ";
 	cout << ToString(clon);
@@ -149,7 +149,7 @@ int main (void)
 	// .....................................................................
 	// Elimino la columna 3 de la matriz clon
 
-	EliminaColumna(clon, 0);
+	EliminaColumna(clon, 3);
 
 	cout << "Matriz clon con columna 3 eliminada: ";
 	cout << ToString(clon);
@@ -163,13 +163,14 @@ int main (void)
 
 	// .....................................................................
 	// Creo una matriz nueva, llamada submatriz, donde guardaré
-	// una submatriz de m7
+	// una submatriz de m7, que querré que sea 4x4 pero será
+	// 3x3 debido a las dimensiones
 
 	Matriz2D submatriz = CreaMatriz();
 
-	SubMatriz(submatriz, m7, 2, 1, 3, 3);
+	SubMatriz(submatriz, m7, 2, 1, 4, 4);
 
-	cout << "Submatriz de 3x3 supuestamente de m7: ";
+	cout << "Submatriz de 4x4 supuestamente de m7: ";
 	cout << ToString(submatriz);
 
 
