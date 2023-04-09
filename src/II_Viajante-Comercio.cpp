@@ -19,8 +19,8 @@ using namespace std;
 
 /*****************************************************************************/
 // Busca en la matriz de precios de viaje entre ciudades el precio más barato
-// de viajar desde la ciudad (fila) elegida hasta la ciudad que sea, siempre que
-// esta no esté en el vector de ciudad ya visitadas presentado como argumento
+// de viajar desde la ciudad (fila) elegida hasta la ciudad que sea, siempre
+// que esta no esté en el vector de ciudad ya visitadas
 
 int BuscaPrecioMinimo(const Matriz2D & precios, int fila, 
                        VectorDinamico & visitadas){
@@ -74,8 +74,8 @@ int main(){
 
 
 
-    // Pregunto el número de ciudades y creo la matriz de precios de viaje entre
-    // ciudades, y compruebo que el valor proporcionado es válido
+    // Pregunto el número de ciudades y creo la matriz de precios de viaje 
+    // entre ciudades, y compruebo que el valor proporcionado es válido
     // (número de ciudades mayor que 1)
 
     
@@ -154,7 +154,8 @@ int main(){
 
     // Por ultimo, necesito el precio de ir de la ultima ciudad a la primera
    
-    precio += Valor(precios, ValorVectorDinamico(itinerario, n-1), ValorVectorDinamico(itinerario, 0));
+    precio += Valor(precios, ValorVectorDinamico(itinerario, n-1), \
+                    ValorVectorDinamico(itinerario, 0));
 
 
     // Modifico el itinerario para que las ciudades empiecen desde el 1

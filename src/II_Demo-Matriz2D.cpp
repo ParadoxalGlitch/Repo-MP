@@ -1,16 +1,10 @@
 /***************************************************************************/
 // METODOLOGIA DE LA PROGRAMACION
-// GRADO EN INGENIERIA INFORMATICA
 //
-// (C) FRANCISCO JOSE CORTIJO BON
-// DEPARTAMENTO DE CIENCIAS DE LA COMPUTACION E INTELIGENCIA ARTIFICIAL
 //
 // Pruebas sobre el tipo Matriz2D
 //
-// Matriz2D: Matriz 2D dinamica de datos "TipoBase" en la que cada 
-//            fila es un vector dinamico independiente.
-//
-// Fichero: Demo-BasicoMatriz2D.cpp 
+// Fichero: II_Demo-BasicoMatriz2D.cpp 
 //
 /***************************************************************************/
 

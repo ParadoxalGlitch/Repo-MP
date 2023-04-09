@@ -400,7 +400,8 @@ void EliminaColumna(Matriz2D & matriz, int num_col){
 		// saltandome la columna
 		for (int i=0; i < matriz.fils; i++){
 			memcpy(tmp.datos[i], matriz.datos[i], num_col*sizeof(TipoBase));
-			memcpy(tmp.datos[i]+num_col, matriz.datos[i]+num_col+1, (matriz.cols-num_col-1)*sizeof(TipoBase));
+			memcpy(tmp.datos[i]+num_col, matriz.datos[i]+num_col+1, \
+			      (matriz.cols-num_col-1)*sizeof(TipoBase));
 		}
 
 		Clona(matriz, tmp);
@@ -431,7 +432,8 @@ void EliminaColumna(Matriz2D & matriz, int num_col){
 //			   num_cols, tamaño de columnas de la submatriz
 // PRE: matriz NO vacía, valor de columna válido
 
-void SubMatriz (Matriz2D & resultado, const Matriz2D & original, int fila_inic, int col_inic, int num_filas, int num_cols){
+void SubMatriz (Matriz2D & resultado, const Matriz2D & original, int fila_inic, 
+                int col_inic, int num_filas, int num_cols){
 
 
 	// Compruebo que las casillas elegidas son correctas
@@ -476,7 +478,8 @@ void SubMatriz (Matriz2D & resultado, const Matriz2D & original, int fila_inic, 
 
 	for (int i=0; i<resultado.fils; i++){
 
-		memcpy(resultado.datos[i], original.datos[i+fila_inic]+col_inic, (num_cols)*sizeof(TipoBase));
+		memcpy(resultado.datos[i], original.datos[i+fila_inic]+col_inic, 
+		      (num_cols)*sizeof(TipoBase));
 
 	}
 
