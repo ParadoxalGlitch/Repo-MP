@@ -16,6 +16,7 @@
 /***************************************************************************/
 
 #include "Matriz2D.h"
+#include "TipoBase.h"
 
 #include <string>
 #include <cstring>
@@ -315,35 +316,55 @@ bool SonIguales (const Matriz2D & una, const Matriz2D & otra){
 // PRE: matriz NO vacía, valor de fila válido
 
 void EliminaFila (Matriz2D & matriz, int num_fila){
+
+	bool Continuar = true;
 	
+	// Compruebo que la matriz no está vacía
+	// en cuyo caso no hago nada
 
-	memmove(matriz.datos[num_fila], matriz.datos[num_fila+1],\
-			matriz.cols*(matriz.fils - num_fila-1) *sizeof(TipoBase));
 
+	if (EstaVacia(matriz))
+		Continuar = false;
 	
-	// Almaceno los datos de la matriz a modificar para
-	// tener acceso a ellos tras borrarla
+	// Si la matriz no está vacía y tiene más de una fila
+	// procedo a eliminar la fila
 
-	TipoBase * tmp = new TipoBase [matriz.fils*matriz.cols];
-	memcpy(tmp, matriz.datos[0], matriz.fils*matriz.cols*sizeof(TipoBase));
+	if (Continuar && matriz.fils > 1){
+		memmove(matriz.datos[num_fila], matriz.datos[num_fila+1],\
+				matriz.cols*(matriz.fils - num_fila-1) *sizeof(TipoBase));
 
-	int fils = matriz.fils - 1;
-	int cols = matriz.cols;
+		
+		// Almaceno los datos de la matriz a modificar para
+		// tener acceso a ellos tras borrarla
+
+		TipoBase * tmp = new TipoBase [matriz.fils*matriz.cols];
+		memcpy(tmp, matriz.datos[0], matriz.fils*matriz.cols*sizeof(TipoBase));
+
+		int fils = matriz.fils - 1;
+		int cols = matriz.cols;
 
 
-	// Elimino la memoria de la matriz y reservo nueva
-	// acorde a las nuevas características
+		// Elimino la memoria de la matriz y reservo nueva
+		// acorde a las nuevas características
 
-	EliminaTodos(matriz);
-	matriz = CreaMatriz(fils, cols);
+		EliminaTodos(matriz);
+		matriz = CreaMatriz(fils, cols);
 
-	// Copio el contenido en la nueva matriz
+		// Copio el contenido en la nueva matriz
+		
+		memcpy(matriz.datos[0], tmp, fils*cols*sizeof(TipoBase));
+
+		// Me deshago del vector temporal
+
+		delete [] tmp;
+	}
+
+	// Si la matriz tiene una fila
 	
-	memcpy(matriz.datos[0], tmp, fils*cols*sizeof(TipoBase));
-
-	// Me deshago del vector temporal
-
-	delete [] tmp;
+	else if (Continuar && matriz.fils == 1){
+		EliminaTodos(matriz);
+		matriz = CreaMatriz(0,0);
+	}
 
 }
 
@@ -359,20 +380,41 @@ void EliminaFila (Matriz2D & matriz, int num_fila){
 
 void EliminaColumna(Matriz2D & matriz, int num_col){
 
+	bool Continuar = true;
 
-	// Creo Matriz auxiliar con los datos necesarios
-	Matriz2D tmp = CreaMatriz(matriz.fils, (matriz.cols-1));
 
-	// Voy fila por fila copiando los elementos que quiero 
-	// saltandome la columna
-	for (int i=0; i < matriz.fils; i++){
-		memcpy(tmp.datos[i], matriz.datos[i], num_col*sizeof(TipoBase));
-		memcpy(tmp.datos[i]+num_col, matriz.datos[i]+num_col+1, (matriz.cols-num_col-1)*sizeof(TipoBase));
+	// Compruebo que la matriz no está vacía
+	// en cuyo caso no hago nada
+
+	if (EstaVacia(matriz))
+		Continuar = false;
+	
+	// Si la matriz no está vacía y tiene más de una columna
+
+	if (Continuar && matriz.cols > 1){
+
+		// Creo Matriz auxiliar con los datos necesarios
+		Matriz2D tmp = CreaMatriz(matriz.fils, (matriz.cols-1));
+
+		// Voy fila por fila copiando los elementos que quiero 
+		// saltandome la columna
+		for (int i=0; i < matriz.fils; i++){
+			memcpy(tmp.datos[i], matriz.datos[i], num_col*sizeof(TipoBase));
+			memcpy(tmp.datos[i]+num_col, matriz.datos[i]+num_col+1, (matriz.cols-num_col-1)*sizeof(TipoBase));
+		}
+
+		Clona(matriz, tmp);
+
+		DestruyeMatriz(tmp);
+
 	}
 
-	Clona(matriz, tmp);
+	// Si la matriz tiene una columna
 
-	DestruyeMatriz(tmp);
+	else if (Continuar && matriz.cols == 1){
+		EliminaTodos(matriz);
+		matriz = CreaMatriz(0,0);
+	}
 
 }
 

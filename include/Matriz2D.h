@@ -19,15 +19,18 @@
 #define MATRIZ2D
 
 #include <string>
+#include "TipoBase.h"
 using namespace std; 
 
 
-
+/*
 // Tipo de los datos almacenados (en este caso, int)
 typedef int TipoBase;
 
 // Valor por defecto del tipo de los datos almacenados
 const TipoBase VALOR_DEF = 0;
+
+*/
 
 /***************************************************************************/
 // Definiciones de tipos

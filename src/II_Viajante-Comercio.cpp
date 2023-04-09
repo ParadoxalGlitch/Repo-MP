@@ -7,6 +7,7 @@
 #include <iostream>
 #include "Matriz2D.h"
 #include "FuncsVectorDinamico.h"
+#include "TipoBase.h"
 using namespace std;
 
 
@@ -74,10 +75,16 @@ int main(){
 
 
     // Pregunto el número de ciudades y creo la matriz de precios de viaje entre
-    // ciudades
+    // ciudades, y compruebo que el valor proporcionado es válido
+    // (número de ciudades mayor que 1)
 
-    cout << "Introduzca el numero de ciudades: ";
-    cin >> n;
+    
+    do{
+
+        cout << "Introduzca el numero de ciudades (n > 1): ";
+        cin >> n;
+
+    }while(n < 2);
 
 
     // Creo la matriz de precios de viaje entre ciudades y 
@@ -91,10 +98,15 @@ int main(){
         for (int j = 0; j < n; j++){
             if(i != j){
 
-                cout << "Precio de viaje de la ciudad " << i+1;
-                cout << " a la ciudad " << j+1 << ": ";
-                cin >> Valor(precios,i,j);
+                // compruebo que el precio establecido sea mayor que 0
 
+                do{
+
+                    cout << "Precio de viaje de la ciudad " << i+1;
+                    cout << " a la ciudad " << j+1 << ": ";
+                    cin >> Valor(precios,i,j);
+
+                }while(Valor(precios,i,j) < 1);
             }
 
             else
@@ -113,9 +125,15 @@ int main(){
     VectorDinamico itinerario = CreaVectorDinamico(n);
 
     // Pregunto la ciudad de origen y la añado al vector de ciudades visitadas
+    // Compruebo que el valor proporcionado es válido 
+    // (ciudad de origen entre 1 y n)
 
-    cout << "Introduzca la ciudad de origen: ";
-    cin >> origen;
+    do{
+
+        cout << "Introduzca la ciudad de origen (1 <= origen <= " << n << "): ";
+        cin >> origen;
+    
+    }while(origen < 1 || origen > n);
 
     AniadeVectorDinamico(itinerario, origen-1);
     
