@@ -442,6 +442,67 @@ void SubMatriz (Matriz2D & resultado, const Matriz2D & original, int fila_inic, 
 }
 
 
+/***************************************************************************/
+/***************************************************************************/
+// Cambia de orden las filas de matriz, en modo espejo
+// Parámetros: matriz, la matriz a invertir en espejo
+
+void EspejoHorizontal (Matriz2D & matriz){
+
+	// Creo una matriz auxiliar con las mismas dimensiones que la original
+    Matriz2D tmp = CreaMatriz(matriz.fils, matriz.cols);
+
+    // Copio las filas en orden inverso
+    for (int i = 0; i < matriz.fils; i++) {
+
+        int j = matriz.fils - i - 1;  // Índice de la fila invertida
+
+        memcpy(tmp.datos[j], matriz.datos[i], matriz.cols * sizeof(TipoBase));
+    }
+
+
+	// Clono el contenido de tmp en matriz
+
+	Clona(matriz,tmp);
+ 
+    // Libero memoria de la matriz auxiliar
+    DestruyeMatriz(tmp);
+
+}
+
+
+/***************************************************************************/
+/***************************************************************************/
+// Cambia de orden las columnas de matriz, en modo espejo
+// Parámetros: matriz, la matriz a invertir en espejo
+
+void EspejoVertical (Matriz2D & matriz){
+
+
+	// Creo una matriz auxiliar con las mismas dimensiones que la original
+	Matriz2D tmp = CreaMatriz(matriz.fils, matriz.cols);
+
+	// Copio las filas 1 a 1 con los valores en orden inverso
+
+	for (int i = 0; i < matriz.fils; i++)
+		for (int j = matriz.cols-1; j >= 0; j--)
+			tmp.datos[i][tmp.cols-j-1] = matriz.datos[i][j];
+	
+
+	// Clono el contenido de tmp en matriz
+
+	Clona(matriz,tmp);
+
+	// Libero la memoria de la matriz auxiliar
+
+	DestruyeMatriz(tmp);
+
+}
+
+
+
+
+
 
 
 

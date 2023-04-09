@@ -171,7 +171,38 @@ int main (void)
 
 	cout << "Submatriz de 3x3 supuestamente de m7: ";
 	cout << ToString(submatriz);
-	
+
+
+
+	// .....................................................................
+	// Destruyo la matriz submatriz
+
+	DestruyeMatriz(submatriz);
+
+
+	// .....................................................................
+	// Cambio el orden de las filas de m7
+
+	cout << "Matriz m7 original: ";
+	cout << ToString(m7);
+
+	EspejoHorizontal(m7);
+
+	cout << "Matriz m7 con el orden de las filas cambiadas: ";
+	cout << ToString(m7);
+
+	// .....................................................................
+	// Cambio el orden de las columnas de m7
+
+	EspejoVertical(m7);
+
+	cout << "Matriz m7 con el orden de las columnas cambiadas: ";
+	cout << ToString(m7);
+
+	// .....................................................................
+	// Destruyo la matriz m7
+
+	DestruyeMatriz(m7);
 
 
 	return 0; 

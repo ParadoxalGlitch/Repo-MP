@@ -202,6 +202,25 @@ void SubMatriz (Matriz2D & resultado, const Matriz2D & original, \
 
 
 
+/***************************************************************************/
+/***************************************************************************/
+// Cambia de orden las filas de matriz, en modo espejo
+// Parámetros: matriz, la matriz a invertir en espejo
+
+void EspejoHorizontal (Matriz2D & matriz);
+
+
+/***************************************************************************/
+/***************************************************************************/
+// Cambia de orden las columnas de matriz, en modo espejo
+// Parámetros: matriz, la matriz a invertir en espejo
+
+void EspejoVertical (Matriz2D & matriz);
+
+
+
+
+
 
 
 #endif

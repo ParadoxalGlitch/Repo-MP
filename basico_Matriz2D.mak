@@ -28,7 +28,7 @@ INCLUDE_CLASES_UTILS = $(HOME_CLASES_UTILS)/include
 
 #................................................
 all:  preambulo \
-      $(BIN)/II_Demo-Matriz2D \
+      $(BIN)/II_Demo-Matriz2D $(BIN)/II_Viajante-Comercio \
       final
 
 #................................................
@@ -54,28 +54,39 @@ final:
 
 $(BIN)/II_Demo-Matriz2D : $(OBJ)/II_Demo-Matriz2D.o \
              $(OBJ)/Matriz2D.o 
-	@echo 
-	@echo Creando ejecutable: II_Demo-Matriz2D
-	@echo 
 	g++ -o $(BIN)/II_Demo-Matriz2D $(OBJ)/II_Demo-Matriz2D.o \
            $(OBJ)/Matriz2D.o 
+           
+$(BIN)/II_Viajante-Comercio : $(OBJ)/II_Viajante-Comercio.o $(OBJ)/Matriz2D.o \
+                              $(OBJ)/FuncsVectorDinamico.o
+	g++ -o $(BIN)/II_Viajante-Comercio $(OBJ)/II_Viajante-Comercio.o \
+	       $(OBJ)/Matriz2D.o $(OBJ)/FuncsVectorDinamico.o
 
 #................................................
 # OBJETOS 
 
 $(OBJ)/II_Demo-Matriz2D.o : $(SRC)/II_Demo-Matriz2D.cpp \
-             $(INCLUDE)/Matriz2D.h
-	@echo 
-	@echo Creando objeto: II_Demo-Matriz2D.o
-	@echo 
+             $(INCLUDE)/Matriz2D.h $(INCLUDE)/FuncsVectorDinamico.h
 	g++ -c -o $(OBJ)/II_Demo-Matriz2D.o $(SRC)/II_Demo-Matriz2D.cpp \
             -I$(INCLUDE) -std=c++11
 
 $(OBJ)/Matriz2D.o : $(SRC)/Matriz2D.cpp $(INCLUDE)/Matriz2D.h
-	@echo 
-	@echo Creando objeto: Matriz2D.o
-	@echo 
 	g++ -c -o $(OBJ)/Matriz2D.o $(SRC)/Matriz2D.cpp -I$(INCLUDE) -std=c++11
+	
+$(OBJ)/II_Viajante-Comercio.o : $(SRC)/II_Viajante-Comercio.cpp \
+                                $(INCLUDE)/Matriz2D.h
+	g++ -c -o $(OBJ)/II_Viajante-Comercio.o $(SRC)/II_Viajante-Comercio.cpp \
+	          -I$(INCLUDE) -std=c++11
+	          
+$(OBJ)/FuncsVectorDinamico.o : $(SRC)/FuncsVectorDinamico.cpp \
+                               $(INCLUDE)/FuncsVectorDinamico.h
+	g++ -c -o $(OBJ)/FuncsVectorDinamico.o $(SRC)/FuncsVectorDinamico.cpp \
+	          -I$(INCLUDE) -std=c++14
+	          
+
+#................................................
+# BIBLIOTECAS
+
 
 #................................................
 # LIMPEZA
