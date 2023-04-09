@@ -2,14 +2,14 @@
 //
 // David Pérez Tobarra
 //
-// Fichero: Departamento.h
+// Fichero: Profesor.h
 //
-// Contiene las cabeceras de la clase "Departamento"
+// Contiene las cabeceras de la clase "Profesor"
 //
 /***************************************************************************/
 
-#ifndef DEPARTAMENTO
-#define DEPARTAMENTO
+#ifndef PROFESOR
+#define PROFESOR
 
 #include <string>
 
@@ -17,51 +17,52 @@ using namespace std;
 
 /***************************************************************************/
 /***************************************************************************/
-// Clase "Departamento"
+// Clase "Profesor"
 
-class Departamento
+class Profesor
 {
 
 private:
 
+    string dni;
     string nombre;
-    string Id_depto;
-public:
+    string apellidos;
+    string fechaNacimiento; // Esto mas tarde será un objeto de la clase "Fecha"
 
+public:
 
 /***************************************************************************/
 // Constructor por defecto
 
-    Departamento();
+    Profesor();
 
 /***************************************************************************/
 // Constructor con argumentos
 
-Departamento(string nom, string id);
+    Profesor(string d, string n, string a, string f);
 
 /***************************************************************************/
 // Métodos get
 
-string getNombre();
-
-string getId();
+    string getDni();
+    string getNombre();
+    string getApellidos();
+    string getFechaNacimiento();
 
 /***************************************************************************/
 // Métodos set
 
-void setNombre(string nom);
-
-void setId(string id);
+    void setDni(string d);
+    void setNombre(string n);
+    void setApellidos(string a);
+    void setFechaNacimiento(string f);
 
 /***************************************************************************/
 // Método ToString
 
-string ToString();
-
-
+    string ToString();
 
 
 };
-
 
 #endif

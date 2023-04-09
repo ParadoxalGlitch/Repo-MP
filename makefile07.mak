@@ -69,7 +69,7 @@ $(OBJ)/II_Demo-Matriz2D.o : $(SRC)/II_Demo-Matriz2D.cpp \
              $(INCLUDE)/Matriz2D.h $(INCLUDE)/FuncsVectorDinamico.h \
              $(INCLUDE)/TipoBase.h
 	g++ -c -o $(OBJ)/II_Demo-Matriz2D.o $(SRC)/II_Demo-Matriz2D.cpp \
-            -I$(INCLUDE) -std=c++11
+            -I$(INCLUDE) -std=c++14
 
 $(OBJ)/Matriz2D.o : $(SRC)/Matriz2D.cpp $(INCLUDE)/Matriz2D.h \
 					$(INCLUDE)/TipoBase.h
@@ -78,7 +78,7 @@ $(OBJ)/Matriz2D.o : $(SRC)/Matriz2D.cpp $(INCLUDE)/Matriz2D.h \
 $(OBJ)/II_Viajante-Comercio.o : $(SRC)/II_Viajante-Comercio.cpp \
                                 $(INCLUDE)/Matriz2D.h $(INCLUDE)/TipoBase.h
 	g++ -c -o $(OBJ)/II_Viajante-Comercio.o $(SRC)/II_Viajante-Comercio.cpp \
-	          -I$(INCLUDE) -std=c++11
+	          -I$(INCLUDE) -std=c++14
 	          
 $(OBJ)/FuncsVectorDinamico.o : $(SRC)/FuncsVectorDinamico.cpp \
                                $(INCLUDE)/FuncsVectorDinamico.h

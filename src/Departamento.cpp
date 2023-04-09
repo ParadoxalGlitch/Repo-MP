@@ -23,16 +23,16 @@ using namespace std;
 Departamento :: Departamento()
 {
     nombre = "Sin nombre";
-    abreviatura = "Sin abreviatura";
+    Id_depto = "Sin abreviatura";
 }
 
 /***************************************************************************/
 // Constructor con argumentos
 
-Departamento :: Departamento(string nom, string abrev)
+Departamento :: Departamento(string nom, string id)
 {
     nombre = nom;
-    abreviatura = abrev;
+    Id_depto = id;
 }
 
 
@@ -44,9 +44,9 @@ string Departamento :: getNombre()
     return nombre;
 }
 
-string Departamento :: getAbreviatura()
+string Departamento :: getId()
 {
-    return abreviatura;
+    return Id_depto;
 }
 
 /***************************************************************************/
@@ -57,9 +57,9 @@ void Departamento :: setNombre(string nom)
     nombre = nom;
 }
 
-void Departamento :: setAbreviatura(string abrev)
+void Departamento :: setId(string id)
 {
-    abreviatura = abrev;
+    Id_depto = id;
 }
 
 /***************************************************************************/
@@ -67,6 +67,9 @@ void Departamento :: setAbreviatura(string abrev)
 
 string Departamento :: ToString()
 {
-    string cadena = "( " + abreviatura + " ) " + "    " + nombre + "\n";
+    string cadena = "( " + Id_depto + " ) " + "    " + nombre + "\n";
     return cadena;
 }
+
+/***************************************************************************/
+/***************************************************************************/
