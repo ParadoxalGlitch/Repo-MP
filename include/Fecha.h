@@ -2,73 +2,64 @@
 //
 // David Pérez Tobarra
 //
-// Fichero: Profesor.h
+// Fichero: Fecha.h
 //
-// Contiene las cabeceras de la clase "Profesor"
+// Contiene las cabeceras de la clase "Fecha"
 //
 /***************************************************************************/
 
-#ifndef PROFESOR
-#define PROFESOR
+#ifndef FECHA
+#define FECHA
 
 #include <string>
 
 #include "utils.h"
-#include "Fecha.h"
 
 using namespace std;
 
-
 /***************************************************************************/
 /***************************************************************************/
-// Clase "Profesor"
+// Clase "Fecha"
 
-class Profesor
+class Fecha
 {
 
 private:
 
-    string dni;
-    string nombre;
-    string apellidos;
-    Fecha fechaNacimiento; 
-    int categoria; // Valor entre 1 y 4
+    int dia;
+    string mes;
+    int anio;
 
 public:
 
 /***************************************************************************/
 // Constructor por defecto
 
-    Profesor();
+    Fecha();
 
 /***************************************************************************/
 // Constructor con argumentos
 
-    Profesor(string linea, char delimitador=DELIMITADOR);
+    Fecha(string linea);
 
 /***************************************************************************/
 // Métodos get
 
-    string getDNI();
-    string getNombre();
-    string getApellidos();
-    string getFechaNacimiento();
-    int getCategoria();
+    int getDia();
+    string getMes();
+    int getAnio();
 
 /***************************************************************************/
 // Métodos set
 
-    void setDni(string d);
-    void setNombre(string n);
-    void setApellidos(string a);
-    void setFechaNacimiento(string f);
-    void setCategoria(int c);
+    void setDia(int d);
+    void setMes(string m);
+    void setAnio(int a);
 
 /***************************************************************************/
 // Método ToString
 
     string ToString();
-
 
 };
 

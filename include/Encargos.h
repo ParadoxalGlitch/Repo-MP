@@ -2,74 +2,66 @@
 //
 // David Pérez Tobarra
 //
-// Fichero: Profesor.h
+// Fichero: Encargos.h
 //
-// Contiene las cabeceras de la clase "Profesor"
+// Contiene las cabeceras de la clase "Encargos"
 //
 /***************************************************************************/
 
-#ifndef PROFESOR
-#define PROFESOR
+#ifndef ENCARGOS
+#define ENCARGOS
 
 #include <string>
 
 #include "utils.h"
-#include "Fecha.h"
+
 
 using namespace std;
 
-
 /***************************************************************************/
 /***************************************************************************/
-// Clase "Profesor"
+// Clase "Encargos"
 
-class Profesor
+class Encargos
 {
 
 private:
 
-    string dni;
-    string nombre;
-    string apellidos;
-    Fecha fechaNacimiento; 
-    int categoria; // Valor entre 1 y 4
+   int categoria;
+   double creditos;
 
 public:
 
 /***************************************************************************/
 // Constructor por defecto
 
-    Profesor();
+   Encargos();
 
 /***************************************************************************/
 // Constructor con argumentos
 
-    Profesor(string linea, char delimitador=DELIMITADOR);
+   Encargos(string linea, char delimitador=DELIMITADOR);
 
 /***************************************************************************/
 // Métodos get
 
-    string getDNI();
-    string getNombre();
-    string getApellidos();
-    string getFechaNacimiento();
-    int getCategoria();
+   int getCategoria();
+   double getCreditos();
 
 /***************************************************************************/
 // Métodos set
 
-    void setDni(string d);
-    void setNombre(string n);
-    void setApellidos(string a);
-    void setFechaNacimiento(string f);
-    void setCategoria(int c);
+   void setCategoria(int cat);
+   void setCreditos(double cred);
 
 /***************************************************************************/
 // Método ToString
 
-    string ToString();
+   string ToString();
+
 
 
 };
 
 #endif
+

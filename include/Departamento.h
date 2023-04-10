@@ -13,7 +13,7 @@
 
 #include <string>
 
-using namespace std;
+#include "utils.h"
 
 /***************************************************************************/
 /***************************************************************************/
@@ -26,6 +26,7 @@ private:
 
     string nombre;
     string Id_depto;
+
 public:
 
 
@@ -36,8 +37,8 @@ public:
 
 /***************************************************************************/
 // Constructor con argumentos
-
-Departamento(string nom, string id);
+    
+    Departamento(string linea, char delimitador=DELIMITADOR);
 
 /***************************************************************************/
 // Métodos get

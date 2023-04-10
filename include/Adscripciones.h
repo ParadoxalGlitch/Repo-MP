@@ -2,74 +2,67 @@
 //
 // David Pérez Tobarra
 //
-// Fichero: Profesor.h
+// Fichero: Adscripciones.h
 //
-// Contiene las cabeceras de la clase "Profesor"
+// Contiene las cabeceras de la clase "Adscripciones"
 //
 /***************************************************************************/
 
-#ifndef PROFESOR
-#define PROFESOR
+#ifndef ADSCRIPCIONES
+#define ADSCRIPCIONES
 
 #include <string>
 
 #include "utils.h"
-#include "Fecha.h"
 
 using namespace std;
 
 
 /***************************************************************************/
 /***************************************************************************/
-// Clase "Profesor"
+// Clase "Adscripciones"
 
-class Profesor
+class Adscripciones
 {
 
 private:
 
     string dni;
-    string nombre;
-    string apellidos;
-    Fecha fechaNacimiento; 
-    int categoria; // Valor entre 1 y 4
+    string Id_depto;
 
 public:
 
 /***************************************************************************/
 // Constructor por defecto
 
-    Profesor();
+    Adscripciones();
 
 /***************************************************************************/
 // Constructor con argumentos
 
-    Profesor(string linea, char delimitador=DELIMITADOR);
+    Adscripciones(string linea, char delimitador=DELIMITADOR);
 
 /***************************************************************************/
 // Métodos get
 
-    string getDNI();
-    string getNombre();
-    string getApellidos();
-    string getFechaNacimiento();
-    int getCategoria();
+    string getDni();
+    string getId_depto();
 
 /***************************************************************************/
 // Métodos set
 
     void setDni(string d);
-    void setNombre(string n);
-    void setApellidos(string a);
-    void setFechaNacimiento(string f);
-    void setCategoria(int c);
+    void setId_depto(string id);
 
 /***************************************************************************/
 // Método ToString
 
     string ToString();
 
-
 };
 
 #endif
+
+
+
+

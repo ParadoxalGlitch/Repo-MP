@@ -2,17 +2,16 @@
 //
 // David Pérez Tobarra
 //
-// Fichero: Departamento.cpp
+// Fichero: Adscripciones.cpp
 //
-// Contiene las implementaciones de la clase "Departamento"
+// Contiene las implementaciones de la clase "Adscripciones"
 //
-/***************************************************************************/   
+/***************************************************************************/
 
 
-#include "Departamento.h"
+#include "Adscripciones.h"
 
 #include <iostream>
-
 
 using namespace std;
 
@@ -20,16 +19,16 @@ using namespace std;
 /***************************************************************************/
 // Constructor por defecto
 
-Departamento :: Departamento()
+Adscripciones :: Adscripciones()
 {
-    nombre = "Sin nombre";
-    Id_depto = "Sin abreviatura";
+    dni = "Sin DNI";
+    Id_depto = "Sin ID";
 }
 
 /***************************************************************************/
 // Constructor con argumentos
 
-Departamento :: Departamento(string linea, char delimitador)
+Adscripciones :: Adscripciones(string linea, char delimitador)
 {
 
     // Creo un string auxiliar donde iré guardando los datos
@@ -38,20 +37,14 @@ Departamento :: Departamento(string linea, char delimitador)
     int i = 0;
     
     // Voy leyendo los datos del string hasta encontrar el delimitador
-
-    aux += "(";
-    
     while(linea[i] != delimitador)
     {
         aux += linea[i];
         i++;
     }
 
-    aux += ")";
-
-    // Guardo el ID del departamento en la clase
-    Id_depto = aux;
-    Id_depto = FormatString(Id_depto, 6);
+    // Guardo el DNI en la clase
+    dni = aux;
     aux = "";
 
     i++;
@@ -64,22 +57,21 @@ Departamento :: Departamento(string linea, char delimitador)
         i++;
     }
 
-    // Guardo el nombre del departamento en la clase
+    // Guardo el ID en la clase
+    Id_depto = aux;
 
-    nombre = aux;
-
+    i++;
 }
-
 
 /***************************************************************************/
 // Métodos get
 
-string Departamento :: getNombre()
+string Adscripciones :: getDni()
 {
-    return nombre;
+    return dni;
 }
 
-string Departamento :: getId()
+string Adscripciones :: getId_depto()
 {
     return Id_depto;
 }
@@ -87,12 +79,12 @@ string Departamento :: getId()
 /***************************************************************************/
 // Métodos set
 
-void Departamento :: setNombre(string nom)
+void Adscripciones :: setDni(string d)
 {
-    nombre = nom;
+    dni = d;
 }
 
-void Departamento :: setId(string id)
+void Adscripciones :: setId_depto(string id)
 {
     Id_depto = id;
 }
@@ -100,11 +92,8 @@ void Departamento :: setId(string id)
 /***************************************************************************/
 // Método ToString
 
-string Departamento :: ToString()
+string Adscripciones :: ToString()
 {
-    string cadena = Id_depto + "    " + nombre + "\n";
+    string cadena = dni + " " + Id_depto + "\n";
     return cadena;
 }
-
-/***************************************************************************/
-/***************************************************************************/

@@ -15,6 +15,7 @@
 
 using namespace std;
 
+
 /***************************************************************************/
 /***************************************************************************/
 // Constructor por defecto
@@ -24,25 +25,100 @@ Profesor :: Profesor()
     dni = "Sin DNI";
     nombre = "Sin nombre";
     apellidos = "Sin apellidos";
-    fechaNacimiento = "Sin fecha de nacimiento";
+    fechaNacimiento = Fecha();
+    categoria = 0;
 
 }
 
 /***************************************************************************/
 // Constructor con argumentos
 
-Profesor :: Profesor(string d, string n, string a, string f)
+Profesor :: Profesor(string linea, char delimitador)
 {
-    dni = d;
-    nombre = n;
-    apellidos = a;
-    fechaNacimiento = f;
+
+    // Creo un string auxiliar donde guardaré los datos que vaya leyendo
+
+    string aux = "";
+    int i = 0;
+
+
+    
+    // Voy leyendo los datos del string hasta encontrar el delimitador
+    while(linea[i] != delimitador)
+    {
+        aux += linea[i];
+        i++;
+    }
+
+    // Guardo el DNI del profesor en la clase
+    dni = aux;
+    aux = "";
+
+    i++;
+
+    // Sigo leyendo los datos del string hasta encontrar el delimitador
+
+    while(linea[i] != delimitador)
+    {
+        aux += linea[i];
+        i++;
+    }
+
+    // Guardo el nombre en la clase
+    nombre = aux;
+    aux = "";
+
+    i++;
+
+    // Sigo leyendo los datos del string hasta encontrar el delimitador
+
+    while(linea[i] != delimitador)
+    {
+        aux += linea[i];
+        i++;
+    }
+
+    // Guardo los apellidos en la clase
+    apellidos = aux;
+    aux = "";
+
+    i++;
+
+    // Sigo leyendo los datos del string hasta encontrar el delimitador
+
+    while(linea[i] != delimitador)
+    {
+        aux += linea[i];
+        i++;
+    }
+
+    
+    // Guardo la fecha de nacimiento en la clase
+    fechaNacimiento = Fecha(aux);
+    aux = "";
+
+    i++;
+
+    // Sigo leyendo los datos del string hasta encontrar el delimitador
+
+    while(linea[i] != delimitador)
+    {
+        aux += linea[i];
+        i++;
+    }
+
+    // Guardo la categoría en la clase
+    categoria = stoi(aux);
+    aux = "";
+
+    i++;
+   
 }
 
 /***************************************************************************/
 // Métodos get
 
-string Profesor :: getDni()
+string Profesor :: getDNI()
 {
     return dni;
 }
@@ -59,9 +135,17 @@ string Profesor :: getApellidos()
 
 string Profesor :: getFechaNacimiento()
 {
-    return fechaNacimiento;
+    string fecha;
+    fecha = to_string(fechaNacimiento.getAnio()) + fechaNacimiento.getMes() + \
+            to_string(fechaNacimiento.getDia());
+
+    return fecha;
 }
 
+int Profesor :: getCategoria()
+{
+    return categoria;
+}
 
 /***************************************************************************/
 // Métodos set
@@ -83,7 +167,13 @@ void Profesor :: setApellidos(string a)
 
 void Profesor :: setFechaNacimiento(string f)
 {
-    fechaNacimiento = f;
+    Fecha tmp(f);
+    fechaNacimiento = tmp;
+}
+
+void Profesor :: setCategoria(int c)
+{
+    categoria = c;
 }
 
 /***************************************************************************/
@@ -91,8 +181,8 @@ void Profesor :: setFechaNacimiento(string f)
 
 string Profesor :: ToString()
 {
-    string cadena = "DNI: " + dni + " Nombre: " + nombre + " Apellidos: " \
-    + apellidos + " Fecha de nacimiento: " + fechaNacimiento;
+    string cadena = dni + " " + FormatString((apellidos + ", " + nombre),32) + \
+    fechaNacimiento.ToString() + "   " + to_string(categoria) + "\n";
     return cadena;
 }
 
