@@ -249,6 +249,7 @@ void Ecualiza (Matriz2D & matriz, TipoBase valor){
 //		       origen, la matriz a clonar
 
 void Clona (Matriz2D & destino, const Matriz2D & origen){
+	
 
 	// Eliminamos el contenido del destino
 
@@ -258,12 +259,9 @@ void Clona (Matriz2D & destino, const Matriz2D & origen){
 
 	destino = CreaMatriz(origen.fils, origen.cols);
 
-	// Copio los datos de origen en destino
-
-	memcpy(destino.datos[0], origen.datos[0], \
-		origen.fils*origen.cols*sizeof(TipoBase));
-
-
+	//copiamos los valores
+	for(int i=0; i<destino.fils; i++)
+		memcpy(destino.datos[i], origen.datos[i], sizeof(TipoBase)*origen.cols);
 }
 
 

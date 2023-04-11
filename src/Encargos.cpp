@@ -91,10 +91,21 @@ void Encargos :: setCreditos(double cred)
 
 string Encargos :: ToString()
 {
-    string numero = FormatDouble(creditos,3,2);
+
+
+    string cad;
+    /*string numero = FormatDouble(creditos,3,2);
     string cadena = " " + to_string(categoria) + "  " + \
     FormatString(numero,numero.length()+5,TipoAlineacion::AlinDerecha) + "\n";
-    return cadena;
+    return cadena;*/
+
+    cad += FormatString(to_string(getCategoria()), 3, TipoAlineacion::AlinCentro);
+    cad += " ";
+    cad += FormatString(FormatDouble(getCreditos(),4,2),5,TipoAlineacion::AlinDerecha);
+    cad += "\n";
+
+    return cad;
+
 }
 
 /***************************************************************************/
