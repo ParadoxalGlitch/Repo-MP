@@ -1,6 +1,5 @@
 /***************************************************************************/
-// METODOLOGIA DE LA PROGRAMACION
-//
+// David Pérez Tobarra
 //
 // Pruebas sobre el tipo Matriz2D
 //

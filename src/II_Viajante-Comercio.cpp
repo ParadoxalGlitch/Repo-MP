@@ -1,5 +1,9 @@
 /***************************************************************************/
-// METODOLOGIA DE LA PROGRAMACION
+// David Pérez Tobarra
+//
+// Fichero: II_Viajante-Comercio.cpp 
+//
+// Contiene el main del programa
 //
 /***************************************************************************/
 

@@ -1,9 +1,6 @@
 /***************************************************************************/
-// METODOLOGIA DE LA PROGRAMACION
-// GRADO EN INGENIERIA INFORMATICA
 //
-// (C) FRANCISCO JOSE CORTIJO BON
-// DEPARTAMENTO DE CIENCIAS DE LA COMPUTACION E INTELIGENCIA ARTIFICIAL
+// David Pérez Tobarra
 //
 // Fichero de cabecera asociado al tipo base de las estructuras dinámicas
 //

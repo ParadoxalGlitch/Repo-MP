@@ -20,18 +20,18 @@ OBJ = $(HOME)/obj
 BIN = $(HOME)/bin
 
 #......................................
-all: presentacion $(BIN)/main_MP_Proyecto_Fase1
+all: presentacion $(BIN)/MP_Proyecto_Fase1
 	@echo Terminado
 
 
 #......................................
 # EJECUTABLES
 
-$(BIN)/main_MP_Proyecto_Fase1 : $(OBJ)/main_MP_Proyecto_Fase1.o \
-	                            $(LIB)/libDepartamento.a $(LIB)/libProfesor.a \
-	                            $(LIB)/libEncargos.a $(LIB)/libAdscripciones.a \
-	                            $(LIB)/libutils.a $(LIB)/libFecha.a     
-	g++ -o $(BIN)/main_MP_Proyecto_Fase1 $(OBJ)/main_MP_Proyecto_Fase1.o \
+$(BIN)/MP_Proyecto_Fase1 : $(OBJ)/main_MP_Proyecto_Fase1.o \
+	                       $(LIB)/libDepartamento.a $(LIB)/libProfesor.a \
+                           $(LIB)/libEncargos.a $(LIB)/libAdscripciones.a \
+                           $(LIB)/libutils.a $(LIB)/libFecha.a     
+	g++ -o $(BIN)/MP_Proyecto_Fase1 $(OBJ)/main_MP_Proyecto_Fase1.o \
 	-L$(LIB) -lDepartamento -lProfesor -lEncargos -lAdscripciones -lutils \
 	-lFecha
 

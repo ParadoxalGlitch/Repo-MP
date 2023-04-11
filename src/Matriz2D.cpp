@@ -1,17 +1,10 @@
 /***************************************************************************/
-// METODOLOGIA DE LA PROGRAMACION
 //
-// (C) FRANCISCO JOSE CORTIJO BON
-// DEPARTAMENTO DE CIENCIAS DE LA COMPUTACION E INTELIGENCIA ARTIFICIAL
-//
-// Fichero con la definición de las funciones asociadas el tipo Matriz2D
-//
-// Matriz2D: Matriz 2D dinamica de datos int en la que cada 
-// fila es un vector dinamico independiente. 
-//
-// Tipo básico descrito en el video dedicado a la implementación de Matriz2D
+// David Pérez Tobarra
 //
 // Fichero: Matriz2D.cpp
+//
+// Contiene la definición de las funciones de Matriz2D
 //
 /***************************************************************************/
 

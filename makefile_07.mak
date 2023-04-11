@@ -21,46 +21,24 @@ OBJ = $(HOME)/obj
 LIB = $(HOME)/lib
 INCLUDE = $(HOME)/include
 
-SRC_CLASES_UTILS =  $(HOME_CLASES_UTILS)/src
-OBJ_CLASES_UTILS =  $(HOME_CLASES_UTILS)/obj
-LIB_CLASES_UTILS =  $(HOME_CLASES_UTILS)/lib
-INCLUDE_CLASES_UTILS = $(HOME_CLASES_UTILS)/include
-
 #................................................
-all:  preambulo \
-      $(BIN)/II_Demo-Matriz2D $(BIN)/II_Viajante-Comercio \
-      final
-
-#................................................
-preambulo:
-	@echo
-	@echo ------------------------------------------------------------
-	@echo Proyecto descrito en el video: \"Gestión de matrices dinámicas\"
-	@echo
-	@echo METODOLOGÍA DE LA PROGRAMACIÓN
-	@echo
-	@echo "("c")" Francisco José CORTIJO BON
-	@echo Depto. Ciencias de la Computación e Inteligencia Artificial
-	@echo Universidad de Granada
-	@echo ------------------------------------------------------------
-	@echo
-
-#................................................
-final: 
-	@echo
+all:  $(BIN)/II_Demo-Matriz2D $(BIN)/II_Viajante-Comercio 
+	  
+	  @echo Terminado
 
 #................................................
 # EJECUTABLES
 
 $(BIN)/II_Demo-Matriz2D : $(OBJ)/II_Demo-Matriz2D.o \
-             $(OBJ)/Matriz2D.o 
+             $(LIB)/libMatriz2D.a
 	g++ -o $(BIN)/II_Demo-Matriz2D $(OBJ)/II_Demo-Matriz2D.o \
-           $(OBJ)/Matriz2D.o 
+	       -L$(LIB) -lMatriz2D
            
-$(BIN)/II_Viajante-Comercio : $(OBJ)/II_Viajante-Comercio.o $(OBJ)/Matriz2D.o \
-                              $(OBJ)/FuncsVectorDinamico.o
+$(BIN)/II_Viajante-Comercio : $(OBJ)/II_Viajante-Comercio.o \
+                              $(LIB)/libMatriz2D.a \
+                              $(LIB)/libVectorDinamico.a
 	g++ -o $(BIN)/II_Viajante-Comercio $(OBJ)/II_Viajante-Comercio.o \
-	       $(OBJ)/Matriz2D.o $(OBJ)/FuncsVectorDinamico.o
+	       -L$(LIB) -lMatriz2D -lVectorDinamico
 
 #................................................
 # OBJETOS 
@@ -88,29 +66,25 @@ $(OBJ)/FuncsVectorDinamico.o : $(SRC)/FuncsVectorDinamico.cpp \
 
 #................................................
 # BIBLIOTECAS
-
+$(LIB)/libMatriz2D.a : $(OBJ)/Matriz2D.o
+	ar rvs $(LIB)/libMatriz2D.a $(OBJ)/Matriz2D.o
+	
+$(LIB)/libVectorDinamico.a : $(OBJ)/FuncsVectorDinamico.o
+	ar rvs $(LIB)/libVectorDinamico.a $(OBJ)/FuncsVectorDinamico.o
 
 #................................................
 # LIMPEZA
 
-clean: clean-objs 
+clean:
+	-rm $(OBJ)/*
+	@echo objetos eliminados
+		
+mr.proper: clean
+	-rm $(BIN)/*
+	@echo ejecutables eliminados
+	-rm $(LIB)/*
+	@echo librerias eliminadas
 
-clean-objs: 
-
-	@echo Borrando objetos...
-
-	-rm $(OBJ)/II_Demo-Matriz2D.o
-	-rm $(OBJ)/Matriz2D.o
-
-	@echo ...Borrados objetos
-	@echo 
-
-clean-bins : 
-	@echo Borrando ejecutables...
-
-	-rm $(BIN)/II_Demo-Matriz2D
-
-	@echo ...Borrados ejecutables
-
-mr.proper:  clean-objs clean-bins
+presentacion:
+	@echo El autor de este software es: $(AUTOR)
 

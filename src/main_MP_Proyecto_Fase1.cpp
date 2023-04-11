@@ -125,7 +125,7 @@ int main(){
 
     cout << "--------------------------------------------------------------";
     cout << endl;
-    cout << "ADSCRIPCIONES:" << endl;
+    cout << "ADSCRIPCION DE PROFESORES A DEPARTAMENTOS:" << endl;
     cout << "--------------------------------------------------------------";
     cout << endl;
 
