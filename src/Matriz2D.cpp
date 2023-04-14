@@ -40,9 +40,7 @@ Matriz2D CreaMatriz (int nfils, int ncols, TipoBase valor)
 	
 	// Inicializar las casillas de la matriz
 
-	for (int f=0; f<matriz.fils; f++) 
-		for (int c=0; c<matriz.cols; c++) 
-			matriz.datos[f][c] = valor;
+	Ecualiza(matriz, valor);
 
 	return (matriz); 
 }
