@@ -18,10 +18,24 @@
 using namespace std;
 
 /***************************************************************************/
+// Constructor por defecto
+
+Departamento :: Departamento()
+{
+    nombre = nullptr;
+    Id_depto = nullptr;
+}
+
+
+/***************************************************************************/
 // Constructor con argumentos
 
 Departamento :: Departamento(string linea, char delimitador)
 {
+
+    nombre = nullptr;
+    Id_depto = nullptr;
+
 
     // Creo un string auxiliar donde iré guardando los datos
 
@@ -29,14 +43,11 @@ Departamento :: Departamento(string linea, char delimitador)
     int i = 0;
     
     // Voy leyendo los datos del string hasta encontrar el delimitador
-
-    
     while(linea[i] != delimitador)
     {
         aux += linea[i];
         i++;
     }
-
 
     // Guardo los datos
 
@@ -57,13 +68,24 @@ Departamento :: Departamento(string linea, char delimitador)
     }
 
 
-
     // Guardo los datos
 
     setNombre(aux);
 
 }
 
+
+/***************************************************************************/
+/***************************************************************************/
+// Destructor
+
+Departamento :: ~Departamento()
+{
+    delete [] nombre;
+    nombre = nullptr;
+    delete [] Id_depto;
+    Id_depto = nullptr;
+}
 
 /***************************************************************************/
 // Métodos get
@@ -87,9 +109,10 @@ void Departamento :: setNombre(string nom)
     // Me deshago de la memoria de lo que ya hay guardado
     // si es que lo hay
 
-    if (!nombre){
+    if (nombre){
 
         delete[] nombre;
+        nombre = nullptr;
 
     }
 
@@ -114,15 +137,18 @@ void Departamento :: setId(string id)
     // Me deshago de la memoria de lo que ya hay guardado
     // si es que lo hay
 
-    if (!Id_depto){
+
+    if (Id_depto){
 
         delete[] Id_depto;
+        Id_depto = nullptr;
 
     }
 
     // Pido memoria para el nuevo string
 
     char * aux = new char [id.size()];
+
 
     // Copio los valores de nom en aux
 
@@ -141,19 +167,38 @@ void Departamento :: setId(string id)
 
 string Departamento :: ToString()
 {
-    string cadena = FormatString(("(" + (CharToString(Id_depto) + ")")),6) + "    " + \
-                    CharToString(nombre) + "\n";
+    
+    string cadena;
+
+    if (!nombre){
+
+        cadena = "no hay datos";
+
+    }
+
+    else{
+
+    cadena = FormatString(("(" + (CharToString(Id_depto) + ")")),6) + "    " + \
+             CharToString(nombre) + "\n";
+
+    }
+
     return cadena;
+
 }
 
-/***************************************************************************/
-/***************************************************************************/
-// Destructor
 
-Departamento :: ~Departamento()
+/***************************************************************************/
+/***************************************************************************/
+// Método clona
+
+void Departamento :: clona(Departamento& original)
 {
-    delete [] nombre;
-    nombre = nullptr;
-    delete [] Id_depto;
-    Id_depto = nullptr;
+
+    string nom = original.getNombre();
+    setNombre(nom);
+
+    string id = original.getId();
+    setId(id);
+    
 }

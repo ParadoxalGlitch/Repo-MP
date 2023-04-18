@@ -32,6 +32,7 @@ private:
 
 public:
 
+
 /***************************************************************************/
 // Constructor por defecto
 
@@ -59,7 +60,10 @@ public:
 
    string ToString();
 
+/***************************************************************************/
+// Método clona
 
+void clona(Encargos original);
 
 };
 

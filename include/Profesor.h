@@ -38,6 +38,12 @@ public:
 
 
 /***************************************************************************/
+// Constructor por defecto
+
+    Profesor();
+
+
+/***************************************************************************/
 // Constructor con argumentos
 
     Profesor(string linea, char delimitador=DELIMITADOR);
@@ -53,7 +59,7 @@ public:
 /***************************************************************************/
 // Métodos get
 
-    string getDNI();
+    string getDni();
     string getNombre();
     string getApellidos();
     string getFechaNacimiento();
@@ -72,7 +78,11 @@ public:
 // Método ToString
 
     string ToString();
+    
+/***************************************************************************/
+// Método clona
 
+void clona(Profesor& original);
 
 };
 

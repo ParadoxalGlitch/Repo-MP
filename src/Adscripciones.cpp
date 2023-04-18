@@ -15,12 +15,27 @@
 
 using namespace std;
 
+
+/***************************************************************************/
+/***************************************************************************/
+// Constructor por defecto
+
+Adscripciones :: Adscripciones()
+{
+    dni = nullptr;
+    Id_depto = nullptr;
+}
+
 /***************************************************************************/
 /***************************************************************************/
 // Constructor con argumentos
 
 Adscripciones :: Adscripciones(string linea, char delimitador)
 {
+
+    dni = nullptr;
+    Id_depto = nullptr;
+
 
     // Creo un string auxiliar donde iré guardando los datos
 
@@ -54,6 +69,19 @@ Adscripciones :: Adscripciones(string linea, char delimitador)
 
 }
 
+
+/***************************************************************************/
+/***************************************************************************/
+// Destructor
+
+Adscripciones :: ~Adscripciones()
+{
+    delete [] dni;
+    dni = nullptr;
+    delete [] Id_depto;
+    Id_depto = nullptr;
+}
+
 /***************************************************************************/
 /***************************************************************************/
 // Métodos get
@@ -77,9 +105,10 @@ void Adscripciones :: setDni(string d)
     // Me deshago de la memoria de lo que ya hay guardado
     // si es que lo hay
 
-    if (!dni){
+    if (dni){
 
         delete[] dni;
+        dni = nullptr;
 
     }
 
@@ -103,9 +132,10 @@ void Adscripciones :: setId_depto(string id)
     // Me deshago de la memoria de lo que ya hay guardado
     // si es que lo hay
 
-    if (!Id_depto){
+    if (Id_depto){
 
         delete[] Id_depto;
+        Id_depto = nullptr;
 
     }
 
@@ -130,21 +160,29 @@ void Adscripciones :: setId_depto(string id)
 
 string Adscripciones :: ToString()
 {
+    if (!dni && !Id_depto)
+        return "No hay datos";
+
+    else{
+
     string cadena = CharToString(dni) + " " + CharToString(Id_depto) + "\n";
     return cadena;
+
+    }
+
 }
 
-/***************************************************************************/
-/***************************************************************************/
-// Destructor
 
-Adscripciones :: ~Adscripciones()
+/***************************************************************************/
+/***************************************************************************/
+// Método clona
+
+void Adscripciones :: clona(Adscripciones& original)
 {
-    delete [] dni;
-    dni = nullptr;
-    delete [] Id_depto;
-    Id_depto = nullptr;
-}
+    setDni(original.getDni());
 
+    setId_depto(original.getId_depto());
+    
+}
 
 

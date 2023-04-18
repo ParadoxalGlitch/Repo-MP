@@ -24,9 +24,9 @@ using namespace std;
 
 Fecha :: Fecha()
 {
-    dia = 1;
-    mes = "Ene";
-    anio = 2000 ;
+    dia = 0;
+    mes = 0;
+    anio = 0;
 }
 
 /***************************************************************************/
@@ -57,9 +57,11 @@ Fecha :: Fecha(string linea)
 
     
     // Guardo el día en la clase
-    dia = stoi(aux);
-    aux = "";
+    setDia(stoi(aux));
 
+
+
+    aux = "";
     i++;
 
     // Sigo leyendo los datos del string hasta encontrar el delimitador
@@ -71,47 +73,8 @@ Fecha :: Fecha(string linea)
     }
 
     // Convierto el mes a texto
+    setMes(stoi(aux));
     
-    switch(stoi(aux))
-    {
-        case 1:
-            mes = "Ene";
-            break;
-        case 2:
-            mes = "Feb";
-            break;
-        case 3:
-            mes = "Mar";
-            break;
-        case 4:
-            mes = "Abr";
-            break;
-        case 5:
-            mes = "May";
-            break;
-        case 6:
-            mes = "Jun";
-            break;
-        case 7:
-            mes = "Jul";
-            break;
-        case 8:
-            mes = "Ago";
-            break;
-        case 9:
-            mes = "Sep";
-            break;
-        case 10:
-            mes = "Oct";
-            break;
-        case 11:
-            mes = "Nov";
-            break;
-        case 12:
-            mes = "Dic";
-            break;
-    }
-
     aux = "";
 
     i++;
@@ -124,7 +87,7 @@ Fecha :: Fecha(string linea)
     }
 
     // Guardo el año en la clase
-    anio = stoi(aux);
+    setAnio(stoi(aux));
 }
 
 /***************************************************************************/
@@ -135,7 +98,7 @@ int Fecha :: getDia()
     return dia;
 }
 
-string Fecha :: getMes()
+int Fecha :: getMes()
 {
     return mes;
 }
@@ -153,7 +116,7 @@ void Fecha :: setDia(int d)
     dia = d;
 }
 
-void Fecha :: setMes(string m)
+void Fecha :: setMes(int m)
 {
     mes = m;
 }
@@ -168,11 +131,28 @@ void Fecha :: setAnio(int a)
 
 string Fecha :: ToString()
 {
-    string fecha = to_string(dia) + " " + mes + " " + to_string(anio);
+
+    string meses[12] = {"Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", \
+                      "Ago", "Sep", "Oct", "Nov", "Dic"};
+
+    string fecha = to_string(dia) + " " + meses[mes-1] + " " + to_string(anio);
 
     return fecha;
 
 
+}
+
+/***************************************************************************/
+// Método clona
+
+void Fecha :: clona(Fecha original)
+{
+    setDia(original.getDia());
+
+    setMes(original.getMes());
+
+    setAnio(original.getAnio());
+    
 }
 
 /***************************************************************************/

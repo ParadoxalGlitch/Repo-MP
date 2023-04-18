@@ -32,6 +32,13 @@ private:
 
 public:
 
+
+/***************************************************************************/
+// Constructor por defecto
+
+    Adscripciones();
+
+
 /***************************************************************************/
 // Constructor con argumentos
 
@@ -60,6 +67,11 @@ public:
 // Método ToString
 
     string ToString();
+
+/***************************************************************************/
+// Método clona
+
+    void clona(Adscripciones& original);
 
 };
 

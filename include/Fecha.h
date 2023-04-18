@@ -27,7 +27,7 @@ class Fecha
 private:
 
     int dia;
-    string mes;
+    int mes;
     int anio;
 
 public:
@@ -46,14 +46,14 @@ public:
 // Métodos get
 
     int getDia();
-    string getMes();
+    int getMes();
     int getAnio();
 
 /***************************************************************************/
 // Métodos set
 
     void setDia(int d);
-    void setMes(string m);
+    void setMes(int m);
     void setAnio(int a);
 
 /***************************************************************************/
@@ -61,6 +61,12 @@ public:
 
     string ToString();
 
+/***************************************************************************/
+// Método clona
+
+    void clona(Fecha original);
+
+    
 };
 
 #endif

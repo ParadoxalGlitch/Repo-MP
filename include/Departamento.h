@@ -31,6 +31,12 @@ public:
 
 
 /***************************************************************************/
+// Constructor por defecto
+
+    Departamento();
+
+
+/***************************************************************************/
 // Constructor con argumentos
     
     Departamento(string linea, char delimitador=DELIMITADOR);
@@ -59,7 +65,10 @@ void setId(string id);
 
 string ToString();
 
+/***************************************************************************/
+// Método clona
 
+void clona(Departamento& original);
 
 
 

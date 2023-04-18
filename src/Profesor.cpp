@@ -16,11 +16,32 @@
 using namespace std;
 
 
+
+/***************************************************************************/
+// Constructor por defecto
+
+Profesor :: Profesor()
+{
+    dni = nullptr;
+    nombre = nullptr;
+    apellidos = nullptr;
+    fechaNacimiento = Fecha();
+    categoria = 0;
+}
+
+
 /***************************************************************************/
 // Constructor con argumentos
 
 Profesor :: Profesor(string linea, char delimitador)
 {
+
+    dni = nullptr;
+    nombre = nullptr;
+    apellidos = nullptr;
+    fechaNacimiento = Fecha();
+    categoria = 0;
+
 
     // Creo un string auxiliar donde guardaré los datos que vaya leyendo
 
@@ -104,10 +125,24 @@ Profesor :: Profesor(string linea, char delimitador)
     setCategoria(stoi(aux));
 }
 
+
+/***************************************************************************/
+// Destructor
+
+Profesor :: ~Profesor()
+{
+    delete [] dni;
+    dni = nullptr;
+    delete [] nombre;
+    nombre = nullptr;
+    delete [] apellidos;
+    apellidos = nullptr;
+}
+
 /***************************************************************************/
 // Métodos get
 
-string Profesor :: getDNI()
+string Profesor :: getDni()
 {
     return dni;
 }
@@ -125,8 +160,9 @@ string Profesor :: getApellidos()
 string Profesor :: getFechaNacimiento()
 {
     string fecha;
-    fecha = to_string(fechaNacimiento.getAnio()) + fechaNacimiento.getMes() + \
-            to_string(fechaNacimiento.getDia());
+    fecha = to_string(fechaNacimiento.getDia()) + "/" +\
+            to_string(fechaNacimiento.getMes()) + "/" + \
+            to_string(fechaNacimiento.getAnio());
 
     return fecha;
 }
@@ -145,9 +181,10 @@ void Profesor :: setDni(string d)
 // Me deshago de la memoria de lo que ya hay guardado
     // si es que lo hay
 
-    if (!dni){
+    if (dni){
 
         delete[] dni;
+        dni = nullptr;
 
     }
 
@@ -173,9 +210,10 @@ void Profesor :: setNombre(string n)
     // Me deshago de la memoria de lo que ya hay guardado
     // si es que lo hay
 
-    if (!nombre){
+    if (nombre){
 
         delete[] nombre;
+        nombre = nullptr;
 
     }
 
@@ -201,9 +239,10 @@ void Profesor :: setApellidos(string a)
 // Me deshago de la memoria de lo que ya hay guardado
     // si es que lo hay
 
-    if (!apellidos){
+    if (apellidos){
 
         delete[] apellidos;
+        apellidos = nullptr;
 
     }
 
@@ -239,27 +278,39 @@ void Profesor :: setCategoria(int c)
 
 string Profesor :: ToString()
 {
-    string cadena = CharToString(dni) + " " + \
+
+    string cadena;
+
+    if (!dni && !nombre && !apellidos)
+    {
+        cadena = "No hay datos";
+    }
+
+    else{
+
+    cadena = CharToString(dni) + " " + \
     FormatString(CharToString(apellidos) + ", " + CharToString(nombre),32) + \
     fechaNacimiento.ToString() + "   " + to_string(categoria) + "\n";
+
+    }
 
     return cadena;
 }
 
 
 /***************************************************************************/
-/***************************************************************************/
-// Destructor
+// Método clona
 
-/***************************************************************************/
-// Destructor
-
-Profesor :: ~Profesor()
+void Profesor :: clona(Profesor& original)
 {
-    delete [] dni;
-    dni = nullptr;
-    delete [] nombre;
-    nombre = nullptr;
-    delete [] apellidos;
-    apellidos = nullptr;
+    setDni(original.getDni());
+
+    setNombre(original.getNombre());
+
+    setApellidos(original.getApellidos());
+
+    setFechaNacimiento(original.getFechaNacimiento());
+
+    setCategoria(original.getCategoria());
+    
 }

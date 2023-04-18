@@ -21,7 +21,7 @@ using namespace std;
 Encargos :: Encargos()
 {
     categoria = 0;
-    creditos = 0;
+    creditos = 0,0;
 }
 
 /***************************************************************************/
@@ -109,4 +109,11 @@ string Encargos :: ToString()
 }
 
 /***************************************************************************/
-/***************************************************************************/
+// Método clona
+void Encargos :: clona(Encargos original)
+{
+    setCategoria(original.getCategoria());
+
+    setCreditos(original.getCreditos());
+    
+}
