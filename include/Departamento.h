@@ -24,21 +24,21 @@ class Departamento
 
 private:
 
-    string nombre;
-    string Id_depto;
+    char * nombre;
+    char * Id_depto;
 
 public:
 
 
 /***************************************************************************/
-// Constructor por defecto
-
-    Departamento();
-
-/***************************************************************************/
 // Constructor con argumentos
     
     Departamento(string linea, char delimitador=DELIMITADOR);
+
+
+/***************************************************************************/
+// Destructor
+    ~Departamento();
 
 /***************************************************************************/
 // Métodos get
@@ -58,6 +58,7 @@ void setId(string id);
 // Método ToString
 
 string ToString();
+
 
 
 

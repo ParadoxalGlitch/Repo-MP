@@ -28,23 +28,27 @@ class Profesor
 
 private:
 
-    string dni;
-    string nombre;
-    string apellidos;
+    char * dni;
+    char * nombre;
+    char * apellidos;
     Fecha fechaNacimiento; 
     int categoria; // Valor entre 1 y 4
 
 public:
 
-/***************************************************************************/
-// Constructor por defecto
-
-    Profesor();
 
 /***************************************************************************/
 // Constructor con argumentos
 
     Profesor(string linea, char delimitador=DELIMITADOR);
+
+
+
+/***************************************************************************/
+// Destructor
+    ~Profesor();
+
+    
 
 /***************************************************************************/
 // Métodos get

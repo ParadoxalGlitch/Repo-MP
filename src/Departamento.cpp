@@ -12,19 +12,10 @@
 #include "Departamento.h"
 
 #include <iostream>
+#include <cstring>
 
 
 using namespace std;
-
-/***************************************************************************/
-/***************************************************************************/
-// Constructor por defecto
-
-Departamento :: Departamento()
-{
-    nombre = "Sin nombre";
-    Id_depto = "Sin abreviatura";
-}
 
 /***************************************************************************/
 // Constructor con argumentos
@@ -39,7 +30,6 @@ Departamento :: Departamento(string linea, char delimitador)
     
     // Voy leyendo los datos del string hasta encontrar el delimitador
 
-    aux += "(";
     
     while(linea[i] != delimitador)
     {
@@ -47,13 +37,14 @@ Departamento :: Departamento(string linea, char delimitador)
         i++;
     }
 
-    aux += ")";
 
-    // Guardo el ID del departamento en la clase
-    Id_depto = aux;
-    Id_depto = FormatString(Id_depto, 6);
+    // Guardo los datos
+
+    setId(aux);
+
+
+    // Reinicio auxiliar
     aux = "";
-
     i++;
 
     // Sigo leyendo los datos del string hasta encontrar el delimitador
@@ -62,11 +53,14 @@ Departamento :: Departamento(string linea, char delimitador)
     {
         aux += linea[i];
         i++;
+
     }
 
-    // Guardo el nombre del departamento en la clase
 
-    nombre = aux;
+
+    // Guardo los datos
+
+    setNombre(aux);
 
 }
 
@@ -89,22 +83,77 @@ string Departamento :: getId()
 
 void Departamento :: setNombre(string nom)
 {
-    nombre = nom;
+
+    // Me deshago de la memoria de lo que ya hay guardado
+    // si es que lo hay
+
+    if (!nombre){
+
+        delete[] nombre;
+
+    }
+
+    // Pido memoria para el nuevo string
+
+    char * aux = new char [nom.size()];
+
+    // Copio los valores de nom en aux
+
+    for (int i = 0; i <= nom.size(); i++)
+    {
+        aux[i] = nom[i];
+    }
+
+    // Igualo nombre a aux
+    nombre = aux;
+
 }
 
 void Departamento :: setId(string id)
 {
-    Id_depto = id;
+    // Me deshago de la memoria de lo que ya hay guardado
+    // si es que lo hay
+
+    if (!Id_depto){
+
+        delete[] Id_depto;
+
+    }
+
+    // Pido memoria para el nuevo string
+
+    char * aux = new char [id.size()];
+
+    // Copio los valores de nom en aux
+
+    for (int i = 0; i <= id.size(); i++)
+    {
+        aux[i] = id[i];
+    }
+
+    // Igualo id a aux
+    Id_depto = aux;
 }
 
 /***************************************************************************/
 // Método ToString
 
+
 string Departamento :: ToString()
 {
-    string cadena = Id_depto + "    " + nombre + "\n";
+    string cadena = FormatString(("(" + (CharToString(Id_depto) + ")")),6) + "    " + \
+                    CharToString(nombre) + "\n";
     return cadena;
 }
 
 /***************************************************************************/
 /***************************************************************************/
+// Destructor
+
+Departamento :: ~Departamento()
+{
+    delete [] nombre;
+    nombre = nullptr;
+    delete [] Id_depto;
+    Id_depto = nullptr;
+}

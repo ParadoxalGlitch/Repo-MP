@@ -27,20 +27,22 @@ class Adscripciones
 
 private:
 
-    string dni;
-    string Id_depto;
+    char * dni;
+    char * Id_depto;
 
 public:
-
-/***************************************************************************/
-// Constructor por defecto
-
-    Adscripciones();
 
 /***************************************************************************/
 // Constructor con argumentos
 
     Adscripciones(string linea, char delimitador=DELIMITADOR);
+
+
+/***************************************************************************/
+// Destructor
+    ~Adscripciones();
+
+    
 
 /***************************************************************************/
 // Métodos get

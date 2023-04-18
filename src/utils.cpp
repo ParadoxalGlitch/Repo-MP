@@ -164,3 +164,23 @@ string FormatString (string la_cadena, int num_casillas,
     return la_cadena;
 
 }
+
+/***************************************************************************/
+/***************************************************************************/
+// Transforma un dato de tipo char * a string (copia el contenido del vector
+// al que apunta char * a un string)
+
+string CharToString (char * cadena)
+{
+    string aux = "";
+
+    int i = 0;
+
+    while(cadena[i] != '\0')
+    {
+        aux += cadena[i];
+        i++;
+    }
+
+    return aux;
+}
