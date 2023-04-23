@@ -30,6 +30,20 @@ Fecha :: Fecha()
 }
 
 /***************************************************************************/
+// Constructor de copia
+
+Fecha :: Fecha(Fecha & otra)
+{
+    // Inicializo los atributos
+    dia = 0;
+    mes = 0;
+    anio = 0;
+
+    // Copio los atributos
+    clona(otra);
+}
+
+/***************************************************************************/
 // Constructor con argumentos
 
 Fecha :: Fecha(string linea)

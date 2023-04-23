@@ -38,6 +38,11 @@ public:
     Fecha();
 
 /***************************************************************************/
+// Constructor de copia
+
+    Fecha(Fecha & otra);
+
+/***************************************************************************/
 // Constructor con argumentos
 
     Fecha(string linea);

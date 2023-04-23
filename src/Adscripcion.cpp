@@ -9,9 +9,10 @@
 /***************************************************************************/
 
 
-#include "Adscripciones.h"
+#include "Adscripcion.h"
 
 #include <iostream>
+#include <cstring>
 
 using namespace std;
 
@@ -20,7 +21,7 @@ using namespace std;
 /***************************************************************************/
 // Constructor por defecto
 
-Adscripciones :: Adscripciones()
+Adscripcion :: Adscripcion()
 {
     dni = nullptr;
     Id_depto = nullptr;
@@ -28,14 +29,28 @@ Adscripciones :: Adscripciones()
 
 /***************************************************************************/
 /***************************************************************************/
-// Constructor con argumentos
+// Constructor de copia
 
-Adscripciones :: Adscripciones(string linea, char delimitador)
+Adscripcion :: Adscripcion(const Adscripcion & otro)
 {
-
+    // Inicializo los atributos
     dni = nullptr;
     Id_depto = nullptr;
 
+    // Copio los atributos
+    clona(otro);
+}
+
+/***************************************************************************/
+/***************************************************************************/
+// Constructor con argumentos
+
+Adscripcion :: Adscripcion(string linea, char delimitador)
+{
+
+    // Inicializo los atributos
+    dni = nullptr;
+    Id_depto = nullptr;
 
     // Creo un string auxiliar donde iré guardando los datos
 
@@ -74,7 +89,7 @@ Adscripciones :: Adscripciones(string linea, char delimitador)
 /***************************************************************************/
 // Destructor
 
-Adscripciones :: ~Adscripciones()
+Adscripcion :: ~Adscripcion()
 {
     delete [] dni;
     dni = nullptr;
@@ -86,12 +101,12 @@ Adscripciones :: ~Adscripciones()
 /***************************************************************************/
 // Métodos get
 
-string Adscripciones :: getDni()
+string Adscripcion :: getDni()
 {
     return CharToString(dni);
 }
 
-string Adscripciones :: getId_depto()
+string Adscripcion :: getId_depto()
 {
     return CharToString(Id_depto);
 }
@@ -100,7 +115,7 @@ string Adscripciones :: getId_depto()
 /***************************************************************************/
 // Métodos set
 
-void Adscripciones :: setDni(string d)
+void Adscripcion :: setDni(string d)
 {
     // Me deshago de la memoria de lo que ya hay guardado
     // si es que lo hay
@@ -125,9 +140,11 @@ void Adscripciones :: setDni(string d)
 
     // Igualo id a aux
     dni = aux;
+
+
 }
 
-void Adscripciones :: setId_depto(string id)
+void Adscripcion :: setId_depto(string id)
 {
     // Me deshago de la memoria de lo que ya hay guardado
     // si es que lo hay
@@ -158,9 +175,10 @@ void Adscripciones :: setId_depto(string id)
 /***************************************************************************/
 // Método ToString
 
-string Adscripciones :: ToString()
+string Adscripcion :: ToString()
 {
     if (!dni && !Id_depto)
+
         return "No hay datos";
 
     else{
@@ -173,16 +191,110 @@ string Adscripciones :: ToString()
 }
 
 
+
+/***************************************************************************/
+/***************************************************************************/
+// Método ReservaMemoria
+// Se llama a esta función cuando se va a clonar un objeto
+// por lo que se elimina el contenido anterior y se reserva
+// para el nuevo
+
+void Adscripcion :: ReservaMemoria(const Adscripcion & objeto)
+{
+
+    // Me deshago de la memoria de lo que ya hay guardado
+
+    
+    LiberarMemoria();
+
+
+    // Reservo memoria para el DNI
+    char * aux = new char [strlen(objeto.dni) + 1];
+    
+
+    dni = aux;
+
+    // Reservo memoria para el ID
+    aux = new char [strlen(objeto.Id_depto) + 1];
+
+    Id_depto = aux;
+
+}
+
+
+
+/************************************************************/
+/************************************************************/
+// Libera memoria
+
+void Adscripcion :: LiberarMemoria(void)
+{
+
+
+    if (dni && Id_depto){
+
+        delete[] dni;
+        dni = nullptr;
+
+        delete[] Id_depto;
+        Id_depto = nullptr;
+
+    }
+}
+
+
+
+/************************************************************/
+/************************************************************/
+// Copiar datos desde otro objeto de la clase
+// Parámetros: otro (referencia), objeto que sirve de modelo.
+//
+// PRE: Se ha reservado memoria para los datos
+void Adscripcion :: CopiarDatos (const Adscripcion & otro)
+{
+
+   // Copiar DNI
+    for (int i = 0; i <= strlen(otro.dni); i++) {
+        dni[i] = otro.dni[i];
+    }
+
+    // Copiar Id_depto
+    for (int i = 0; i <= strlen(otro.Id_depto); i++) {
+        Id_depto[i] = otro.Id_depto[i];
+    }
+    
+
+}
+
 /***************************************************************************/
 /***************************************************************************/
 // Método clona
 
-void Adscripciones :: clona(Adscripciones& original)
+void Adscripcion :: clona(const Adscripcion & original)
 {
-    setDni(original.getDni());
-
-    setId_depto(original.getId_depto());
     
+    ReservaMemoria(original);
+
+    CopiarDatos(original);
+
 }
+
+
+
+
+/**************************************************************************/
+/**************************************************************************/
+// Operador de asignación
+
+Adscripcion & Adscripcion:: operator = (const Adscripcion & original)
+{
+    if (this != &original)
+    {
+        clona (original);
+    }
+    return *this;
+}
+
+
 
 

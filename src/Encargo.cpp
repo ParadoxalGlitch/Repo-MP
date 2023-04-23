@@ -8,7 +8,7 @@
 //
 /***************************************************************************/
 
-#include "Encargos.h"
+#include "Encargo.h"
 
 #include <iostream>
 
@@ -18,16 +18,30 @@ using namespace std;
 /***************************************************************************/
 // Constructor por defecto
 
-Encargos :: Encargos()
+Encargo :: Encargo()
 {
     categoria = 0;
     creditos = 0,0;
 }
 
 /***************************************************************************/
+/***************************************************************************/
+// Constructor de copia
+
+Encargo :: Encargo(Encargo & otro)
+{
+    // Inicializo los atributos
+    categoria = 0;
+    creditos = 0,0;
+
+    // Copio los atributos
+    clona(otro);
+}
+
+/***************************************************************************/
 // Constructor con argumentos
 
-Encargos :: Encargos(string linea, char delimitador)
+Encargo :: Encargo(string linea, char delimitador)
 {
     
         // Creo un string auxiliar donde iré guardando los datos
@@ -63,12 +77,12 @@ Encargos :: Encargos(string linea, char delimitador)
 /***************************************************************************/
 // Métodos get
 
-int Encargos :: getCategoria()
+int Encargo :: getCategoria()
 {
     return categoria;
 }
 
-double Encargos :: getCreditos()
+double Encargo :: getCreditos()
 {
     return creditos;
 }
@@ -76,12 +90,12 @@ double Encargos :: getCreditos()
 /***************************************************************************/
 // Métodos set
 
-void Encargos :: setCategoria(int cat)
+void Encargo :: setCategoria(int cat)
 {
     categoria = cat;
 }
 
-void Encargos :: setCreditos(double cred)
+void Encargo :: setCreditos(double cred)
 {
     creditos = cred;
 }
@@ -89,7 +103,7 @@ void Encargos :: setCreditos(double cred)
 /***************************************************************************/
 // Método ToString
 
-string Encargos :: ToString()
+string Encargo :: ToString()
 {
 
 
@@ -99,21 +113,27 @@ string Encargos :: ToString()
     FormatString(numero,numero.length()+5,TipoAlineacion::AlinDerecha) + "\n";
     return cadena;*/
 
-    cad += FormatString(to_string(getCategoria()), 3, TipoAlineacion::AlinCentro);
+    cad += FormatString(to_string(getCategoria()), 3, \
+                        TipoAlineacion::AlinCentro);
     cad += " ";
-    cad += FormatString(FormatDouble(getCreditos(),4,2),5,TipoAlineacion::AlinDerecha);
+    cad += FormatString(FormatDouble(getCreditos(),4,2),5,\
+                        TipoAlineacion::AlinDerecha);
     cad += "\n";
 
     return cad;
 
 }
 
+
+/***************************************************************************/
 /***************************************************************************/
 // Método clona
-void Encargos :: clona(Encargos original)
-{
-    setCategoria(original.getCategoria());
 
-    setCreditos(original.getCreditos());
+void Encargo :: clona(Encargo & otro)
+{
     
+    setCategoria(otro.getCategoria());
+
+    setCreditos(otro.getCreditos());
+
 }

@@ -12,6 +12,7 @@
 #include "Profesor.h"
 
 #include <iostream>
+#include <cstring>
 
 using namespace std;
 
@@ -27,6 +28,22 @@ Profesor :: Profesor()
     apellidos = nullptr;
     fechaNacimiento = Fecha();
     categoria = 0;
+}
+
+/***************************************************************************/
+// Constructor de copia
+
+Profesor :: Profesor(const Profesor & otro)
+{
+    // Inicializo los atributos
+    dni = nullptr;
+    nombre = nullptr;
+    apellidos = nullptr;
+    fechaNacimiento = Fecha();
+    categoria = 0;
+    
+    // Copio los atributos
+    clona(otro);
 }
 
 
@@ -298,19 +315,124 @@ string Profesor :: ToString()
 }
 
 
+
+/***************************************************************************/
+/***************************************************************************/
+// Método ReservaMemoria
+// Se llama a esta función cuando se va a clonar un objeto
+// por lo que se elimina el contenido anterior y se reserva
+// para el nuevo
+
+void Profesor :: ReservaMemoria(const Profesor & objeto)
+{
+
+    // Me deshago de la memoria de lo que ya hay guardado
+
+    
+    LiberarMemoria();
+
+
+    // Reservo memoria para el DNI
+    char * aux = new char [strlen(objeto.dni) + 1];
+    
+
+    dni = aux;
+
+    // Reservo memoria para el nombre
+    aux = new char [strlen(objeto.nombre) + 1];
+
+    nombre = aux;
+
+    // Reservo memoria para los apellidos
+    aux = new char [strlen(objeto.apellidos) + 1];
+
+    apellidos = aux;
+
+    
+
+}
+
+/************************************************************/
+/************************************************************/
+// Libera memoria
+
+void Profesor :: LiberarMemoria(void)
+{
+
+
+    if (dni && nombre && apellidos){
+
+        delete[] dni;
+        dni = nullptr;
+
+        delete[] nombre;
+        nombre = nullptr;
+
+        delete[] apellidos;
+        apellidos = nullptr;
+
+    }
+}
+
+
+
+/************************************************************/
+/************************************************************/
+// Copiar datos desde otro objeto de la clase
+// Parámetros: otro (referencia), objeto que sirve de modelo.
+//
+// PRE: Se ha reservado memoria para los datos
+
+void Profesor :: CopiarDatos (const Profesor & otro)
+{
+
+   // Copiar DNI
+    for (int i = 0; i <= strlen(otro.dni); i++) {
+        dni[i] = otro.dni[i];
+    }
+
+    // Copiar nombre
+    for (int i = 0; i <= strlen(otro.nombre); i++) {
+        nombre[i] = otro.nombre[i];
+    }
+
+    // Copiar apellidos
+    for (int i = 0; i <= strlen(otro.apellidos); i++) {
+        apellidos[i] = otro.apellidos[i];
+    }
+
+    // Copiar fecha de nacimiento
+    fechaNacimiento = otro.fechaNacimiento;
+
+    // Copiar categoría
+    categoria = otro.categoria;
+    
+
+}
+
+/***************************************************************************/
 /***************************************************************************/
 // Método clona
 
-void Profesor :: clona(Profesor& original)
+void Profesor :: clona(const Profesor & original)
 {
-    setDni(original.getDni());
-
-    setNombre(original.getNombre());
-
-    setApellidos(original.getApellidos());
-
-    setFechaNacimiento(original.getFechaNacimiento());
-
-    setCategoria(original.getCategoria());
     
+    ReservaMemoria(original);
+
+    CopiarDatos(original);
+
+}
+
+
+/**************************************************************************/
+/**************************************************************************/
+// Operador de asignación
+
+Profesor & Profesor:: operator = (const Profesor & original)
+{
+    if (this != &original)
+    {
+        clona (original);
+    }
+    return *this;
 }

@@ -1,222 +1,182 @@
-/*****************************************************************************/
+/***************************************************************************/
 //
 // David Pérez Tobarra
 //
-// Fichero: Matriz2D.h
+// Fichero: Fecha.h
 //
-// Contiene la declaración de la funciones de Matriz2D
+// Contiene las cabeceras de la clase "Matriz2D"
 //
-/*****************************************************************************/
+/***************************************************************************/
 
 #ifndef MATRIZ2D
 #define MATRIZ2D
 
 #include <string>
 #include "TipoBase.h"
-using namespace std; 
+#include "Secuencia.h"
 
-
-/*
-// Tipo de los datos almacenados (en este caso, int)
-typedef int TipoBase;
-
-// Valor por defecto del tipo de los datos almacenados
-const TipoBase VALOR_DEF = 0;
-
-*/
-
-/***************************************************************************/
-// Definiciones de tipos
-
-typedef struct {
-
-	int ** datos;	// Puntero a vector de punteros a los datos
-
-	int fils;			// Num. de filas
-	int cols; 			// Num. de columnas
-
-} Matriz2D;
-
+using namespace std;
 
 /***************************************************************************/
 /***************************************************************************/
-// Crea una matriz dinámica con "nfils" filas y "ncols" columnas. 
-// El contenido de las "fils"x"cols" casillas se inicializa a un valor común, 
-// el indicado en el parámetro "valor"
-// Parámetros:
-//		nfils, número de filas de la matriz (por defecto 0).
-//		ncols, número de columnas de la matriz (por defecto 0).
-//		valor, valor común que se copiará en las casillas (por defecto 0). 
-// Devuelve: un dato de tipo Matriz2D.
+// Clase "Matriz2D"
+
+class Matriz2D
+{
+
+private:
+
+    TipoBase ** datos;
+    int fils;
+    int cols;
+
+public:
+
+/***************************************************************************/
+// Constructor por defecto
+
+    Matriz2D();
+
+/***************************************************************************/
+// Constructor con 1 argumento, num de filas y columnas
+
+    Matriz2D(int num);
+
+/***************************************************************************/
+// Constructor con 2 argumentos, num de filas y num de columnas
+
+    Matriz2D(int f, int c);
+
+/***************************************************************************/
+// Constructor con 3 argumentos, num de filas, num de columnas y valor a 
+// inicializar
+
+    Matriz2D(int f, int c, int valor);
+
+/***************************************************************************/
+// Constructor de copia
+
+    Matriz2D(Matriz2D & otra);
+
+/***************************************************************************/
+// Destructor
+
+    ~Matriz2D();
+
+/***************************************************************************/
+// Reserva de memoria
+
+    void ReservaMemoria(int f, int c, int valor = 0);
+
+/***************************************************************************/
+// Consulta de dimensiones
+
+    int NumFilas(void) const;
+
+    int NumColumnas(void) const; 
+
+/***************************************************************************/
+// Consulta de estado de la matriz (vacia o no)
+
+    bool EstaVacia(void) const;
+
+/***************************************************************************/
+// Metodo de eliminacion de todos los valores de una matriz
+
+    void EliminaTodos(void);
+
+
+/***************************************************************************/
+// Método clona
+
+    void Clona (const Matriz2D & origen);
+
+/***************************************************************************/
+// Metodo de copia de filas de una matriz a otra
+// Esta copiará las filas de una matriz a otra, pero no clonará la matriz
+// El segundo argumento es hasta qué fila se copiarán los valores
 //
-// PRE: nfils >= 0 && ncols >= 0
-// NOTA: Tanto "nfils" como "nols" deben ser estrictamente positivos para poder 
-// 		 disponer de una matriz no vacía. Si alguno de los dos valores fuera 0  
-//		 no se reserva memoria, y la matriz queda vacía. 
+// Pre: Las matriz a recibir los datos debe tener las mismas dimensiones que
+// la matriz original o mayor
 
-Matriz2D CreaMatriz (int nfils=0, int ncols=0, TipoBase valor=VALOR_DEF);
+    void CopiaFilas(const Matriz2D & origen, int inic, int final);
 
 /***************************************************************************/
-/***************************************************************************/
-// "Destruye" una matriz dinámica y la deja en un estado no útil (vacía). 
-// Parámetros: 
-//		matriz (referencia), la matriz que va a "destruirse". 
-// POST: La matriz queda vacía (todos sus campos a cero)
+// Metodo ecualiza
+// Reemplaza los valores de las casillas por el valor dado como argumento
 
-void DestruyeMatriz (Matriz2D & matriz);
+    void Ecualiza(int valor);
 
 /***************************************************************************/
-/***************************************************************************/
-// Reserva memoria para los datos de una matriz dinámica con "nfils" filas 
-// y "ncols" columnas. 
-// El contenido de las "nfils"x"ncols" casillas queda INDEFINIDO.
-// Parámetros:
-//		nfils, número de filas de la matriz.
-//		ncols, número de columnas de la matriz. 
-// Devuelve: un dato Matriz2D con memoria reservada.
-// 		El contenido de las "fils"x"cols" casillas queda indefinido. 
-//
-// PRE: nfils >= 0 && ncols >= 0
-// NOTA: Tanto "nfils" como "nols" deben ser estrictamente positivos para poder 
-// 		 disponer de una matriz no vacía. Si alguno de los dos valores fuera 0  
-//		 no se reserva memoria, y la matriz queda vacía. 
+// Metodo ToString
 
-Matriz2D ReservaMemoria (int nfils, int ncols);
+    string ToString(void);
 
 /***************************************************************************/
-/***************************************************************************/
-// Libera la memoria ocupada por una matriz dinámica. 
-// Parámetros: 
-//		matriz (referencia), la matriz que va a "liberarse". 
-// POST: La matriz queda vacía (todos sus campos a cero)
+// Sobrecarga del operador de asignación
 
-void EliminaTodos (Matriz2D & matriz);
-
-/***************************************************************************/
-/***************************************************************************/
-// Devuelve un string con el resultado de "serializar" una matriz.
-// Parámetros: matriz (referencia), la matriz que va a serializarse. 
-
-string ToString (const Matriz2D & matriz);
-
-/***************************************************************************/
-/***************************************************************************/
-
-
-/***************************************************************************/
-/***************************************************************************/
-// Devuelve el número de filas/columnas de la matriz.
-// Parámetros: matriz (referencia), la matriz que se va a consultar. 
-
-int NumFilas (const Matriz2D & matriz);
-int NumColumnas (const Matriz2D & matriz);
-
-/***************************************************************************/
-/***************************************************************************/
-// Consulta ó modifica el valor de una casilla dada. Si se utiliza como 
-// rvalue se emplea para consulta. Si se utiliza como lvalue se emplea 
-// para modificación.
-// Parámetros: matriz (referencia), la matriz. 
-//			   num_fila, número de fila.
-//			   num_columna, número de columna.
-// PRE: 0<=num_fila<NumFilas(m)
-// PRE: 0<=num_columna<NumColumnas(m)
-
-TipoBase & Valor (const Matriz2D & matriz, int num_fila, int num_columna); 
-
-/***************************************************************************/
-/***************************************************************************/
-/***************************************************************************/
-/***************************************************************************/
-// Comprueba si la matriz dada está vacía o ocupada
-// Parámetros: matriz, la matriz.
-
-bool EstaVacia (const Matriz2D & matriz);
+    Matriz2D & operator = (const Matriz2D & otra);
 
 
 
 /***************************************************************************/
-/***************************************************************************/
-// Cambia todos los valores de la matriz por valor.
-// Parámetros: matriz, la matriz
-//			   valor, valor a establecer en toda la matriz
+// Sobrecarga alternativa del operador de asignación, que recibe como argumento
+// un valor de tipo TipoBase y asigna dicho valor a todos los elementos de la
+// matriz
 
-void Ecualiza (Matriz2D & matriz, TipoBase valor=VALOR_DEF);
-
+    Matriz2D & operator = (const TipoBase & valor);
 
 
 /***************************************************************************/
-/***************************************************************************/
-// Hace una copia profunda de origen en destino
-// Parámetros: destino, la matriz donde se va a clonar origen
-//		       origen, la matriz a clonar
+// Método get y set
+// Devuelve una referencia, para poder leer o modificar el valor a gusto del
+// usuario
 
-void Clona (Matriz2D & destino, const Matriz2D & origen);
-
-
-/***************************************************************************/
-/***************************************************************************/
-// Comprueba si dos matrices son iguales en dimensiones y contenido
-// Parámetros: una, la primera matriz
-//			   otra, la segunda matriz
-
-bool SonIguales (const Matriz2D & una, const Matriz2D & otra);
-
+    TipoBase & Valor(int f, int c);
+    
 
 /***************************************************************************/
-/***************************************************************************/
-// Elimina una fila de la matriz
-// Parámetros: matriz, la matriz
-//			   num_fila, fila a eliminar
-// PRE: matriz NO vacía
+// Método para comparar dos matrices, devuelve true si son iguales
 
-void EliminaFila (Matriz2D & matriz, int num_fila);
-
+    bool EsIgualA (const Matriz2D & otra);
 
 /***************************************************************************/
+// Método get de filas y columnas, como objetos de la clase Secuencia
+// usando la funcion Valor de Secuencia
+
+    Secuencia Fila (int f);
+
+    Secuencia Columna (int c);
+
 /***************************************************************************/
-// Elimina una columna de la matriz
-// Parámetros: matriz, la matriz
-//			   num_col, fila a eliminar
-// PRE: matriz NO vacía
+// Método para añadir una fila al final de la matriz. Siendo esta fila de
+// tipo Secuencia
 
-void EliminaColumna (Matriz2D & matriz, int num_col);
+    void AniadeFila (Secuencia & fila);
 
 /***************************************************************************/
-/***************************************************************************/
-// Extrae una submatriz de original y la deja en resultado
-// Parámetros: resultado, la submatriz resultante
-//			   original, matriz original
-//			   fila_inic, fila desde donde se extrae la submatriz
-//			   col_inic, columa desde donde se extrae la submatriz
-//		       num_filas, tamaño de filas de la submatriz
-//			   num_cols, tamaño de columnas de la submatriz
-// PRE: matriz NO vacía, valor de columna válido
+// Método para insertar una fila en la matriz. Siendo esta fila de tipo
+// Secuencia
 
-void SubMatriz (Matriz2D & resultado, const Matriz2D & original, \
-				int fila_inic, int col_inic, int num_filas, int num_cols);
-
+    void InsertaFila (Secuencia & fila, int pos);
 
 
 /***************************************************************************/
-/***************************************************************************/
-// Cambia de orden las filas de matriz, en modo espejo
-// Parámetros: matriz, la matriz a invertir en espejo
+// Método para eliminar una fila de la matriz
 
-void EspejoHorizontal (Matriz2D & matriz);
-
+    void EliminaFila (int num_fila);
 
 /***************************************************************************/
+// Método para eliminar una columna de la matriz
+
+    void EliminaColumna(int num_col);
+
 /***************************************************************************/
-// Cambia de orden las columnas de matriz, en modo espejo
-// Parámetros: matriz, la matriz a invertir en espejo
+// Método SubMatriz
 
-void EspejoVertical (Matriz2D & matriz);
+    void SubMatriz (const Matriz2D & original, int fila_inic, 
+                int col_inic, int num_filas, int num_cols);
 
-
-
-
-
-
+};
 
 #endif

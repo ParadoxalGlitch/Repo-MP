@@ -2,37 +2,33 @@
 //
 // David Pérez Tobarra
 //
-// Fichero: Profesor.h
+// Fichero: Adscripciones.h
 //
-// Contiene las cabeceras de la clase "Profesor"
+// Contiene las cabeceras de la clase "Adscripciones"
 //
 /***************************************************************************/
 
-#ifndef PROFESOR
-#define PROFESOR
+#ifndef ADSCRIPCIONES
+#define ADSCRIPCIONES
 
 #include <string>
 
 #include "utils.h"
-#include "Fecha.h"
 
 using namespace std;
 
 
 /***************************************************************************/
 /***************************************************************************/
-// Clase "Profesor"
+// Clase "Adscripciones"
 
-class Profesor
+class Adscripcion
 {
 
 private:
 
     char * dni;
-    char * nombre;
-    char * apellidos;
-    Fecha fechaNacimiento; 
-    int categoria; // Valor entre 1 y 4
+    char * Id_depto;
 
 public:
 
@@ -40,24 +36,23 @@ public:
 /***************************************************************************/
 // Constructor por defecto
 
-    Profesor();
-
+    Adscripcion();
 
 /***************************************************************************/
 // Constructor de copia
 
-    Profesor(const Profesor & otro);
+    Adscripcion(const Adscripcion & otro);
+
 
 /***************************************************************************/
 // Constructor con argumentos
 
-    Profesor(string linea, char delimitador=DELIMITADOR);
-
+    Adscripcion(string linea, char delimitador=DELIMITADOR);
 
 
 /***************************************************************************/
 // Destructor
-    ~Profesor();
+    ~Adscripcion();
 
     
 
@@ -65,60 +60,50 @@ public:
 // Métodos get
 
     string getDni();
-    string getNombre();
-    string getApellidos();
-    string getFechaNacimiento();
-    int getCategoria();
+    string getId_depto();
 
 /***************************************************************************/
 // Métodos set
 
     void setDni(string d);
-    void setNombre(string n);
-    void setApellidos(string a);
-    void setFechaNacimiento(string f);
-    void setCategoria(int c);
+    void setId_depto(string id);
 
 /***************************************************************************/
 // Método ToString
 
     string ToString();
-    
-
-/***************************************************************************/
-// Método ReservaMemoria
-// Se llama a esta función cuando se va a clonar un objeto
-// por lo que se elimina el contenido anterior y se reserva
-// para el nuevo
-
-    void ReservaMemoria(const Profesor & objeto);
-
-
-/************************************************************/
-// Libera memoria
-
-    void LiberarMemoria(void);
-
-/************************************************************/
-// Copiar datos desde otro objeto de la clase
-// Parámetros: otro (referencia), objeto que sirve de modelo.
-//
-// PRE: Se ha reservado memoria para los datos
-
-    void CopiarDatos (const Profesor & otro);
-
 
 /***************************************************************************/
 // Método clona
 
-    void clona(const Profesor & original);
+    void clona(const Adscripcion & original);
 
 
-/**************************************************************************/
-// Operador de asignación
+/***************************************************************************/
+// Método ReservaMemoria
 
-    Profesor & operator = (const Profesor & original);
+    void ReservaMemoria(const Adscripcion & objeto);
+
+
+/***************************************************************************/
+// Libera memoria
+void LiberarMemoria (void);
+
+
+/***************************************************************************/
+// Método CopiarDatos
+
+    void CopiarDatos (const Adscripcion & otro);
+
+/***************************************************************************/
+// Sobrecarga del operador =
+
+    Adscripcion & operator=(const Adscripcion& original);
 
 };
 
 #endif
+
+
+
+

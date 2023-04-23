@@ -2,81 +2,79 @@
 //
 // David Pérez Tobarra
 //
-// Fichero: Adscripciones.h
+// Fichero: Fecha.h
 //
-// Contiene las cabeceras de la clase "Adscripciones"
+// Contiene las cabeceras de la clase "Secuencia"
 //
 /***************************************************************************/
 
-#ifndef ADSCRIPCIONES
-#define ADSCRIPCIONES
+#ifndef SECUENCIA
+#define SECUENCIA
 
 #include <string>
-
-#include "utils.h"
+#include "TipoBase.h"
 
 using namespace std;
 
-
 /***************************************************************************/
 /***************************************************************************/
-// Clase "Adscripciones"
+// Clase "Secuencia"
 
-class Adscripciones
+class Secuencia
 {
 
 private:
 
-    char * dni;
-    char * Id_depto;
+    TipoBase * datos;
+    int tam;
+
 
 public:
-
 
 /***************************************************************************/
 // Constructor por defecto
 
-    Adscripciones();
+    Secuencia();
 
 
 /***************************************************************************/
-// Constructor con argumentos
+// Constructor con 1 argumento, tamaño
 
-    Adscripciones(string linea, char delimitador=DELIMITADOR);
+    Secuencia(int num);
 
+/***************************************************************************/
+// Constructor de copia
+
+    Secuencia(const Secuencia & otra);
 
 /***************************************************************************/
 // Destructor
-    ~Adscripciones();
 
-    
-
-/***************************************************************************/
-// Métodos get
-
-    string getDni();
-    string getId_depto();
+    ~Secuencia();
 
 /***************************************************************************/
-// Métodos set
+// Reserva memoria para la matriz
 
-    void setDni(string d);
-    void setId_depto(string id);
+    void ReservaMemoria(int num);
 
 /***************************************************************************/
-// Método ToString
+// LIbera la memoria de la matriz
 
-    string ToString();
+    void EliminaTodos();
 
 /***************************************************************************/
 // Método clona
+// Clona en el vector con el que se llama el contenido del vector que se pasa
+// como argumento
 
-    void clona(Adscripciones& original);
+    void Clona(const Secuencia & otra);
+
+/***************************************************************************/
+// Método set & get, mediante referencia
+// Pre: 0 <= pos < tam
+
+    TipoBase & Valor(int pos);
+
 
 };
-
 #endif
-
-
-
-

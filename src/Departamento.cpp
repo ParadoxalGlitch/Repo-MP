@@ -28,6 +28,20 @@ Departamento :: Departamento()
 
 
 /***************************************************************************/
+// Constructor de copia
+
+Departamento :: Departamento(const Departamento & otro)
+{
+    // Inicializo los atributos
+    nombre = nullptr;
+    Id_depto = nullptr;
+
+    // Copio los atributos
+    clona(otro);
+}
+
+
+/***************************************************************************/
 // Constructor con argumentos
 
 Departamento :: Departamento(string linea, char delimitador)
@@ -187,18 +201,104 @@ string Departamento :: ToString()
 
 }
 
+/***************************************************************************/
+/***************************************************************************/
+// Método ReservaMemoria
+// Se llama a esta función cuando se va a clonar un objeto
+// por lo que se elimina el contenido anterior y se reserva
+// para el nuevo
+
+void Departamento :: ReservaMemoria(const Departamento & objeto)
+{
+
+    // Me deshago de la memoria de lo que ya hay guardado
+
+    
+    LiberarMemoria();
+
+
+    // Reservo memoria para el DNI
+    char * aux = new char [strlen(objeto.nombre) + 1];
+    
+
+    nombre = aux;
+
+    // Reservo memoria para el ID
+    aux = new char [strlen(objeto.Id_depto) + 1];
+
+    Id_depto = aux;
+
+}
+
+/************************************************************/
+/************************************************************/
+// Libera memoria
+
+void Departamento :: LiberarMemoria(void)
+{
+
+
+    if (nombre && Id_depto){
+
+        delete[] nombre;
+        nombre = nullptr;
+
+        delete[] Id_depto;
+        Id_depto = nullptr;
+
+    }
+}
+
+/************************************************************/
+/************************************************************/
+// Copiar datos desde otro objeto de la clase
+// Parámetros: otro (referencia), objeto que sirve de modelo.
+//
+// PRE: Se ha reservado memoria para los datos
+void Departamento :: CopiarDatos (const Departamento & otro)
+{
+
+   // Copiar DNI
+    for (int i = 0; i <= strlen(otro.nombre); i++) {
+        nombre[i] = otro.nombre[i];
+    }
+
+    // Copiar Id_depto
+    for (int i = 0; i <= strlen(otro.Id_depto); i++) {
+        Id_depto[i] = otro.Id_depto[i];
+    }
+    
+
+}
+
+
 
 /***************************************************************************/
 /***************************************************************************/
 // Método clona
 
-void Departamento :: clona(Departamento& original)
+void Departamento :: clona(const Departamento & original)
 {
-
-    string nom = original.getNombre();
-    setNombre(nom);
-
-    string id = original.getId();
-    setId(id);
     
+    ReservaMemoria(original);
+
+    CopiarDatos(original);
+
 }
+
+
+/**************************************************************************/
+/**************************************************************************/
+// Operador de asignación
+
+Departamento & Departamento:: operator = (const Departamento & original)
+{
+    if (this != &original)
+    {
+        clona (original);
+    }
+    return *this;
+}
+
+
+

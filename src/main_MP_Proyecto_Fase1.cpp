@@ -108,7 +108,7 @@ int main(){
 
     do 
     {
-        Encargos enc(linea);
+        Encargo enc(linea);
         cout << enc.ToString();    
         cuenta_enc++;    
 
@@ -134,7 +134,7 @@ int main(){
 
     do 
     {
-        Adscripciones ads(linea);
+        Adscripcion ads(linea);
         cout << ads.ToString();     
         cuenta_ads++;   
 

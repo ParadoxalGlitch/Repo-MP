@@ -23,7 +23,7 @@
 #include "Departamento.h"
 #include "Profesor.h"
 #include "Encargos.h"
-#include "Adscripciones.h"
+#include "Adscripcion.h"
 
 #include "utils.h"
 
@@ -136,7 +136,7 @@ int main()
 		
 		cont_encargos++; // Un encargo más (no se leyó TERMINADOR)	
 			
-		Encargos un_encargo (linea);
+		Encargo un_encargo (linea);
 
 		cout << un_encargo.ToString() << endl; 
 
@@ -160,13 +160,14 @@ int main()
 		
 		cont_adscripciones++; // Una adscripción más (no se leyó TERMINADOR)	
 			
-		Adscripciones una_adscripcion (linea);
+		Adscripcion una_adscripcion (linea);
 
 		cout << una_adscripcion.ToString() << endl; 
 
-		Adscripciones copia_una_adscripcion;
+		Adscripcion copia_una_adscripcion;
 
-		cout << "ADSCRIPCION VACIO: " << copia_una_adscripcion.ToString() << endl; 
+		cout << "ADSCRIPCION VACIO: " << copia_una_adscripcion.ToString() \
+		     << endl; 
 
 		copia_una_adscripcion.clona (una_adscripcion);
 		cout << "Clonado: " << copia_una_adscripcion.ToString() << endl; 

@@ -2,14 +2,14 @@
 //
 // David Pérez Tobarra
 //
-// Fichero: Encargos.h
+// Fichero: Encargo.h
 //
-// Contiene las cabeceras de la clase "Encargos"
+// Contiene las cabeceras de la clase "Encargo"
 //
 /***************************************************************************/
 
-#ifndef ENCARGOS
-#define ENCARGOS
+#ifndef ENCARGO
+#define ENCARGO
 
 #include <string>
 
@@ -20,9 +20,9 @@ using namespace std;
 
 /***************************************************************************/
 /***************************************************************************/
-// Clase "Encargos"
+// Clase "Encargo"
 
-class Encargos
+class Encargo
 {
 
 private:
@@ -36,12 +36,17 @@ public:
 /***************************************************************************/
 // Constructor por defecto
 
-   Encargos();
+   Encargo();
+
+/***************************************************************************/
+// Constructor de copia
+
+   Encargo(Encargo & otro);
 
 /***************************************************************************/
 // Constructor con argumentos
 
-   Encargos(string linea, char delimitador=DELIMITADOR);
+   Encargo(string linea, char delimitador=DELIMITADOR);
 
 /***************************************************************************/
 // Métodos get
@@ -63,7 +68,7 @@ public:
 /***************************************************************************/
 // Método clona
 
-void clona(Encargos original);
+   void clona(Encargo & original);
 
 };
 
