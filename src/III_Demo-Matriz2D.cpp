@@ -291,7 +291,7 @@ int main (void)
 	cout << "Se ha clonado la matriz \"m\" en \"clon_m\": " 
 	     << clon_m.NumFilas() << " x " << clon_m.NumColumnas() << endl;
 	cout << "Vacia = " << (clon_m.EstaVacia() ? "SI": "NO") << endl;	
-	cout << "Iguales = " << (clon_m.SonIguales(m) ? "SI": "NO") << endl;	
+	cout << "Iguales = " << (clon_m.EsIgualA(m) ? "SI": "NO") << endl;	
 	cout << endl;	
 		
 	cout << "Matriz \"clon_m\": ";
@@ -380,10 +380,55 @@ int main (void)
 		     << diagonal.NumFilas() << " x " << diagonal.NumColumnas() << endl;
 		cout << "Vacia = " << (diagonal.EstaVacia() ? "SI": "NO") << endl;	
 		cout << endl;	
-			
+
 		cout << "Matriz \"diagonal\": ";
 		cout << diagonal.ToString();
 	}
+
+	// Prueba del operador de asignación
+	Matriz2D matriz1 (5,5,9);
+	Matriz2D matriz2;
+
+
+	matriz2 = matriz1;
+
+	cout << "Matriz 1: " << endl << matriz1.ToString();
+	cout << "Matriz 2: " << endl << matriz2.ToString();
+
+	matriz1.Valor(0,0) = 0;
+	matriz1.Valor(0,1) = 1;
+	matriz1.Valor(0,2) = 2;
+	matriz1.Valor(0,3) = 3;
+	matriz1.Valor(0,4) = 4;
+	matriz1.Valor(1,0) = 1;
+	matriz1.Valor(2,0) = 2;
+	matriz1.Valor(3,0) = 3;
+	matriz1.Valor(4,0) = 4;
+
+
+
+	cout << "Matriz 1: " << endl << matriz1.ToString();
+	cout << "Matriz 2: " << endl << matriz2.ToString();
+
+	// Pruebas de la clase Secuencia
+
+
+	Secuencia secuencia1;
+	Secuencia secuencia2;
+
+	secuencia1 = matriz1.Fila(0);
+	cout << secuencia1.ToString();
+
+	secuencia2 = matriz1.Columna(0);
+	cout << secuencia2.ToString();
+
+	matriz1.AniadeFila(secuencia2);
+	cout << matriz1.ToString();
+
+	matriz1.InsertaFila(secuencia2, 2);
+	cout << matriz1.ToString();
+
+	
 
 	return 0; 
 }

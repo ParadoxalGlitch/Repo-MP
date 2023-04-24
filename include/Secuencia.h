@@ -75,6 +75,16 @@ public:
 
     TipoBase & Valor(int pos);
 
+/***************************************************************************/
+// Método ToString
+
+    string ToString();
+
+/***************************************************************************/
+// Sobrecarga del operador de asignación
+
+    Secuencia & operator = (const Secuencia & otra);
+
 
 };
 #endif

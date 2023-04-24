@@ -145,9 +145,13 @@ Matriz2D :: Matriz2D(Matriz2D & otra)
 
 Matriz2D :: ~Matriz2D()
 {
-    // Libero la memoria
-    delete [] datos[0];
-    delete [] datos;
+
+    if (!EstaVacia())
+    {
+        // Libero la memoria
+        delete [] datos[0];
+        delete [] datos;
+    }
 
 }
 
@@ -160,19 +164,23 @@ void Matriz2D :: ReservaMemoria(int f, int c, int valor)
 {
 
     // Reservo memoria para la matriz
-    datos = new TipoBase * [fils];
+    datos = new TipoBase * [f];
 
-    datos[0] = new int [fils * cols];
+    datos[0] = new int [f * c];
 
-    for (int i = 0; i < fils; i++)
+    fils = f;
+    cols = c;
+
+
+    for (int i = 0; i < f; i++)
     {
-        datos[i] = datos[0] + (i * cols);
+        datos[i] = datos[0] + (i * c);
     }
 
     // Inicializo la matriz con el valor pasado por argumento
 
-    for(int i = 0; i < fils; i++)
-        for(int j = 0; j < cols; j++)
+    for(int i = 0; i < f; i++)
+        for(int j = 0; j < c; j++)
             datos[i][j] = valor;
 }
 
@@ -239,28 +247,10 @@ void  Matriz2D :: Clona (const Matriz2D & origen){
 	ReservaMemoria(origen.fils, origen.cols);
 
 	//copiamos los valores
-    for (int i = 0; i < fils; i++)
-        for (int j = 0; j < cols; j++)
+    for (int i = 0; i < origen.NumFilas(); i++)
+        for (int j = 0; j < origen.NumColumnas(); j++)
             datos[i][j] = origen.datos[i][j];
 	
-}
-
-/***************************************************************************/
-// Metodo de copia de filas de una matriz a otra
-// Esta copiará las filas de una matriz a otra, pero no clonará la matriz
-// El segundo argumento es desde qué fila se copiarán los valores
-// El tercer argumento es hasta qué fila se copiarán los valores, no incluida
-//
-// Pre: Las matriz a recibir los datos debe tener las mismas dimensiones que
-// la matriz original o mayor
-
-void Matriz2D :: CopiaFilas(const Matriz2D & origen, int inic, int final)
-{
-    // Copio los valores
-    for (int i = inic; i < origen.fils && i < final; i++)
-        for (int j = 0; j < origen.cols; j++)
-            datos[i][j] = origen.datos[i][j];
-    
 }
 
 /***************************************************************************/
@@ -345,7 +335,7 @@ Matriz2D & Matriz2D :: operator = (const TipoBase & valor)
 // Devuelve una referencia, para poder leer o modificar el valor a gusto del
 // usuario
 
-TipoBase & Matriz2D :: Valor(int f, int c)
+TipoBase & Matriz2D :: Valor(int f, int c) const
 {
     return datos[f][c];
 }
@@ -397,6 +387,7 @@ Secuencia Matriz2D :: Fila (int f)
 
     for (int i = 0; i < cols; i++)
         fila.Valor(i) = datos[f][i];
+    
 
     return fila;
 }
@@ -424,7 +415,9 @@ void Matriz2D :: AniadeFila (Secuencia & fila)
     Matriz2D aux(fils + 1, cols);
 
     // Copio los valores de la matriz original
-    aux.CopiaFilas(*this, 0, this->NumFilas());
+    for (int i = 0; i < fils; i++)
+        for (int j = 0; j < cols; j++)
+            aux.datos[i][j] = datos[i][j];
 
     // Copio los valores de la fila pasada por argumento
     for (int i = 0; i < cols; i++)
@@ -447,17 +440,35 @@ void Matriz2D :: InsertaFila (Secuencia & fila, int pos)
     // Creo una matriz auxiliar con una fila mas
     Matriz2D aux(fils + 1, cols);
 
+    cout << "MATRIZ AUX INICIALIZADA: ";
+    cout << aux.ToString();
+
     // Copio los valores de la matriz original hasta la posicion pasada por
     // argumento
-    CopiaFilas(*this, 0, pos);
+    for (int i = 0; i < pos; i++)
+        for (int j = 0; j < cols; j++)
+            aux.datos[i][j] = datos[i][j];
+
+
+    cout << "MATRIZ AUX MEDIA MITAD COPIADA: ";
+    cout << aux.ToString();
+
 
     // Copio los valores de la fila pasada por argumento
     for (int i = 0; i < cols; i++)
         aux.datos[pos][i] = fila.Valor(i);
 
+    cout << "MATRIZ AUX COPIADA LA FILA: ";
+    cout << aux.ToString();
+
     // Copio los valores de la matriz original desde la posicion pasada por
     // argumento
-    CopiaFilas(*this, pos, this->NumFilas());
+    for (int i = pos; i < fils; i++)
+        for (int j = 0; j < cols; j++)
+            aux.datos[i+1][j] = datos[i][j];
+
+    cout << "MATRIZ AUX COPIADA LA SEGUNDA MITAD: ";
+    cout << aux.ToString();
 
 
     // Libero la memoria de la matriz original

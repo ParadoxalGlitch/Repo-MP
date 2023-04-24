@@ -91,15 +91,6 @@ public:
 
     void Clona (const Matriz2D & origen);
 
-/***************************************************************************/
-// Metodo de copia de filas de una matriz a otra
-// Esta copiará las filas de una matriz a otra, pero no clonará la matriz
-// El segundo argumento es hasta qué fila se copiarán los valores
-//
-// Pre: Las matriz a recibir los datos debe tener las mismas dimensiones que
-// la matriz original o mayor
-
-    void CopiaFilas(const Matriz2D & origen, int inic, int final);
 
 /***************************************************************************/
 // Metodo ecualiza
@@ -132,7 +123,7 @@ public:
 // Devuelve una referencia, para poder leer o modificar el valor a gusto del
 // usuario
 
-    TipoBase & Valor(int f, int c);
+    TipoBase & Valor(int f, int c) const;
     
 
 /***************************************************************************/

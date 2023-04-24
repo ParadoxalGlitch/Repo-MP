@@ -114,3 +114,34 @@ TipoBase & Secuencia :: Valor(int pos)
     return datos[pos];
 }
 
+
+/***************************************************************************/
+// Método ToString
+
+string Secuencia :: ToString()
+{
+    string cadena;
+
+
+    for (int i = 0; i < tam; i++)
+    {
+        cadena += to_string(datos[i]) + " ";
+    }
+
+    return cadena;
+}
+
+/***************************************************************************/
+// Sobrecarga del operador de asignación
+
+Secuencia & Secuencia :: operator = (const Secuencia & otra)
+{
+    // Compruebo que no se esté intentando asignar un vector a sí mismo
+    if (this != &otra)
+    {
+        // Clono el vector que se pasa como argumento
+        Clona(otra);
+    }
+
+    return *this;
+}
