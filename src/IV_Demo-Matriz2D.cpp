@@ -428,6 +428,63 @@ int main (void)
 	matriz1.InsertaFila(secuencia2, 2);
 	cout << matriz1.ToString();
 
+
+
+	// pruebas de los operadores () y == y !=
+
+	Matriz2D matriz3;
+
+	matriz3 = matriz1;
+
+	cout << "Matriz 3: " << endl << matriz3.ToString();
+
+
+
+
+
+	cout << "Es matriz 3 igual a matriz 1?:" << endl;
+
+	if (matriz3 == matriz1) 
+		cout << "SI" << endl;
+	else
+		cout << "NO" << endl;
+
+	cout << "Es matriz 3 distinta a matriz 1?:" << endl;
+
+	if (matriz3 != matriz1) 
+		cout << "SI" << endl << endl;
+	else
+		cout << "NO" << endl << endl;
+
+
+
+	matriz3(0,0) = 99;
+	cout << matriz3(0,0) << " es el valor que he editado en matriz3" << endl;
+	cout << endl;
+
+	cout << "Es matriz 3 igual a matriz 1?:" << endl;
+
+	if (matriz3 == matriz1) 
+		cout << "SI" << endl;
+	else
+		cout << "NO" << endl;
+
+	cout << "Es matriz 3 distinta a matriz 1?:" << endl;
+
+	if (matriz3 != matriz1) 
+		cout << "SI" << endl << endl;
+	else
+		cout << "NO" << endl << endl;
+
+
+
+
+
+
+
+
+
+
 	
 
 	return 0; 

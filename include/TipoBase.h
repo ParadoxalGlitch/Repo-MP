@@ -28,6 +28,9 @@ typedef double TipoBase;	// Tipo de los elementos de la estructura dinámica
 #define VALOR_DEF 0.0
 */
 
+// Definición de constantes
+#define TAM_BLOQUE 5
+
 
 #endif
 

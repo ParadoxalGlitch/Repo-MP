@@ -168,6 +168,24 @@ public:
     void SubMatriz (const Matriz2D & original, int fila_inic, 
                 int col_inic, int num_filas, int num_cols);
 
+
+/***************************************************************************/
+// Sobrecarga del operador ()
+
+    TipoBase & operator () (int f, int c) const;
+
+    TipoBase & operator () (int f, int c);
+
+
+/***************************************************************************/
+// Sobrecarga del operador == y !=
+    
+        bool operator == (const Matriz2D & otra);
+    
+        bool operator != (const Matriz2D & otra);
+
+
 };
+
 
 #endif

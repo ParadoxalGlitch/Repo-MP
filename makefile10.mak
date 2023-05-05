@@ -18,24 +18,24 @@ LIB = $(HOME)/lib
 INCLUDE = $(HOME)/include
 
 #................................................
-all:  $(BIN)/III_Demo-Matriz2D
+all:  $(BIN)/IV_Demo-Matriz2D
 	  
 	  @echo Terminado
 
 #................................................
 # EJECUTABLES
 
-$(BIN)/III_Demo-Matriz2D : $(OBJ)/III_Demo-Matriz2D.o $(LIB)/libMatriz2D.a \
+$(BIN)/IV_Demo-Matriz2D : $(OBJ)/IV_Demo-Matriz2D.o $(LIB)/libMatriz2D.a \
                            $(LIB)/libSecuencia.a
-	g++ -o $(BIN)/III_Demo-Matriz2D $(OBJ)/III_Demo-Matriz2D.o \
+	g++ -o $(BIN)/IV_Demo-Matriz2D $(OBJ)/IV_Demo-Matriz2D.o \
 	       -L$(LIB) -lMatriz2D -lSecuencia
 
 #................................................
 # OBJETOS 
 
-$(OBJ)/III_Demo-Matriz2D.o : $(SRC)/III_Demo-Matriz2D.cpp \
+$(OBJ)/IV_Demo-Matriz2D.o : $(SRC)/IV_Demo-Matriz2D.cpp \
              $(INCLUDE)/Matriz2D.h $(INCLUDE)/Secuencia.h $(INCLUDE)/TipoBase.h
-	g++ -c -o $(OBJ)/III_Demo-Matriz2D.o $(SRC)/III_Demo-Matriz2D.cpp \
+	g++ -c -o $(OBJ)/IV_Demo-Matriz2D.o $(SRC)/IV_Demo-Matriz2D.cpp \
             -I$(INCLUDE) -std=c++14
 
 $(OBJ)/Matriz2D.o : $(SRC)/Matriz2D.cpp $(INCLUDE)/Matriz2D.h \

@@ -31,6 +31,7 @@
 #include "Profesor.h"
 #include "Encargo.h"
 #include "Adscripcion.h"
+#include "VectorDepartamento.h"
 
 #include "utils.h"
 
@@ -66,6 +67,9 @@ int main()
 	//......................................................................
 	// DEPARTAMENTOS
 
+
+	VectorDepartamento v_departamentos;
+
 	cout << Cabecera ("DEPARTAMENTOS:");
 
 	getline(cin, linea); // Lectura adelantada
@@ -79,7 +83,10 @@ int main()
 
 		cout << "Leido: " << un_departamento.ToString() << endl; 
 
+		v_departamentos.aniade(un_departamento);
 
+
+		/*
 		#ifdef DEBUG_DEPARTAMENTOS
 
 		Departamento tmp; 
@@ -92,7 +99,7 @@ int main()
 		cout << "TMP (ASIG) : " << tmp.ToString() << endl; 
 		
 		#endif
-
+		*/
 
 		// Leer la siguiente linea 
 		getline(cin, linea); 
@@ -102,6 +109,11 @@ int main()
 
 	cout << "Total Departamentos = "<< setw(3) << cont_departamentos << endl; 
 	cout << endl; 
+
+
+	cout << "PRUEBA DEL VECTOR DE DEPARTAMENTOS: " << endl;
+
+	cout << v_departamentos.toString() << endl;
 
 
 
@@ -244,6 +256,17 @@ string Cabecera (const char * titulo)
 
 	return cad; 
 }
+
+
+
+
+
+
+
+
+// Prueba de VectorDepartamento
+
+
 
 /***************************************************************************/
 /***************************************************************************/

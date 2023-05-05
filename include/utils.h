@@ -15,7 +15,8 @@
 
 using namespace std;
 
-
+// Definición de constantes
+#define TAM_BLOQUE 5
 
 // definicion del delimitador
 

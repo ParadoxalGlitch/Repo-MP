@@ -642,3 +642,52 @@ void Matriz2D :: SubMatriz (const Matriz2D & original, int fila_inic,
 
 
 }
+
+/***************************************************************************/
+// Sobrecarga del operador ()
+// PRE: 0 <= fila < fils && 0 <= col < cols
+
+TipoBase & Matriz2D :: operator () (int fila, int col)
+{
+    return datos[fila][col];
+}
+
+TipoBase & Matriz2D :: operator () (int fila, int col) const
+{
+    return datos[fila][col];
+}
+
+/***************************************************************************/
+// Sobrecarga del operador == y !=
+
+bool Matriz2D :: operator == (const Matriz2D & otra)
+{
+
+    bool esIgual = true;
+    // Compruebo que las matrices tienen el mismo tamaño
+    // Si no lo tienen, devuelvo false
+
+    if (fils != otra.fils || cols != otra.cols)
+        esIgual = false;
+
+    // Si tienen el mismo tamaño, compruebo que todos los elementos
+    // son iguales. Si no lo son, devuelvo false
+
+    for (int i=0; i<fils; i++)
+        for (int j=0; j<cols; j++)
+            if (datos[i][j] != otra.datos[i][j])
+                esIgual = false;
+
+    // Si todos los elementos son iguales, devuelvo true
+
+    return esIgual;
+}
+
+bool Matriz2D :: operator != (const Matriz2D & otra)
+{
+    return !(*this == otra);
+}
+
+
+
+
