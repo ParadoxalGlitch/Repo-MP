@@ -238,10 +238,6 @@ void Matriz2D :: EliminaTodos(void)
 void  Matriz2D :: Clona (const Matriz2D & origen){
 	
 
-	// Eliminamos el contenido del destino
-
-	EliminaTodos();
-
 	// Volvemos a inicializarla con los datos de origen
 
 	ReservaMemoria(origen.fils, origen.cols);
@@ -309,6 +305,7 @@ Matriz2D & Matriz2D :: operator = (const Matriz2D & otra)
         // Copio los atributos
         Clona(otra);
     }
+
     return (*this);
 }
 
@@ -346,29 +343,23 @@ TipoBase & Matriz2D :: Valor(int f, int c) const
 bool Matriz2D :: EsIgualA (const Matriz2D & otra)
 {
     bool Iguales = true;
-	int i;
 
-	if (cols != otra.cols)
+    // Revisa si las columnas son distintas
+	if (NumColumnas() != otra.NumColumnas())
 		Iguales = false;
-	
-	if(fils != otra.fils)
+    
+    // Revisa si las filas son distintas
+	if(NumFilas() != otra.NumFilas())
 		Iguales = false;
 
-	while (i < fils && Iguales){
-
-		int j = 0;
-
-		while(j < cols && Iguales){
-			
-			if (datos[i][j] != otra.datos[i][j])
-				Iguales = false;
-			else
-				j++;
-
-		}
-
-		i++;
-	}
+    // Recorre todas las posiciones de la matriz
+	for (int f=0; f<NumColumnas() && Iguales; f++)
+        for (int c=0; c<NumColumnas() && Iguales; c++)
+            // Comprueba si hay algńu valor distinto
+            if (Valor(f, c) != otra.Valor(f, c))
+                // En ese caso, establece Iguales a falso
+                // deteniendo la ejecución del bucle
+                Iguales = false;
 	
 	return (Iguales);
 }
