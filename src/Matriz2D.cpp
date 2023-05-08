@@ -129,7 +129,7 @@ Matriz2D :: Matriz2D(int f, int c, int valor)
 /***************************************************************************/
 // Constructor de copia
 
-Matriz2D :: Matriz2D(Matriz2D & otra)
+Matriz2D :: Matriz2D(const Matriz2D & otra)
 {
     // Inicializo los atributos
     fils = 0;
@@ -309,7 +309,6 @@ Matriz2D & Matriz2D :: operator = (const Matriz2D & otra)
         // Copio los atributos
         Clona(otra);
     }
-
     return (*this);
 }
 
@@ -688,6 +687,118 @@ bool Matriz2D :: operator != (const Matriz2D & otra)
     return !(*this == otra);
 }
 
+/***************************************************************************/
+// Sobrecarga del operador unario + y -
+
+Matriz2D Matriz2D :: operator + ()
+{
+    return (*this);
+}
+
+Matriz2D Matriz2D :: operator - ()
+{
+    Matriz2D tmp(fils, cols);
+
+    for (int i=0; i < fils; i++)
+        for (int j=0; j < cols; j++)
+            tmp(i,j) = -Valor(i,j);
+
+    return tmp;
+
+}
+
+/**************************************************************************/
+// Sobrecarga del operador binario + y - (ambos operandos de tipo Matriz2D)
+
+Matriz2D operator + (const Matriz2D & una, const Matriz2D & otra)
+{
 
 
+    Matriz2D tmp(una.NumFilas(), una.NumColumnas());
 
+    if (una.NumFilas() == otra.NumFilas() && \
+        una.NumColumnas() == otra.NumColumnas()){
+
+        for (int i=0; i < una.NumFilas(); i++)
+            for (int j=0; j < una.NumColumnas(); j++)
+                tmp.Valor(i,j) = una.Valor(i,j) + otra.Valor(i,j);
+
+    }
+
+    return tmp;
+
+}
+
+Matriz2D operator - (const Matriz2D & una, const Matriz2D & otra)
+{
+
+    Matriz2D tmp;
+
+    tmp = otra;
+
+    return (una + -tmp);
+
+}
+
+/**************************************************************************/
+// Sobrecarga del operador binario + y - (uno de los operandos es de tipo
+// TipoBase y el otro de tipo TipoBaseMatriz2D)
+
+Matriz2D operator + (const Matriz2D & matriz, const TipoBase valor)
+{
+
+    return (matriz + Matriz2D(matriz.NumFilas(), matriz.NumColumnas(),valor));
+
+}
+
+Matriz2D operator - (const Matriz2D & matriz, const TipoBase valor)
+{
+
+    return (matriz - Matriz2D(matriz.NumFilas(), matriz.NumColumnas(),valor));
+
+}
+
+Matriz2D operator + (const TipoBase valor, const Matriz2D & matriz)
+{
+
+    return (matriz + Matriz2D(matriz.NumFilas(), matriz.NumColumnas(),valor));
+
+}
+
+Matriz2D operator - (const TipoBase valor, const Matriz2D & matriz)
+{
+
+    return (Matriz2D(matriz.NumFilas(), matriz.NumColumnas(),valor) - matriz);
+
+}
+
+
+/***************************************************************************/
+// Sobrecarga del operador combinado += y -= (ambos operandos son de tipo
+// Matriz2D)
+
+Matriz2D & Matriz2D :: operator +=(const Matriz2D & otra) 
+{
+
+    if (fils == otra.fils && cols == otra.cols) {
+        for (int i = 0; i < fils; i++) {
+            for (int j = 0; j < cols; j++) {
+                Valor(i, j) += otra.Valor(i, j);
+            }
+        }
+    }
+    return (*this);
+}
+
+Matriz2D & Matriz2D :: operator -= (const Matriz2D & otra) 
+{
+
+    if (fils == otra.fils && cols == otra.cols) {
+        for (int i = 0; i < fils; i++) {
+            for (int j = 0; j < cols; j++) {
+                Valor(i, j) -= otra.Valor(i, j);
+            }
+        }
+    }
+    return (*this);
+}

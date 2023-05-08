@@ -56,7 +56,7 @@ public:
 /***************************************************************************/
 // Constructor de copia
 
-    Matriz2D(Matriz2D & otra);
+    Matriz2D(const Matriz2D & otra);
 
 /***************************************************************************/
 // Destructor
@@ -183,6 +183,42 @@ public:
         bool operator == (const Matriz2D & otra);
     
         bool operator != (const Matriz2D & otra);
+
+
+
+/***************************************************************************/
+// Sobrecarga del operador unario + y -
+
+    Matriz2D operator + ();
+
+    Matriz2D operator - ();
+
+/***************************************************************************/
+// Sobrecarga del operador binario + y - (ambos operandos de tipo Matriz2D)
+
+    friend Matriz2D operator + (const Matriz2D & una , const Matriz2D & otra);
+
+    friend Matriz2D operator - (const Matriz2D & una, const Matriz2D & otra);
+
+/***************************************************************************/
+// Sobrecarga del operador binario + y - (uno de los operandos es de tipo
+// TipoBase y el otro de tipo TipoBaseMatriz2D)
+
+    friend Matriz2D operator + (const Matriz2D & matriz, const TipoBase valor);
+
+    friend Matriz2D operator - (const Matriz2D & matriz, const TipoBase valor);
+
+    friend Matriz2D operator + (const TipoBase valor, const Matriz2D & matriz);
+
+    friend Matriz2D operator - (const TipoBase valor, const Matriz2D & matriz);
+
+/***************************************************************************/
+// Sobrecarga del operador combinado += y -= (ambos operandos son de tipo
+// Matriz2D)
+
+    Matriz2D & operator += (const Matriz2D & otra);
+
+    Matriz2D & operator -= (const Matriz2D & otra);
 
 
 };

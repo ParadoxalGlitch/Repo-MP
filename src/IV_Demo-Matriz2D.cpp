@@ -479,11 +479,80 @@ int main (void)
 
 
 
+	// PRUEBAS OPERADORES + - += Y -=
 
 
+	Matriz2D todo9 (5,5,9);
+
+	Matriz2D todo5 (5,5,5);
+
+	Matriz2D prueba1 (5);
+	Matriz2D prueba2 (5);
 
 
+	//prueba operador + y - unario
 
+	cout << "Matriz todo9: " << endl;
+	cout << todo9.ToString();
+
+	todo9 = +todo9;
+
+	cout << "Matriz todo9 positiva: " << endl;
+	cout << todo9.ToString();
+
+	cout << "Matriz todo5: " << endl;
+	cout << todo5.ToString();
+	
+	todo5 = -todo5;
+
+	cout << "Matriz todo5 negativa: " << endl;
+	cout << todo5.ToString();
+
+	todo5 = -todo5;
+
+	cout << "Matriz todo5 normal de nuevo: " << endl;
+	cout << todo5.ToString();
+
+	//prueba operador + y - binario
+
+	prueba1 = todo9 + todo5;
+
+	cout << "Matriz todo9 + matriz todo5: " << endl;
+	cout << prueba1.ToString();
+
+	prueba2 = todo5 - todo9;
+
+	cout << "Matriz todo5 - matriz todo9: " << endl;
+	cout << prueba2.ToString();
+
+	prueba2 = prueba2 + 5;
+
+	cout << "Matriz prueba2 (todo5-todo9) + 5: " << endl;
+	cout << prueba2.ToString();
+
+	prueba1 = prueba1 - 4;
+
+	cout << "Matriz prueba1 (todo9+todo5) - 4 :" << endl;
+	cout << prueba1.ToString();
+
+	//prueba operador += y -=
+
+	cout << "Matriz prueba1: " << endl;
+	cout << prueba1.ToString();
+
+
+	cout << "Matriz prueba2: " << endl;
+	cout << prueba2.ToString();
+
+	prueba1 += prueba2;
+
+	cout << "Matriz prueba1 (prueba1 += prueba2): " << endl;
+	cout << prueba1.ToString();
+
+	prueba1 -= prueba2;
+
+	cout << "Matriz prueba1 (prueba1 -= prueba2): " << endl;
+	cout << prueba1.ToString();
 
 	
 
