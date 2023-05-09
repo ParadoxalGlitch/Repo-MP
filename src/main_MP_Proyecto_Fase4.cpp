@@ -245,6 +245,41 @@ int main()
 
 
 
+	// PRUEBAS OPERADORES FASE 5
+
+	cout << "/***********PRUEBAS OPERADORES FASE 5***********/" << endl;
+
+	// prueba operador binario +
+
+	VectorDepartamento v_dep2;
+	v_dep2.aniade(v_departamentos[1]);
+
+	cout << v_departamentos.toString() << endl;
+	cout << v_dep2.toString() << endl;
+
+	v_departamentos = v_departamentos + v_dep2;
+
+	cout << "v_departamentos deberia mantenerse igual: " << endl;
+	cout << "v_departamentos = v_departamentos + v_dep2: "<< endl;
+	cout << v_departamentos.toString() << endl;
+
+	Departamento dep_aux;
+	dep_aux.setId("ABCD");
+	dep_aux.setNombre("Departamento Estandar");
+
+	v_dep2.aniade(dep_aux);
+
+	cout << "añadido departamento distinto a v_dep2";
+	cout << v_dep2.toString() << endl;
+
+	VectorDepartamento v_dep3;
+	v_dep3 = v_departamentos + v_dep2;
+
+	cout << "v_dep3 = v_departamentos + v_dep2: "<< endl;
+	cout << v_departamentos.toString() << endl;
+
+
+
 
 
 

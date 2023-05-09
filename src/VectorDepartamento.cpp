@@ -331,7 +331,8 @@ void VectorDepartamento::copiaDatos(const VectorDepartamento & otro)
 /***********************************************************************/
 // Método para buscar si x departamento ya existe en el vector
 
-bool VectorDepartamento::estaDepartamento (const Departamento & departamento) const
+bool VectorDepartamento::estaDepartamento (const Departamento & departamento) 
+const
 {
 
     bool encontrado = false;
@@ -486,4 +487,149 @@ VectorDepartamento operator * (const VectorDepartamento & uno, const
 }
 
 
+/***********************************************************************/
+// Sobrecarga del operador binario && (vector && vector)
 
+VectorDepartamento operator && (const VectorDepartamento & uno, const
+                                VectorDepartamento & otro)
+{
+    int i=0;
+    bool continuar = true;
+
+    // Compruebo si todos los dep. del segundo vector están en el primero
+
+    while (i < otro.getUsados() && continuar)
+        if (!uno.estaDepartamento(otro[i]))
+            continuar = false;
+
+    return (continuar);
+
+}
+
+
+/***********************************************************************/
+// Sobrecarga del operador binario && (Vector && departamento)
+
+VectorDepartamento operator && (const VectorDepartamento & uno, const
+                                Departamento & departamento)
+{
+
+    // Almaceno el departamento en un vector
+
+    VectorDepartamento tmp;
+    tmp.aniade(departamento);
+
+    return (uno && tmp);
+
+}
+
+/***********************************************************************/
+// Sobrecarga del operador binario && (departamento && Vector)
+
+VectorDepartamento operator && (const Departamento & departamento,
+                                const VectorDepartamento & uno)
+{
+    
+    return (uno && departamento);
+
+}
+
+
+/***********************************************************************/
+// Sobrecarga del operador binario && (Vector && string)
+
+VectorDepartamento operator && (const VectorDepartamento & uno, const
+                                string & cadena)
+{
+
+    Departamento dep;
+    dep.setId(cadena);
+
+    return (uno && dep);
+
+}
+
+/***********************************************************************/
+// Sobrecarga del operador binario && (string && Vector)
+
+VectorDepartamento operator && (const string & cadena, const
+                                VectorDepartamento & uno)
+{
+
+    Departamento dep;
+    dep.setId(cadena);
+
+    return (uno && dep);
+
+}
+
+/***********************************************************************/
+// Sobrecarga del operador += (vector += vector)
+
+VectorDepartamento operator += (const VectorDepartamento & uno, const
+                                VectorDepartamento & otro)
+{
+
+    VectorDepartamento tmp1(uno);
+    VectorDepartamento tmp2(otro);
+
+    return (tmp1 + tmp2);
+
+}
+
+/***********************************************************************/
+// Sobrecarga del operador += (vector += departamento)
+
+VectorDepartamento operator += (const VectorDepartamento & uno, const
+                                Departamento & departamento)
+{
+
+    VectorDepartamento tmp(uno);
+
+    return (tmp + departamento);
+
+}
+
+/***********************************************************************/
+// Sobrecarga del operador -= (vector -= vector)
+
+VectorDepartamento operator -= (const VectorDepartamento & uno, const
+                                VectorDepartamento & otro)
+{
+
+    VectorDepartamento tmp1(uno);
+    VectorDepartamento tmp2(otro);
+
+    return (tmp1 - tmp2);
+
+}
+
+/***********************************************************************/
+// Sobrecarga del operador -= (vector -= departamento)
+
+VectorDepartamento operator -= (const VectorDepartamento & uno, const
+                                Departamento & departamento)
+{
+
+    VectorDepartamento tmp(uno);
+
+    return (tmp - departamento);
+
+}
+
+
+/***********************************************************************/
+// Sobrecarga del operador -= (vector -= string)
+
+VectorDepartamento operator -= (const VectorDepartamento & uno, const
+                                string & cadena)
+{
+
+    VectorDepartamento tmp(uno);
+
+    Departamento dep;
+    dep.setId(cadena);
+
+    return (tmp - dep);
+
+}
