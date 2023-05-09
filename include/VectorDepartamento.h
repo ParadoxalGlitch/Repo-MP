@@ -131,6 +131,53 @@ public:
     void copiaDatos(const VectorDepartamento & otro);
 
 
+    /***********************************************************************/
+    // Método para buscar si x departamento ya existe en el vector
+
+    bool estaDepartamento (const Departamento & departamento) const;
+
+
+    /***********************************************************************/
+    // Sobrecarga del operador + (Vector + Vector)
+
+    friend VectorDepartamento operator + (const VectorDepartamento & uno, const
+                                          VectorDepartamento & otro);
+    /***********************************************************************/
+    // Sobrecarga del operador + (Vector + departamento)
+
+    friend VectorDepartamento operator + (const VectorDepartamento & uno, const
+                                          Departamento & departamento);
+
+    /***********************************************************************/
+    // Sobrecarga del operador + (departamento + Vector)
+
+    friend VectorDepartamento operator + (const Departamento & departamento,
+                                          const VectorDepartamento & uno);
+
+    /***********************************************************************/
+    // Sobrecarga del operador - (Vector - Vector)
+
+    friend VectorDepartamento operator - (const VectorDepartamento & uno, const
+                                          VectorDepartamento & otro);
+
+    /***********************************************************************/
+    // Sobrecarga del operador - (Vector - departamento)
+
+    friend VectorDepartamento operator - (const VectorDepartamento & uno, const
+                                          Departamento & departamento);
+
+
+    /***********************************************************************/
+    // Sobrecarga del operador - (Vector - string)
+
+    friend VectorDepartamento operator - (const VectorDepartamento & uno, const
+                                          string & cadena);
+
+    /***********************************************************************/
+    // Sobrecarga del operador * (Vector * Vector)
+
+    friend VectorDepartamento operator * (const VectorDepartamento & uno, const
+                                          VectorDepartamento & otro);
 
 
 

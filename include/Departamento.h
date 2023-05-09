@@ -57,7 +57,7 @@ Departamento(const Departamento & otro);
 
 string getNombre();
 
-string getId();
+string getId() const;
 
 /***************************************************************************/
 // Métodos set

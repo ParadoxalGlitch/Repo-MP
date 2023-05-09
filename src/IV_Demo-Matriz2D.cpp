@@ -499,7 +499,7 @@ int main (void)
 	Matriz2D misma = +todo9;
 
 	cout << "Matriz todo9 positiva: " << endl;
-	cout << todo9.ToString();
+	cout << misma.ToString();
 
 	cout << "Matriz todo5: " << endl;
 	cout << todo5.ToString();

@@ -109,7 +109,7 @@ string Departamento :: getNombre()
     return nombre;
 }
 
-string Departamento :: getId()
+string Departamento :: getId () const
 {
     return Id_depto;
 }

@@ -328,4 +328,162 @@ void VectorDepartamento::copiaDatos(const VectorDepartamento & otro)
 }
 
 
+/***********************************************************************/
+// Método para buscar si x departamento ya existe en el vector
+
+bool VectorDepartamento::estaDepartamento (const Departamento & departamento) const
+{
+
+    bool encontrado = false;
+    int i=0;
+
+    while (i < getUsados() && !encontrado){
+
+        if (datos[i].getId() == departamento.getId())
+            encontrado = true;
+
+    }
+
+    return (encontrado);
+
+}
+
+
+
+/***********************************************************************/
+// Sobrecarga del operador + (Vector + Vector)
+
+VectorDepartamento operator + (const VectorDepartamento & uno, const
+                                          VectorDepartamento & otro)
+{
+
+        // Creo un vector temporal donde guardaré los datos concatenados
+
+        VectorDepartamento tmp(uno);
+
+        // Guardo los datos de otro en tmp
+
+        for (int i = 0; i < otro.getUsados(); i++){
+            
+            if (!tmp.estaDepartamento(otro[i]))
+                tmp.aniade(otro[i]);
+
+        }
+
+        // Devuelvo tmp
+
+        return tmp;
+        
+}
+
+/***********************************************************************/
+// Sobrecarga del operador + (Vector + departamento)
+
+VectorDepartamento operator + (const VectorDepartamento & uno, const 
+                               Departamento & departamento)
+{
+
+    // Creo un vector con el departamento dentro
+
+    VectorDepartamento tmp;
+    tmp.aniade(departamento);
+
+    return(uno + tmp);
+
+}
+
+
+
+/***********************************************************************/
+// Sobrecarga del operador + (departamento + Vector)
+
+VectorDepartamento operator + (const Departamento & departamento,
+                               const VectorDepartamento & uno)
+{
+    // Creo un vector con el departamento dentro
+
+    VectorDepartamento tmp;
+    tmp.aniade(departamento);
+
+    return(tmp + uno);
+
+}
+
+
+/***********************************************************************/
+// Sobrecarga del operador - (Vector - Vector)
+
+VectorDepartamento operator - (const VectorDepartamento & uno, const
+                                        VectorDepartamento & otro)
+{
+
+    //Creo un vector temporal donde guardo los datos de uno
+
+    VectorDepartamento tmp(uno);
+
+    //Elimino los datos que coinciden de tmp
+
+    for (int i=0; i<otro.getUsados(); i++)
+        if (tmp.estaDepartamento(otro[i]))
+            tmp.elimina(i);
+
+    // Devuelvo tmp
+
+    return (tmp);
+
+}
+
+/***********************************************************************/
+// Sobrecarga del operador - (Vector - departamento)
+
+VectorDepartamento operator - (const VectorDepartamento & uno, const
+                               Departamento & departamento)
+{
+
+    // Creo un vector donde guardo el departamento
+
+    VectorDepartamento tmp;
+
+    return (uno - tmp);
+
+}
+
+/***********************************************************************/
+// Sobrecarga del operador - (Vector - string)
+
+VectorDepartamento operator - (const VectorDepartamento & uno, const
+                               string & cadena)
+{
+
+    // Creo un departamento con la cadena dada establecida como Id_depto
+
+    Departamento dep;
+    dep.setId(cadena);
+
+    return (uno - dep);
+
+}
+
+/***********************************************************************/
+// Sobrecarga del operador * (Vector * Vector)
+
+VectorDepartamento operator * (const VectorDepartamento & uno, const
+                                        VectorDepartamento & otro)
+{
+
+    // Creo un departamento temporal donde almacenaré los datos coincidentes
+
+    VectorDepartamento tmp;
+
+    // Busco y almaceno los datos coincidentes en tmp
+
+    for (int i=0; i<otro.getUsados(); i++)
+        if (uno.estaDepartamento(otro[i]))
+            tmp.aniade(otro[i]);
+
+    return (tmp);
+
+}
+
+
 

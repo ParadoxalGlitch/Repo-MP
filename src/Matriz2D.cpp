@@ -430,9 +430,6 @@ void Matriz2D :: InsertaFila (Secuencia & fila, int pos)
     // Creo una matriz auxiliar con una fila mas
     Matriz2D aux(fils + 1, cols);
 
-    cout << "MATRIZ AUX INICIALIZADA: ";
-    cout << aux.ToString();
-
     // Copio los valores de la matriz original hasta la posicion pasada por
     // argumento
     for (int i = 0; i < pos; i++)
@@ -440,26 +437,15 @@ void Matriz2D :: InsertaFila (Secuencia & fila, int pos)
             aux.datos[i][j] = datos[i][j];
 
 
-    cout << "MATRIZ AUX MEDIA MITAD COPIADA: ";
-    cout << aux.ToString();
-
-
     // Copio los valores de la fila pasada por argumento
     for (int i = 0; i < cols; i++)
         aux.datos[pos][i] = fila.Valor(i);
-
-    cout << "MATRIZ AUX COPIADA LA FILA: ";
-    cout << aux.ToString();
 
     // Copio los valores de la matriz original desde la posicion pasada por
     // argumento
     for (int i = pos; i < fils; i++)
         for (int j = 0; j < cols; j++)
             aux.datos[i+1][j] = datos[i][j];
-
-    cout << "MATRIZ AUX COPIADA LA SEGUNDA MITAD: ";
-    cout << aux.ToString();
-
 
     // Libero la memoria de la matriz original
     EliminaTodos();
