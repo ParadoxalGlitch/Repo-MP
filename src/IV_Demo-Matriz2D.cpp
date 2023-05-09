@@ -265,7 +265,6 @@ int main (void)
 	// .....................................................................
 	// Creación de una matriz y rellenar sus casillas, clones y eliminación 
 	// de filas y columnas  
-
 	Matriz2D m(num_filas, num_cols);
 
 	// Consultar num. de filas y columnas
@@ -278,16 +277,16 @@ int main (void)
 	for (int f=0; f<m.NumFilas(); f++) 
 		for (int c=0; c<m.NumColumnas(); c++) 
 			m.Valor(f, c) = ((10*(f+1))+c+1);
-		
+	
 	cout << "Matriz rellena: ";
-	cout << m.ToString();
+	cout << m.ToString() << endl;
 
 	// Clonar la matriz "m" en "clon_m"
 
 	Matriz2D clon_m;
 
 	clon_m.Clona(m);
-
+	
 	cout << "Se ha clonado la matriz \"m\" en \"clon_m\": " 
 	     << clon_m.NumFilas() << " x " << clon_m.NumColumnas() << endl;
 	cout << "Vacia = " << (clon_m.EstaVacia() ? "SI": "NO") << endl;	
@@ -296,6 +295,7 @@ int main (void)
 		
 	cout << "Matriz \"clon_m\": ";
 	cout << clon_m.ToString();
+	
 
 
 	// Ecualizar matriz m
@@ -494,8 +494,9 @@ int main (void)
 
 	cout << "Matriz todo9: " << endl;
 	cout << todo9.ToString();
+	cout << endl;
 
-	todo9 = +todo9;
+	Matriz2D misma = +todo9;
 
 	cout << "Matriz todo9 positiva: " << endl;
 	cout << todo9.ToString();

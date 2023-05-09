@@ -1,1 +1,11 @@
 .vscode/
+
+# Ignoring all files except gitkeep
+bin/*
+!bin/.gitkeep
+
+obj/*
+!obj/.gitkeep
+
+lib/*
+!lib/.gitkeep
