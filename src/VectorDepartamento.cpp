@@ -364,15 +364,11 @@ VectorDepartamento operator + (const VectorDepartamento & uno, const
 
         // Guardo los datos de otro en tmp
 
-        for (int i = 0; i < otro.getUsados(); i++){
-            
-            if (!tmp.estaDepartamento(otro[i]))
-                tmp.aniade(otro[i]);
-
-        }
+        for (int i = 0; i < otro.getUsados(); i++)
+            if (!tmp.estaDepartamento(otro[i+1]))
+                tmp.aniade(otro[i+1]);
 
         // Devuelvo tmp
-
         return tmp;
         
 }
