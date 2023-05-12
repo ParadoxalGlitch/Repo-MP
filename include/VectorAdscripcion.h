@@ -131,6 +131,39 @@ public:
 
     void copiaDatos(const VectorAdscripcion & otro);
 
+    /***********************************************************************/
+    // Método para buscar si x adscripcion ya existe en el vector
+
+    bool estaAdscripcion (const Adscripcion & adscripcion) const;
+
+    /***********************************************************************/
+    // Sobrecarga del operador + (Vector + Vector)
+
+    friend VectorAdscripcion operator + (const VectorAdscripcion & uno, const
+                                          VectorAdscripcion & otro);
+
+    /***********************************************************************/
+    // Sobrecarga del operador + (Vector + adscripcion)
+
+    friend VectorAdscripcion operator + (const VectorAdscripcion & uno, const
+                                          Adscripcion & adscripcion);
+
+    /***********************************************************************/
+    // Sobrecarga del operador + (adscripcion + Vector)
+
+    friend VectorAdscripcion operator + (const Adscripcion & adscripcion,
+                                          const VectorAdscripcion & uno);
+
+    /***********************************************************************/
+    // Sobrecarga del operador += (vector += vector)
+
+    VectorAdscripcion operator += (const VectorAdscripcion & otro);
+
+    /***********************************************************************/
+    // Sobrecarga del operador += (vector += adscripcion)
+
+    VectorAdscripcion operator += (const Adscripcion & adscripcion);
+
 };
 
 #endif

@@ -101,7 +101,7 @@ Adscripcion :: ~Adscripcion()
 /***************************************************************************/
 // Métodos get
 
-string Adscripcion :: getDni()
+string Adscripcion :: getDni() const
 {
     return CharToString(dni);
 }

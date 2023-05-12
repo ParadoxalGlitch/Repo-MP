@@ -130,6 +130,40 @@ public:
 
     void copiaDatos(const VectorProfesor & otro);
 
+    /***********************************************************************/
+    // Método para buscar si x profesor ya existe en el vector
+
+    bool estaProfesor (const Profesor & profesor) const;
+
+
+    /***********************************************************************/
+    // Sobrecarga del operador + (Vector + Vector)
+
+    friend VectorProfesor operator + (const VectorProfesor & uno, const
+                                      VectorProfesor & otro);
+
+    /***********************************************************************/
+    // Sobrecarga del operador + (Vector + profesor)
+
+    friend VectorProfesor operator + (const VectorProfesor & uno, const
+                                      Profesor & profesor);
+
+    /***********************************************************************/
+    // Sobrecarga del operador + (profesor + Vector)
+
+    friend VectorProfesor operator + (const Profesor & profesor,
+                                      const VectorProfesor & uno);
+
+    /***********************************************************************/
+    // Sobrecarga del operador += (vector += vector)
+
+    VectorProfesor operator += (const VectorProfesor & otro);
+    
+    /***********************************************************************/
+    // Sobrecarga del operador += (vector += departamento)
+
+    VectorProfesor operator += (const Profesor & profesor);
+
 
 
 

@@ -50,6 +50,8 @@ VectorProfesor::VectorProfesor(int capacidad)
 
 VectorProfesor::VectorProfesor(const VectorProfesor & otro)
 {
+
+    datos = nullptr;
     reservaMemoria(otro.capacidad);
 
     copiaDatos(otro);
@@ -326,5 +328,99 @@ void VectorProfesor::copiaDatos(const VectorProfesor & otro)
     usados = otro.usados; // Actualizo el número de elementos usados
 }
 
+/***********************************************************************/
+// Método para buscar si x profesor ya existe en el vector
+
+bool VectorProfesor::estaProfesor (const Profesor & profesor) const
+{
+
+    bool encontrado = false;
+    int i=0;
+
+    while (i < getUsados() && !encontrado){
+        if (datos[i].getDni() == profesor.getDni())
+            encontrado = true;
+
+        i++;
+    }
+
+    return (encontrado);
+
+}
 
 
+/***********************************************************************/
+// Sobrecarga del operador + (Vector + Vector)
+
+VectorProfesor operator + (const VectorProfesor & uno, const
+                           VectorProfesor & otro)
+{
+
+    // Creo un vector temporal donde guardaré los datos concatenados
+
+    VectorProfesor tmp(uno);
+
+    // Guardo los datos de otro en tmp
+
+    for (int i = 0; i < otro.getUsados(); i++)
+        if (!tmp.estaProfesor(otro[i+1]))
+            tmp.aniade(otro[i+1]);
+
+    // Devuelvo tmp
+    return tmp;
+}
+
+/***********************************************************************/
+// Sobrecarga del operador + (Vector + profesor)
+
+VectorProfesor operator + (const VectorProfesor & uno, const
+                           Profesor & profesor)
+{
+    // Creo un vector con el departamento dentro
+
+    VectorProfesor tmp;
+    tmp.aniade(profesor);
+
+    return(uno + tmp);
+}
+
+/***********************************************************************/
+// Sobrecarga del operador + (profesor + Vector)
+
+VectorProfesor operator + (const Profesor & profesor,
+                           const VectorProfesor & uno)
+{
+    // Creo un vector con el departamento dentro
+
+    VectorProfesor tmp;
+    tmp.aniade(profesor);
+
+    return(tmp + uno);
+}
+
+/***********************************************************************/
+// Sobrecarga del operador += (vector += vector)
+
+VectorProfesor VectorProfesor :: operator += (const VectorProfesor & otro)
+{
+
+    for (int i=0; i<otro.getUsados(); i++)
+        if (!estaProfesor(otro[i+1]))
+            aniade(otro[i+1]);
+
+    return (*this);
+
+}
+
+/***********************************************************************/
+// Sobrecarga del operador += (vector += departamento)
+
+VectorProfesor VectorProfesor :: operator += (const Profesor & profesor)
+{
+
+    VectorProfesor tmp;
+    tmp.aniade(profesor);
+
+    return (*this += tmp);
+
+}

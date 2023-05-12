@@ -602,7 +602,7 @@ int main()
 
 	cout << "v_adscripcion1 += adscripcion2: "<< endl;
 	cout << v_adscripcion1.toString() << endl;
-	
+
 
 
 

@@ -159,7 +159,7 @@ Profesor :: ~Profesor()
 /***************************************************************************/
 // Métodos get
 
-string Profesor :: getDni()
+string Profesor :: getDni() const
 {
     return dni;
 }

@@ -49,6 +49,9 @@ VectorEncargo::VectorEncargo(int capacidad)
 
 VectorEncargo::VectorEncargo(const VectorEncargo & otro)
 {
+
+    datos = nullptr;
+
     reservaMemoria(otro.capacidad);
 
     copiaDatos(otro);
@@ -328,3 +331,108 @@ void VectorEncargo::copiaDatos(const VectorEncargo & otro)
 
 
 
+
+
+/***********************************************************************/
+// Método para buscar si x encargo ya existe en el vector
+
+bool VectorEncargo::estaEncargo (const Encargo & encargo) 
+const
+{
+
+    bool encontrado = false;
+    int i=0;
+
+    while (i < getUsados() && !encontrado){
+        if (datos[i].getCategoria() == encargo.getCategoria())
+            encontrado = true;
+
+        i++;
+    }
+
+    return (encontrado);
+
+}
+
+
+/***********************************************************************/
+// Sobrecarga del operador + (Vector + Vector)
+
+VectorEncargo operator + (const VectorEncargo & uno, const
+                          VectorEncargo & otro)
+{
+
+    // Creo un vector temporal donde guardaré los datos concatenados
+
+    VectorEncargo tmp(uno);
+
+    // Guardo los datos de otro en tmp
+
+    for (int i = 0; i < otro.getUsados(); i++)
+        if (!tmp.estaEncargo(otro[i+1]))
+            tmp.aniade(otro[i+1]);
+
+    // Devuelvo tmp
+    return tmp;
+    
+}
+
+
+/***********************************************************************/
+// Sobrecarga del operador + (Vector + Encargo)
+
+VectorEncargo operator + (const VectorEncargo & uno, const
+                          Encargo & encargo)
+{
+
+    // Creo un vector con el departamento dentro
+
+    VectorEncargo tmp;
+    tmp.aniade(encargo);
+
+    return(uno + tmp);
+
+}
+
+
+/***********************************************************************/
+// Sobrecarga del operador + (Encargo + Vector)
+
+VectorEncargo operator + (const Encargo & encargo,
+                          const VectorEncargo & uno)
+{
+    // Creo un vector con el departamento dentro
+
+    VectorEncargo tmp;
+    tmp.aniade(encargo);
+
+    return(tmp + uno);
+
+}
+
+
+/***********************************************************************/
+// Sobrecarga del operador += (vector += vector)
+
+VectorEncargo VectorEncargo :: operator += (const VectorEncargo & otro)
+{
+    for (int i=0; i<otro.getUsados(); i++)
+        if (!estaEncargo(otro[i+1]))
+            aniade(otro[i+1]);
+
+    return (*this);
+
+}
+
+/***********************************************************************/
+// Sobrecarga del operador += (vector += encargo)
+
+VectorEncargo VectorEncargo :: operator += (const Encargo & encargo)
+{
+ 
+    VectorEncargo tmp;
+    tmp.aniade(encargo);
+
+    return (*this += tmp);   
+
+}

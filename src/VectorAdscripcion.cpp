@@ -49,6 +49,9 @@ VectorAdscripcion::VectorAdscripcion(int capacidad)
 
 VectorAdscripcion::VectorAdscripcion(const VectorAdscripcion & otro)
 {
+
+    datos = nullptr;
+
     reservaMemoria(otro.capacidad);
 
     copiaDatos(otro);
@@ -327,3 +330,108 @@ void VectorAdscripcion::copiaDatos(const VectorAdscripcion & otro)
 }
 
 
+/***********************************************************************/
+// Método para buscar si x adscripcion ya existe en el vector
+
+bool VectorAdscripcion::estaAdscripcion (const Adscripcion & adscripcion) 
+const
+{
+
+    bool encontrado = false;
+    int i=0;
+
+    while (i < getUsados() && !encontrado){
+        if (datos[i].getDni() == adscripcion.getDni())
+            encontrado = true;
+
+        i++;
+    }
+
+    return (encontrado);
+
+}
+
+
+/***********************************************************************/
+// Sobrecarga del operador + (Vector + Vector)
+
+VectorAdscripcion operator + (const VectorAdscripcion & uno, const
+                              VectorAdscripcion & otro)
+{
+
+    // Creo un vector temporal donde guardaré los datos concatenados
+
+    VectorAdscripcion tmp(uno);
+
+    // Guardo los datos de otro en tmp
+
+    for (int i = 0; i < otro.getUsados(); i++)
+        if (!tmp.estaAdscripcion(otro[i+1]))
+            tmp.aniade(otro[i+1]);
+
+    // Devuelvo tmp
+    return tmp;
+
+}
+
+/***********************************************************************/
+// Sobrecarga del operador + (Vector + adscripcion)
+
+VectorAdscripcion operator + (const VectorAdscripcion & uno, const
+                              Adscripcion & adscripcion)
+{
+
+    // Creo un vector con el departamento dentro
+
+    VectorAdscripcion tmp;
+    tmp.aniade(adscripcion);
+
+    return(uno + tmp);
+   
+}
+
+/***********************************************************************/
+// Sobrecarga del operador + (adscripcion + Vector)
+
+VectorAdscripcion operator + (const Adscripcion & adscripcion,
+                              const VectorAdscripcion & uno)
+{
+    // Creo un vector con el departamento dentro
+
+    VectorAdscripcion tmp;
+    tmp.aniade(adscripcion);
+
+    return(tmp + uno);
+   
+}
+
+/***********************************************************************/
+// Sobrecarga del operador += (vector += vector)
+
+VectorAdscripcion VectorAdscripcion :: operator += 
+                                        (const VectorAdscripcion & otro)
+{
+
+    for (int i=0; i<otro.getUsados(); i++)
+        if (!estaAdscripcion(otro[i+1]))
+            aniade(otro[i+1]);
+
+    return (*this);
+
+}
+
+/***********************************************************************/
+// Sobrecarga del operador += (vector += departamento)
+
+VectorAdscripcion VectorAdscripcion :: operator += 
+                                         (const Adscripcion & adscripcion)
+{
+
+    VectorAdscripcion tmp;
+    tmp.aniade(adscripcion);
+
+    
+
+    return (*this += tmp);
+
+}

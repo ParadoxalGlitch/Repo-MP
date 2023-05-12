@@ -11,8 +11,6 @@
 #ifndef VECTORDEPARTAMENTO
 #define VECTORDEPARTAMENTO
 
-#include <cstring>
-
 #include "Departamento.h"
 
 /***************************************************************************/
@@ -142,6 +140,7 @@ public:
 
     friend VectorDepartamento operator + (const VectorDepartamento & uno, const
                                           VectorDepartamento & otro);
+                                          
     /***********************************************************************/
     // Sobrecarga del operador + (Vector + departamento)
 
@@ -182,63 +181,58 @@ public:
     /***********************************************************************/
     // Sobrecarga del operador binario && (vector && vector)
 
-    friend VectorDepartamento operator && (const VectorDepartamento & uno, const
+    friend bool operator && (const VectorDepartamento & uno, const
                                            VectorDepartamento & otro);
 
     /***********************************************************************/
     // Sobrecarga del operador binario && (Vector && departamento)
 
-    friend VectorDepartamento operator && (const VectorDepartamento & uno, const
+    friend bool operator && (const VectorDepartamento & uno, const
                                            Departamento & departamento);
 
     /***********************************************************************/
     // Sobrecarga del operador binario && (departamento && Vector)
 
-    friend VectorDepartamento operator && (const Departamento & departamento,
+    friend bool operator && (const Departamento & departamento,
                                            const VectorDepartamento & uno);
 
     /***********************************************************************/
     // Sobrecarga del operador binario && (Vector && string)
 
-    friend VectorDepartamento operator && (const VectorDepartamento & uno, const
+    friend bool operator && (const VectorDepartamento & uno, const
                                            string & cadena);
 
 
     /***********************************************************************/
     // Sobrecarga del operador binario && (string && Vector)
 
-    friend VectorDepartamento operator && (const string & cadena, const
+    friend bool operator && (const string & cadena, const
                                            VectorDepartamento & uno);
 
     /***********************************************************************/
     // Sobrecarga del operador += (vector += vector)
 
-    friend VectorDepartamento operator += (const VectorDepartamento & uno, const
-                                           VectorDepartamento & otro);
+    VectorDepartamento operator += (const VectorDepartamento & otro);
 
     /***********************************************************************/
     // Sobrecarga del operador += (vector += departamento)
 
-    friend VectorDepartamento operator += (const VectorDepartamento & uno, const
-                                           Departamento & departamento);
+    VectorDepartamento operator += (const Departamento & departamento);
 
     /***********************************************************************/
     // Sobrecarga del operador -= (vector -= vector)
 
-    friend VectorDepartamento operator -= (const VectorDepartamento & uno, const
-                                           VectorDepartamento & otro);
+    VectorDepartamento operator -= (const VectorDepartamento & otro);
 
     /***********************************************************************/
     // Sobrecarga del operador -= (vector -= departamento)
 
-    friend VectorDepartamento operator -= (const VectorDepartamento & uno, const
-                                           Departamento & departamento);
+    VectorDepartamento operator -= (const Departamento & departamento);
 
     /***********************************************************************/
     // Sobrecarga del operador -= (vector -= string)
 
-    friend VectorDepartamento operator -= (const VectorDepartamento & uno, const
-                                           string & cadena);
+    VectorDepartamento operator -= (const string & cadena);
 
 
 

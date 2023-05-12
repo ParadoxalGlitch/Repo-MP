@@ -131,6 +131,40 @@ public:
 
     void copiaDatos(const VectorEncargo & otro);
 
+
+    /***********************************************************************/
+    // Método para buscar si x encargo ya existe en el vector
+
+    bool estaEncargo (const Encargo & encargo) const;
+
+    /***********************************************************************/
+    // Sobrecarga del operador + (Vector + Vector)
+
+    friend VectorEncargo operator + (const VectorEncargo & uno, const
+                                          VectorEncargo & otro);
+
+    /***********************************************************************/
+    // Sobrecarga del operador + (Vector + Encargo)
+
+    friend VectorEncargo operator + (const VectorEncargo & uno, const
+                                     Encargo & encargo);
+
+    /***********************************************************************/
+    // Sobrecarga del operador + (Encargo + Vector)
+
+    friend VectorEncargo operator + (const Encargo & encargo,
+                                     const VectorEncargo & uno);
+
+    /***********************************************************************/
+    // Sobrecarga del operador += (vector += vector)
+
+    VectorEncargo operator += (const VectorEncargo & otro);
+
+    /***********************************************************************/
+    // Sobrecarga del operador += (vector += encargo)
+
+    VectorEncargo operator += (const Encargo & encargo);
+
 };
 
 #endif

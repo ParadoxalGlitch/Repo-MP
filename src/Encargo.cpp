@@ -77,7 +77,7 @@ Encargo :: Encargo(string linea, char delimitador)
 /***************************************************************************/
 // Métodos get
 
-int Encargo :: getCategoria()
+int Encargo :: getCategoria() const
 {
     return categoria;
 }

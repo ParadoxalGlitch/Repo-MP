@@ -27,7 +27,7 @@ all: presentacion $(BIN)/MP_Proyecto_Fase4
 #......................................
 # EJECUTABLES
 
-$(BIN)/MP_Proyecto_Fase4 : $(OBJ)/main_MP_Proyecto_Fase4.o \
+$(BIN)/MP_Proyecto_Fase5 : $(OBJ)/main_MP_Proyecto_Fase5.o \
 	                       $(LIB)/libDepartamento.a $(LIB)/libProfesor.a \
                            $(LIB)/libEncargo.a $(LIB)/libAdscripcion.a \
                            $(LIB)/libutils.a $(LIB)/libFecha.a \
@@ -35,7 +35,7 @@ $(BIN)/MP_Proyecto_Fase4 : $(OBJ)/main_MP_Proyecto_Fase4.o \
                            $(LIB)/libVectorProfesor.a \
                            $(LIB)/libVectorAdscripcion.a \
                            $(LIB)/libVectorEncargo.a
-	g++ -o $(BIN)/MP_Proyecto_Fase4 $(OBJ)/main_MP_Proyecto_Fase4.o \
+	g++ -o $(BIN)/MP_Proyecto_Fase5 $(OBJ)/main_MP_Proyecto_Fase5.o \
            -L$(LIB) -lDepartamento -lProfesor -lEncargo -lAdscripcion -lutils \
            -lFecha -lVectorDepartamento -lVectorProfesor -lVectorAdscripcion \
            -lVectorEncargo
@@ -45,12 +45,13 @@ $(BIN)/MP_Proyecto_Fase4 : $(OBJ)/main_MP_Proyecto_Fase4.o \
 #......................................
 # OBJETOS
 	
-$(OBJ)/main_MP_Proyecto_Fase4.o : $(SRC)/main_MP_Proyecto_Fase4.cpp \
+$(OBJ)/main_MP_Proyecto_Fase5.o : $(SRC)/main_MP_Proyecto_Fase5.cpp \
                                $(INCLUDE)/Departamento.h $(INCLUDE)/Profesor.h \
                                $(INCLUDE)/Encargo.h \
-                               $(INCLUDE)/Adscripcion.h $(INCLUDE)/utils.h
-	g++ -c -o $(OBJ)/main_MP_Proyecto_Fase4.o \
-	          $(SRC)/main_MP_Proyecto_Fase4.cpp -I$(INCLUDE) -std=c++14
+                               $(INCLUDE)/Adscripcion.h $(INCLUDE)/utils.h \
+							   $(INCLUDE)/VectorDepartamento.h  
+	g++ -c -o $(OBJ)/main_MP_Proyecto_Fase5.o \
+	          $(SRC)/main_MP_Proyecto_Fase5.cpp -I$(INCLUDE) -std=c++14
 	          
 $(OBJ)/Departamento.o : $(SRC)/Departamento.cpp $(INCLUDE)/Departamento.h \
                         $(INCLUDE)/utils.h

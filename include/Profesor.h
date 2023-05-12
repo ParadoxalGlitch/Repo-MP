@@ -64,7 +64,7 @@ public:
 /***************************************************************************/
 // Métodos get
 
-    string getDni();
+    string getDni() const;
     string getNombre();
     string getApellidos();
     string getFechaNacimiento();
