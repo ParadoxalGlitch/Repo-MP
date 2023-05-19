@@ -11,23 +11,23 @@
 
 
 #include <iostream>
+#include <cstdlib>
 
 using namespace std;
 
 int main(int argc, char * argv[]){
 
-    int tam_palabra = 0;
-    int cuenta_palabras = 0;
-    string linea;
-
-    if (argc < 2 || argc > 2){
+    if (argc != 2){
         cerr << "Número de argumentos incorrecto" << endl;
+        //añadir manera
         exit(1);
     }
 
-    else    
-        tam_palabra = stoi(argv[1]);
-
+    int tam_palabra = 0;
+    int cuenta_palabras = 0;
+    string linea;
+    
+    tam_palabra = atoi(argv[1]);
 
 
     // Leo el fichero entero
@@ -43,6 +43,6 @@ int main(int argc, char * argv[]){
     cout << tam_palabra << endl;
 
 
-
+    return 0;
 
 }

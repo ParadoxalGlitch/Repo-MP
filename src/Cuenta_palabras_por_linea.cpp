@@ -9,6 +9,7 @@
 /***************************************************************************/
 
 #include <iostream>
+#include <sstream>
 using namespace std;
 
 int main(){
@@ -18,34 +19,30 @@ int main(){
     string aux;
     int i=0;
     int contador_palabras=0;
+    bool en_palabra = false;
 
 
     while (getline(cin, linea)){
 
-        aux = linea;
         contador_palabras = 0;
 
+        istringstream iss;
+        iss.str(linea);
 
-        while(cin >> aux){
+        aux = linea;
+
+        while (iss >> aux){
 
             contador_palabras++;
 
         }
 
+
         cout << "Linea   " << i+1 <<":     " << contador_palabras;
-        cout << " palabras";
+        cout << " palabras" << endl;
         i++;
-            
 
     }
 
-
-
-
-
-
-
-
-
-
+    return 0;
 }

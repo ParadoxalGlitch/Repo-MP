@@ -360,6 +360,7 @@ bool Matriz2D :: EsIgualA (const Matriz2D & otra)
                 // En ese caso, establece Iguales a falso
                 // deteniendo la ejecución del bucle
                 Iguales = false;
+    
 	
 	return (Iguales);
 }
@@ -778,4 +779,33 @@ Matriz2D & Matriz2D :: operator -= (const Matriz2D & otra)
         }
     }
     return (*this);
+}
+
+
+/****************************************************************************/
+// Sobrecarga del operador << y >>
+
+ostream & operator << (ostream & out, const Matriz2D & matriz)
+{
+
+	string delimitador = "..................................";
+
+	out << "\n" << delimitador << "\n";
+
+    out << "Filas = " << matriz.NumFilas() << ", Columnas = ";
+    out << matriz.NumColumnas() << "\n\n";
+
+    for (int f=0; f<matriz.NumFilas(); f++){
+
+        out << "Fila " << f << " --> ";
+
+            for (int c=0; c<matriz.NumColumnas(); c++)
+                out << matriz(f,c) << "  ";
+            out << "\n";
+
+    }
+
+
+	return out;
+
 }

@@ -7,12 +7,20 @@
 // Programa que lee una secuencia indefinida y muestra la cantidad del
 // caracter especificado por argumento en la consola que hay en la secuencia
 //
+//
+//
 /***************************************************************************/
 
 #include <iostream>
+#include <cstring>
 using namespace std;
 
 int main(int argc, char * argv[]){
+
+
+
+// Añadir comprobación de longitud de argv[1];
+// o leer argv[1][0]
 
 
     char el_caracter;
@@ -34,7 +42,7 @@ int main(int argc, char * argv[]){
     while (getline(cin, linea)){
 
         for (int i=0; i<linea.length(); i++)
-            if (linea[i] == el_caracter)
+            if (linea.at(i) == el_caracter)
                 cuenta++;
 
     }
@@ -42,5 +50,8 @@ int main(int argc, char * argv[]){
 
     cout << "En el fichero, aparece el caracter " << el_caracter << " ";
     cout << cuenta << " veces" << endl;
+
+
+    return 0;
 
 }

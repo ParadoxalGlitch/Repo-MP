@@ -20,7 +20,7 @@ INCLUDE = $(HOME)/include
 #................................................
 all:  $(BIN)/CuentaLineas $(BIN)/CopiaLineasSinAlmohadilla \
 	  $(BIN)/CuentaCaracteresConcretos $(BIN)/CuentaPalabrasLongitudConcreta \
-	  $(BIN)/Cuenta_palabras_por_linea
+	  $(BIN)/Cuenta_palabras_por_linea $(BIN)/VerificaDatosMatriz2D
 	  @echo Terminado
 
 #................................................
@@ -41,6 +41,9 @@ $(BIN)/CuentaPalabrasLongitudConcreta : $(OBJ)/CuentaPalabrasLongitudConcreta.o
 	       
 $(BIN)/Cuenta_palabras_por_linea : $(OBJ)/Cuenta_palabras_por_linea.o
 	g++ -o $(BIN)/Cuenta_palabras_por_linea $(OBJ)/Cuenta_palabras_por_linea.o
+	
+$(BIN)/VerificaDatosMatriz2D : $(OBJ)/VerificaDatosMatriz2D.o
+	g++ -o $(BIN)/VerificaDatosMatriz2D $(OBJ)/VerificaDatosMatriz2D.o
 	
 #................................................
 # OBJETOS 
@@ -64,6 +67,10 @@ $(OBJ)/CuentaPalabrasLongitudConcreta.o : \
 $(OBJ)/Cuenta_palabras_por_linea.o : $(SRC)/Cuenta_palabras_por_linea.cpp
 	g++ -c -o $(OBJ)/Cuenta_palabras_por_linea.o \
 	          $(SRC)/Cuenta_palabras_por_linea.cpp -std=c++14	 
+	          
+$(OBJ)/VerificaDatosMatriz2D.o : $(SRC)/VerificaDatosMatriz2D.cpp
+	g++ -c -o $(OBJ)/VerificaDatosMatriz2D.o \
+	          $(SRC)/VerificaDatosMatriz2D.cpp -std=c++14	
 
 #................................................
 # BIBLIOTECAS

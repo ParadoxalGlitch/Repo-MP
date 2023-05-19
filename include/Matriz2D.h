@@ -12,6 +12,7 @@
 #define MATRIZ2D
 
 #include <string>
+#include <iostream>
 #include "TipoBase.h"
 #include "Secuencia.h"
 
@@ -219,6 +220,15 @@ public:
     Matriz2D & operator += (const Matriz2D & otra);
 
     Matriz2D & operator -= (const Matriz2D & otra);
+
+
+
+
+/****************************************************************************/
+// Sobrecarga del operador << y >>
+
+    friend ostream & operator << (ostream & out, const Matriz2D & matriz);
+    friend istream & operator >> (istream & in, Matriz2D & matriz);
 
 
 };

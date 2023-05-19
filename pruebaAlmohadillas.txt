@@ -1,0 +1,10 @@
+Este es un archivo de texto de prueba.
+Contiene varias líneas de texto que pueden ser leídas por el programa.
+La sigueinte linea que habla sobre el salto de linea no aparecerá
+#Cada línea termina con un salto de línea (\n).
+Exactamente, no se ha leido esa linea.
+
+
+Los espacios no los ignora, pero la siguiente linea que contiene una a, si
+#a
+Hasta aquí la prueba

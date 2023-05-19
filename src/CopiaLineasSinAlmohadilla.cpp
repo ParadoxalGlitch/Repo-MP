@@ -23,11 +23,12 @@ int main(){
 
     while(getline(cin, linea)){
 
-        if (linea[0] != '#')
-            total += linea + '\n';
+        if (linea.at(0) != '#')
+            cout << linea << endl;
 
     }
 
-    cout << total;
+
+    return 0;
 
 }

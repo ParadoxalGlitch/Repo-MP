@@ -22,8 +22,12 @@ int main(){
 
     while(getline(cin, linea)){
 
+        
+
+
         if (linea == "")
-            lineas_vacias++;
+            lineas_vacias++; // Cuenta las lineas si tienen espacios!
+                             // usar flujos para comprobar q haya palabras
         else
             lineas_rellenas++;
 
@@ -34,5 +38,39 @@ int main(){
     cout << "Lineas vacias: " << lineas_vacias << endl;
     cout << "Lineas no vacias: " << lineas_rellenas << endl;
     cout << "Total de lineas: " << total_lineas << endl;
+
+    return 0;
+
+
+    // considera una lectura de los caracteres para contar correctamente 
+    // las ultimas lineas si estan vacias
+
+
+
+
+    /* FORMA DE HACERLO CON LECTURA ADELANTADA
+    
+    getline(cin, linea);
+
+    while (!cin.eof()){
+
+       if (linea == "")
+            lineas_vacias++; // Cuenta las lineas si tienen espacios!
+        else
+            lineas_rellenas++;
+
+        total_lineas++;
+
+        getline(cin, linea);
+
+    }
+    
+    
+    
+    
+    
+    
+    
+    */
 
 }

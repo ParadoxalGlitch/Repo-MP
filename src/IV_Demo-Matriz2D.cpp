@@ -289,8 +289,8 @@ int main (void)
 	
 	cout << "Se ha clonado la matriz \"m\" en \"clon_m\": " 
 	     << clon_m.NumFilas() << " x " << clon_m.NumColumnas() << endl;
-	cout << "Vacia = " << (clon_m.EstaVacia() ? "SI": "NO") << endl;	
-	cout << "Iguales = " << (clon_m.EsIgualA(m) ? "SI": "NO") << endl;	
+	cout << "Vacia = " << (clon_m.EstaVacia() ? "SI": "NO") << endl;		
+	cout << "Iguales = " << (clon_m.EsIgualA(m) ? "SI": "NO") << endl;
 	cout << endl;	
 		
 	cout << "Matriz \"clon_m\": ";
@@ -556,6 +556,14 @@ int main (void)
 	cout << prueba1.ToString();
 
 	
+
+
+	// Prueba operador << 
+
+	cout << "Voy a imprimir la matriz prueba1 mediante el operador << :";
+	cout << endl;
+
+	cout << prueba1;
 
 	return 0; 
 }
