@@ -19,7 +19,8 @@ INCLUDE = $(HOME)/include
 
 #................................................
 all:  $(BIN)/V_Demo-Matriz2D $(BIN)/NumeraLineas_Ampliacion \
-      $(BIN)/VI_Demo-Matriz2D
+      $(BIN)/VI_Demo-Matriz2D $(BIN)/MensajesOcultos-2 \
+      $(BIN)/ParteFicheroPorNumLineas
 	  
 	  @echo Terminado
 
@@ -38,6 +39,12 @@ $(BIN)/VI_Demo-Matriz2D : $(OBJ)/VI_Demo-Matriz2D.o $(LIB)/libMatriz2D.a \
                            $(LIB)/libSecuencia.a
 	g++ -o $(BIN)/VI_Demo-Matriz2D $(OBJ)/VI_Demo-Matriz2D.o \
 	       -L$(LIB) -lMatriz2D -lSecuencia
+	       
+$(BIN)/MensajesOcultos-2 : $(OBJ)/MensajesOcultos-2.o
+	g++ -o $(BIN)/MensajesOcultos-2 $(OBJ)/MensajesOcultos-2.o
+	
+$(BIN)/ParteFicheroPorNumLineas : $(OBJ)/ParteFicheroPorNumLineas.o
+	g++ -o $(BIN)/ParteFicheroPorNumLineas $(OBJ)/ParteFicheroPorNumLineas.o
 
 #................................................
 # OBJETOS 
@@ -64,6 +71,13 @@ $(OBJ)/Secuencia.o : $(SRC)/Secuencia.cpp $(INCLUDE)/Secuencia.h \
 $(OBJ)/NumeraLineas_Ampliacion.o : $(SRC)/NumeraLineas_Ampliacion.cpp
 	g++ -c -o $(OBJ)/NumeraLineas_Ampliacion.o \
 	          $(SRC)/NumeraLineas_Ampliacion.cpp -std=c++14
+	          
+$(OBJ)/MensajesOcultos-2.o : $(SRC)/MensajesOcultos-2.cpp
+	g++ -c -o $(OBJ)/MensajesOcultos-2.o $(SRC)/MensajesOcultos-2.cpp -std=c++14
+	
+$(OBJ)/ParteFicheroPorNumLineas.o : $(SRC)/ParteFicheroPorNumLineas.cpp
+	g++ -c -o $(OBJ)/ParteFicheroPorNumLineas.o \
+	          $(SRC)/ParteFicheroPorNumLineas.cpp
 	          
 
 #................................................
