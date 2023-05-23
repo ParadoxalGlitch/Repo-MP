@@ -25,7 +25,7 @@ using namespace std;
 int main(void) 
 {
 
-	const char * nombre1 = "datos_matriz/datos_5x4.txt";
+	const char * nombre1 = "datos_5x4.txt";
 	Matriz2D m1(nombre1);
 
 	cout << "Matriz m1 leida del fichero " << nombre1 << endl; 
@@ -40,12 +40,13 @@ int main(void)
 
 
 	cout << endl;	
-	cout << m1.ToString ("Creada matriz m1 (nombre1)");
+	cout << "Creada matriz m1 (nombre1)" << endl;
+	cout << m1.ToString ();
 	cout << endl;	
 
 	//........................................
 
-	const char * nombre2 = "datos_matriz/datos_5x4_out.txt";
+	const char * nombre2 = "datos_5x4_out.txt";
 
 	cout << "Guardando m1 en el fichero " << nombre2 << endl << endl; 
 	m1.EscribirMatriz2D (nombre2);
@@ -65,7 +66,8 @@ int main(void)
         << m2.NumColumnas() << endl;
 
 	cout << endl;	
-	cout << m2.ToString ("Creada matriz m2 (nombre2)");
+	cout << "Creada matriz m2 (nombre2)" << endl;
+	cout << m2.ToString ();
 	cout << endl;	
 	
 	//........................................
@@ -103,7 +105,8 @@ int main(void)
 	m3.LeerMatriz2D (nombre2);
 
 	cout << endl;	
-	cout << m3.ToString ("Matriz m3 (nombre2)");
+	cout << "Matriz m3 (nombre2)" << endl;
+	cout << m3.ToString ();
 	cout << endl;	
 
 	if ((m3 == m2) && (m3 == m1)) 

@@ -16,6 +16,7 @@
 #include <string>
 #include <cstring>
 #include <iostream>
+#include <fstream>
 
 
 
@@ -61,6 +62,20 @@ Matriz2D :: Matriz2D(int num)
         ReservaMemoria(num, num);
 
     }
+
+}
+
+/****************************************************************************/
+// Constructor con 1 argumento, nombre de fichero de texto
+
+Matriz2D :: Matriz2D (const char * nombre)
+{
+
+    fils = 0;
+    cols = 0;
+    datos = nullptr;
+    LeerMatriz2D(nombre);
+
 
 }
 
@@ -266,7 +281,7 @@ void Matriz2D :: Ecualiza(int valor)
 /***************************************************************************/
 // Metodo ToString
 
-string Matriz2D :: ToString(void)
+string Matriz2D :: ToString(void) const
 {
 
     string cad;
@@ -807,5 +822,119 @@ ostream & operator << (ostream & out, const Matriz2D & matriz)
 
 
 	return out;
+
+}
+
+istream & operator >> (istream & in, Matriz2D & matriz)
+{
+
+    // Valores a leer
+
+    int filas = 0;
+    int columnas = 0;
+    TipoBase datos;
+
+    // Lectura de los datos
+
+    in >> filas;
+    in >> columnas;
+
+    // reinicio la matriz con los datos 
+
+    matriz = Matriz2D(filas,columnas);
+
+    for (int i=0; i<filas; i++){
+        for (int j=0; j<columnas; j++){
+
+            in >> datos;
+            matriz(i,j) = datos;
+
+        }
+    }
+
+    return in;
+
+}
+
+/****************************************************************************/
+// Funcion de escritura de una matriz en un fichero
+
+ void Matriz2D :: EscribirMatriz2D (const char * nombre) const
+ {
+    
+    ofstream fo;
+    fo.open(nombre);
+    string datos_matriz;
+
+    if (!fo){
+        cerr << "No se ha podido abrir el fichero " << nombre << endl;
+    }
+
+    fo << "MATRIZ2D" << endl;
+    fo << NumFilas() << " " << NumColumnas() << endl;
+
+    for (int i=0; i<fils; i++){
+        for (int j=0; j<cols; j++)
+            fo << Valor(i,j) << " ";
+        fo << endl;
+    }
+
+ }
+
+/****************************************************************************/
+// Funcion de lectura de una matriz desde un fichero
+
+void Matriz2D :: LeerMatriz2D (const char * nombre)
+{
+
+    // Valores a usar
+    string linea;
+    bool seguir = true;
+    int filas = 0;
+    int columnas = 0;
+
+    // Flujo   de entrada  
+    ifstream fi;
+    fi.open(nombre);
+   
+
+    if(!fi){
+        cerr << "No se ha podido abrir el fichero " << nombre << endl;
+    }
+
+    // Compruebo que la cabecera esté bien
+    // Si no lo está, no modifico nada
+
+	getline (fi, linea);
+
+	if (linea != "MATRIZ2D"){
+
+		seguir = false;
+
+	}
+
+    // Doy por hecho que los valores están bien
+
+	if (seguir){
+
+		// Compruebo los valores de filas y columnas
+
+		fi >> filas;
+		fi >> columnas;
+
+        *this = Matriz2D(filas,columnas);
+
+
+		// Recorrro el resto del fichero comprobando cuantos números hay
+		
+        for (int i=0; i<filas; i++){
+            for (int j=0; j<columnas; j++){
+
+                fi >> Valor(i,j);
+
+            }
+        }
+		
+	}
 
 }

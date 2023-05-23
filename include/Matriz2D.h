@@ -38,6 +38,11 @@ public:
 
     Matriz2D();
 
+/****************************************************************************/
+// Constructor con 1 argumento, nombre de fichero de texto
+
+    Matriz2D (const char * nombre);
+
 /***************************************************************************/
 // Constructor con 1 argumento, num de filas y columnas
 
@@ -102,7 +107,7 @@ public:
 /***************************************************************************/
 // Metodo ToString
 
-    string ToString(void);
+    string ToString(void) const;
 
 /***************************************************************************/
 // Sobrecarga del operador de asignación
@@ -230,8 +235,19 @@ public:
     friend ostream & operator << (ostream & out, const Matriz2D & matriz);
     friend istream & operator >> (istream & in, Matriz2D & matriz);
 
+/****************************************************************************/
+// Funcion de escritura de una matriz en un fichero
+
+    void EscribirMatriz2D (const char * nombre) const;
+
+/****************************************************************************/
+// Funcion de lectura de una matriz desde un fichero
+
+    void LeerMatriz2D (const char * nombre);
 
 };
+
+
 
 
 #endif
