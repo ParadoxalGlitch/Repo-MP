@@ -108,7 +108,14 @@ int main(int argc, char * argv[]){
 
     }
 
+    // Limpio de signos de puntuación las palabras
 
+    for (int i=0; i<tam_frase; i++){
+        for (int j=0; j<frase[i].length(); j++)
+
+        if (ispunct(frase[i][j]))
+            frase[i].erase(j,1);
+    }
 
     // Imprimo la frase oculta
 
