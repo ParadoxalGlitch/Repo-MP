@@ -797,6 +797,7 @@ Matriz2D & Matriz2D :: operator -= (const Matriz2D & otra)
 }
 
 
+
 /****************************************************************************/
 // Sobrecarga del operador << y >>
 
@@ -833,6 +834,8 @@ istream & operator >> (istream & in, Matriz2D & matriz)
     int filas = 0;
     int columnas = 0;
     TipoBase datos;
+
+    matriz.EliminaTodos();
 
     // Lectura de los datos
 

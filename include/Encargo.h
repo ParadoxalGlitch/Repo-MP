@@ -70,6 +70,14 @@ public:
 
    void clona(Encargo & original);
 
+/**************************************************************************/
+// Operador << y >>
+
+friend ofstream & operator << (ofstream & fo, Encargo & encargo);
+
+friend ifstream & operator >> (ifstream & fi, Encargo & encargo);
+
+
 };
 
 #endif

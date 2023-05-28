@@ -13,6 +13,7 @@
 
 #include <iostream>
 #include <cstring>
+#include <fstream>
 
 
 using namespace std;
@@ -104,7 +105,7 @@ Departamento :: ~Departamento()
 /***************************************************************************/
 // Métodos get
 
-string Departamento :: getNombre()
+string Departamento :: getNombre() const
 {
     return nombre;
 }
@@ -216,15 +217,13 @@ void Departamento :: ReservaMemoria(const Departamento & objeto)
     
     LiberarMemoria();
 
-
     // Reservo memoria para el DNI
     char * aux = new char [strlen(objeto.nombre) + 1];
-    
 
     nombre = aux;
 
     // Reservo memoria para el ID
-    aux = new char [strlen(objeto.Id_depto) + 1];
+    aux = new char [(objeto.getId()).length() + 1];
 
     Id_depto = aux;
 
@@ -279,7 +278,7 @@ void Departamento :: CopiarDatos (const Departamento & otro)
 
 void Departamento :: clona(const Departamento & original)
 {
-    
+
     ReservaMemoria(original);
 
     CopiarDatos(original);
@@ -299,6 +298,81 @@ Departamento & Departamento:: operator = (const Departamento & original)
     }
     return *this;
 }
+
+/**************************************************************************/
+/**************************************************************************/
+// Operador << y >>
+
+ofstream & operator << (ofstream & fo, Departamento & dep)
+{
+
+    // Guardo los datos separados por DELIMITADOR
+
+    //Guardo el ID del departamento:
+    fo << dep.getId() << '*';
+
+    // Guardo el Nombre del departamento
+
+    fo << dep.getNombre() << '*';
+
+
+    return fo;
+
+}
+
+ifstream & operator >> (ifstream & fi, Departamento & dep)
+{
+
+
+    string linea;
+
+    // Sigo leyendo lineas, hasta encontrar una que
+    // no empiece por # (es decir, ignorar comentarios) s
+
+    getline(fi,linea); // Lectura adelantada
+
+    while (linea.at(0) == '#'){
+
+        getline(fi,linea);
+    }
+
+
+    // Aquí deberiamos haber encontrado los datos. Si estos no están
+    // el departamento quedará vacío de todas formas
+
+    // Voy guardando en un string aux los datos hasta
+    // encontrar el delimitador, lo cual será el ID
+    string aux;
+    int i=0;
+
+    while(linea[i] != DELIMITADOR)
+    {
+        aux += linea[i];
+        i++;
+    }
+
+    dep.setId(aux); // Actualizo el valor de Id
+    aux = ""; //Reinicio aux
+
+    
+    // Ahora, toca leer el nombre
+
+    i++; // Ignorar el delimitador
+
+    while(linea[i] != DELIMITADOR)
+    {
+        aux += linea[i];
+        i++;
+    }
+
+    dep.setNombre(aux);
+
+    // Ya hemos acabado de leer los datos
+    
+    return fi;
+
+}
+
 
 
 

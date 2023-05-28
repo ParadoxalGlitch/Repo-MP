@@ -45,6 +45,21 @@ VectorAdscripcion::VectorAdscripcion(int capacidad)
 
 /*****************************************************************************/
 /*****************************************************************************/
+// Constructor con argumentos
+
+VectorAdscripcion :: VectorAdscripcion(const string & nombre)
+{
+
+    datos = nullptr;
+    usados = 0;
+    capacidad = 0;
+
+    RecuperarVectorAdscripcion(nombre);
+
+}
+
+/*****************************************************************************/
+/*****************************************************************************/
 // Constructor de copia
 
 VectorAdscripcion::VectorAdscripcion(const VectorAdscripcion & otro)
@@ -434,4 +449,144 @@ VectorAdscripcion VectorAdscripcion :: operator +=
 
     return (*this += tmp);
 
+}
+
+/***********************************************************************/
+// Función de escritura de un vector en un fichero
+
+void VectorAdscripcion :: GuardarVectorAdscripcion(const string & nombre) 
+const
+{
+
+    if (datos != 0){
+
+        // Abro el archivo
+
+        ofstream fo;
+        fo.open(nombre);
+
+        if (!fo)
+        {
+
+            cerr << "No se ha podido abrir el fichero " << nombre;
+            exit(1);
+
+        }
+
+        // Guardo los datos
+
+        fo << *this;
+
+        // Cierro el archivo
+
+        fo.close();
+
+    }
+    
+}
+
+/***********************************************************************/
+// Función de lectura de un vector de un fichero    
+
+void VectorAdscripcion :: RecuperarVectorAdscripcion 
+                            (const string & nombre)
+{
+
+    // Primero abro el fichero
+
+    ifstream fi;
+    fi.open(nombre);
+
+    if (!fi){
+
+        cerr << "No se ha podido abrir el fichero " << nombre << endl;
+        exit(1);
+
+    }
+
+    fi >> *this;
+
+    // En este punto el vector ya debería estar relleno
+    // asi que cierro el fichero
+
+    fi.close();
+
+
+}
+
+
+/***********************************************************************/
+// Operadores >> y <<
+
+ofstream & operator << (ofstream & fo, const VectorAdscripcion & vector)
+{
+    if (vector.datos != nullptr){
+
+        // Escribo la cabecera
+
+        fo << "ADSCRIPCIONES" << endl;
+
+        // Escribo un comentario explicativo
+
+        fo << "# Colección de adscripciones" << endl;
+
+        // Voy escribiendo el contenido del vector en el fichero
+
+        for (int i=0; i<vector.getUsados(); i++){
+
+
+            fo << vector.datos[i] << endl;
+
+
+        }
+
+    }
+
+    return fo;
+
+}
+
+ifstream & operator >> (ifstream & fi, VectorAdscripcion & vector)
+{
+    // Reinicio el Vector
+
+    vector.reinicia();
+
+    // Compruebo que la cabecera es correcta
+
+    string linea;
+
+    getline(fi,linea);
+
+
+    if (linea == "ADSCRIPCIONES"){
+
+        // Leo lineas hasta que no queden mas
+
+        getline(fi,linea); // Lectura adelantada
+        Adscripcion aux;
+
+        while (!fi.eof()){
+
+            while (linea.at(0) == '#'){
+                getline(fi,linea);
+            }
+               
+
+            if (!fi.eof()){
+
+                Adscripcion aux(linea);
+
+                vector.aniade(aux);
+
+
+            }
+
+            getline(fi,linea);
+
+        }
+
+    }
+
+    return fi;
 }

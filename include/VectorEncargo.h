@@ -12,6 +12,7 @@
 #define VECTORENCARGO
 
 #include <cstring>
+#include <fstream>
 
 #include "Encargo.h"
 
@@ -41,6 +42,11 @@ public:
     // Constructor con argumentos
 
     VectorEncargo(int capacidad);
+
+    /***********************************************************************/
+    // Constructor con argumentos (fichero)
+
+    VectorEncargo(const string & nombre);
 
     /***********************************************************************/
     // Constructor de copia
@@ -164,6 +170,25 @@ public:
     // Sobrecarga del operador += (vector += encargo)
 
     VectorEncargo operator += (const Encargo & encargo);
+
+
+    /***********************************************************************/
+    // Función de escritura de un vector en un fichero
+
+    void GuardarVectorEncargo (const string & nombre) const;
+
+    /***********************************************************************/
+    // Función de lectura de un vector de un fichero    
+
+    void RecuperarVectorEncargo (const string & nombre);
+
+    /***********************************************************************/
+    // Operadores >> y <<
+
+    friend ofstream & operator << (ofstream & fo, 
+                             const VectorEncargo & vector);
+    
+    friend ifstream & operator >> (ifstream & fi, VectorEncargo & vector);
 
 };
 

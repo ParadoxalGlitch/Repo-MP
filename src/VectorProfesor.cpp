@@ -46,6 +46,21 @@ VectorProfesor::VectorProfesor(int capacidad)
 
 /*****************************************************************************/
 /*****************************************************************************/
+// Constructor con argumentos
+
+VectorProfesor :: VectorProfesor(const string & nombre)
+{
+
+    datos = nullptr;
+    usados = 0;
+    capacidad = 0;
+
+    RecuperarVectorProfesor(nombre);
+
+}
+
+/*****************************************************************************/
+/*****************************************************************************/
 // Constructor de copia
 
 VectorProfesor::VectorProfesor(const VectorProfesor & otro)
@@ -423,4 +438,142 @@ VectorProfesor VectorProfesor :: operator += (const Profesor & profesor)
 
     return (*this += tmp);
 
+}
+
+/***********************************************************************/
+// Función de escritura de un vector en un fichero
+
+void VectorProfesor :: GuardarVectorProfesor(const string & nombre) 
+const
+{
+    // Abro el archivo
+    if (usados != 0){
+
+        ofstream fo;
+        fo.open(nombre);
+
+        if (!fo)
+        {
+
+            cerr << "No se ha podido abrir el fichero " << nombre;
+            exit(1);
+
+        }
+
+        // Guardo los datos
+
+        fo << *this;
+
+        // Cierro el archivo
+
+        fo.close();
+
+    }
+    
+}
+
+/***********************************************************************/
+// Función de lectura de un vector de un fichero    
+
+void VectorProfesor :: RecuperarVectorProfesor 
+                            (const string & nombre)
+{
+
+    // Primero abro el fichero
+
+    ifstream fi;
+    fi.open(nombre);
+
+    if (!fi){
+
+        cerr << "No se ha podido abrir el fichero " << nombre << endl;
+        exit(1);
+
+    }
+
+    fi >> *this;
+
+    // En este punto el vector ya debería estar relleno
+    // asi que cierro el fichero
+
+    fi.close();
+
+
+}
+
+
+/***********************************************************************/
+// Operadores >> y <<
+
+ofstream & operator << (ofstream & fo, const VectorProfesor & vector)
+{
+    if (vector.datos != nullptr){
+
+        // Escribo la cabecera
+
+        fo << "PROFESORES" << endl;
+
+        // Escribo un comentario explicativo
+
+        fo << "# Colección de profesores" << endl;
+
+        // Voy escribiendo el contenido del vector en el fichero
+
+        for (int i=0; i<vector.getUsados(); i++){
+
+
+            fo << vector.datos[i] << endl;
+
+
+        }
+
+    }
+
+    return fo;
+
+}
+
+ifstream & operator >> (ifstream & fi, VectorProfesor & vector)
+{
+    // Reinicio el Vector
+
+    vector.reinicia();
+
+    // Compruebo que la cabecera es correcta
+
+    string linea;
+
+    getline(fi,linea);
+
+
+    if (linea == "PROFESORES"){
+
+        // Leo lineas hasta que no queden mas
+
+        getline(fi,linea); // Lectura adelantada
+        Profesor aux;
+
+        while (!fi.eof()){
+
+            while (linea.at(0) == '#'){
+                getline(fi,linea);
+            }
+               
+
+            if (!fi.eof()){
+
+                Profesor aux(linea);
+
+                vector.aniade(aux);
+
+
+            }
+
+            getline(fi,linea);
+
+        }
+
+    }
+
+    return fi;
 }

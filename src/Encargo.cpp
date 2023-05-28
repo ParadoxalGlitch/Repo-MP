@@ -11,6 +11,7 @@
 #include "Encargo.h"
 
 #include <iostream>
+#include <fstream>
 
 using namespace std;
 
@@ -135,5 +136,80 @@ void Encargo :: clona(Encargo & otro)
     setCategoria(otro.getCategoria());
 
     setCreditos(otro.getCreditos());
+
+}
+
+/**************************************************************************/
+/**************************************************************************/
+// Operador << y >>
+
+
+ofstream & operator << (ofstream & fo, Encargo & encargo)
+{
+
+    // Guardo los datos separados por DELIMITADOR
+
+    //Guardo el ID del departamento:
+    fo << encargo.getCategoria() << '*';
+
+    // Guardo el Nombre del departamento
+
+    fo << encargo.getCreditos() << '*';
+
+
+    return fo;
+
+}
+
+ifstream & operator >> (ifstream & fi, Encargo & encargo)
+{
+
+    string linea;
+
+    // Sigo leyendo lineas, hasta encontrar una que
+    // no empiece por # (es decir, ignorar comentarios) 
+
+    getline(fi,linea); // Lectura adelantada
+
+    while(linea.at(0) == '#'){
+
+        getline(fi,linea);
+
+    }
+
+    // Aquí deberiamos haber encontrado los datos. Si estos no están
+    // el departamento quedará vacío de todas formas
+
+    // Voy guardando en un string aux los datos hasta
+    // encontrar el delimitador, lo cual será el ID
+    string aux;
+    int i=0;
+
+    while(linea[i] != DELIMITADOR)
+    {
+        aux += linea[i];
+        i++;
+    }
+
+    encargo.setCategoria(stoi(aux)); // Actualizo el valor de Id
+    aux = ""; //Reinicio aux
+
+
+    // Ahora, toca leer el nombre
+
+    i++; // Ignorar el delimitador
+
+    while(linea[i] != DELIMITADOR)
+    {
+        aux += linea[i];
+        i++;
+    }
+
+    encargo.setCreditos(stod(aux));
+
+    // Ya hemos acabado de leer los datos
+        
+    
+    return fi;
 
 }

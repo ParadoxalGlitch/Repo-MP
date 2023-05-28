@@ -12,6 +12,7 @@
 #define VECTORPROFESOR
 
 #include <cstring>
+#include <fstream>
 
 #include "Profesor.h"
 
@@ -40,6 +41,11 @@ public:
     // Constructor con argumentos
 
     VectorProfesor(int capacidad);
+
+    /***********************************************************************/
+    // Constructor con argumentos (fichero)
+
+    VectorProfesor(const string & nombre);
 
     /***********************************************************************/
     // Constructor de copia
@@ -164,6 +170,23 @@ public:
 
     VectorProfesor operator += (const Profesor & profesor);
 
+    /***********************************************************************/
+    // Función de escritura de un vector en un fichero
+
+    void GuardarVectorProfesor (const string & nombre) const;
+
+    /***********************************************************************/
+    // Función de lectura de un vector de un fichero    
+
+    void RecuperarVectorProfesor (const string & nombre);
+
+    /***********************************************************************/
+    // Operadores >> y <<
+
+    friend ofstream & operator << (ofstream & fo, 
+                             const VectorProfesor & vector);
+    
+    friend ifstream & operator >> (ifstream & fi, VectorProfesor & vector);
 
 
 

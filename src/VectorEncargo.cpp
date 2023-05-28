@@ -45,6 +45,21 @@ VectorEncargo::VectorEncargo(int capacidad)
 
 /*****************************************************************************/
 /*****************************************************************************/
+// Constructor con argumentos
+
+VectorEncargo :: VectorEncargo(const string & nombre)
+{
+
+    datos = nullptr;
+    usados = 0;
+    capacidad = 0;
+
+    RecuperarVectorEncargo(nombre);
+
+}
+
+/*****************************************************************************/
+/*****************************************************************************/
 // Constructor de copia
 
 VectorEncargo::VectorEncargo(const VectorEncargo & otro)
@@ -435,4 +450,144 @@ VectorEncargo VectorEncargo :: operator += (const Encargo & encargo)
 
     return (*this += tmp);   
 
+}
+
+/***********************************************************************/
+// Función de escritura de un vector en un fichero
+
+void VectorEncargo :: GuardarVectorEncargo(const string & nombre) 
+const
+{
+
+    if (datos != 0){
+
+        // Abro el archivo
+
+        ofstream fo;
+        fo.open(nombre);
+
+        if (!fo)
+        {
+
+            cerr << "No se ha podido abrir el fichero " << nombre;
+            exit(1);
+
+        }
+
+        // Guardo los datos
+
+        fo << *this;
+
+        // Cierro el archivo
+
+        fo.close();
+
+    }
+    
+}
+
+/***********************************************************************/
+// Función de lectura de un vector de un fichero    
+
+void VectorEncargo :: RecuperarVectorEncargo 
+                            (const string & nombre)
+{
+
+    // Primero abro el fichero
+
+    ifstream fi;
+    fi.open(nombre);
+
+    if (!fi){
+
+        cerr << "No se ha podido abrir el fichero " << nombre << endl;
+        exit(1);
+
+    }
+
+    fi >> *this;
+
+    // En este punto el vector ya debería estar relleno
+    // asi que cierro el fichero
+
+    fi.close();
+
+
+}
+
+
+/***********************************************************************/
+// Operadores >> y <<
+
+ofstream & operator << (ofstream & fo, const VectorEncargo & vector)
+{
+    if (vector.datos != nullptr){
+
+        // Escribo la cabecera
+
+        fo << "ENCARGOS" << endl;
+
+        // Escribo un comentario explicativo
+
+        fo << "# Colección de encargos" << endl;
+
+        // Voy escribiendo el contenido del vector en el fichero
+
+        for (int i=0; i<vector.getUsados(); i++){
+
+
+            fo << vector.datos[i] << endl;
+
+
+        }
+
+    }
+
+    return fo;
+
+}
+
+ifstream & operator >> (ifstream & fi, VectorEncargo & vector)
+{
+    // Reinicio el Vector
+
+    vector.reinicia();
+
+    // Compruebo que la cabecera es correcta
+
+    string linea;
+
+    getline(fi,linea);
+
+
+    if (linea == "ENCARGOS"){
+
+        // Leo lineas hasta que no queden mas
+
+        getline(fi,linea); // Lectura adelantada
+        Encargo aux;
+
+        while (!fi.eof()){
+
+            while (linea.at(0) == '#'){
+                getline(fi,linea);
+            }
+               
+
+            if (!fi.eof()){
+
+                Encargo aux(linea);
+
+                vector.aniade(aux);
+
+
+            }
+
+            getline(fi,linea);
+
+        }
+
+    }
+
+    return fi;
 }

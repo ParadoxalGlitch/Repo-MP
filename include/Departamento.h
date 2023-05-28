@@ -39,7 +39,7 @@ public:
 /***************************************************************************/
 // Constructor de copia
 
-Departamento(const Departamento & otro);
+    Departamento(const Departamento & otro);
 
 
 /***************************************************************************/
@@ -55,7 +55,7 @@ Departamento(const Departamento & otro);
 /***************************************************************************/
 // Métodos get
 
-string getNombre();
+string getNombre() const;
 
 string getId() const;
 
@@ -101,6 +101,13 @@ void clona(const Departamento & original);
 // Operador de asignación
 
 Departamento & operator = (const Departamento & original);
+
+/**************************************************************************/
+// Operador << y >>
+
+friend ofstream & operator << (ofstream & fo, Departamento & dep);
+
+friend ifstream & operator >> (ifstream & fi, Departamento & dep);
 
 
 

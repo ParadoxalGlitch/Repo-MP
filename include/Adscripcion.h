@@ -100,6 +100,13 @@ void LiberarMemoria (void);
 
     Adscripcion & operator=(const Adscripcion& original);
 
+/**************************************************************************/
+// Operador << y >>
+
+friend ofstream & operator << (ofstream & fo, Adscripcion & adscripcion);
+
+friend ifstream & operator >> (ifstream & fi, Adscripcion & adscripcion);
+
 };
 
 #endif

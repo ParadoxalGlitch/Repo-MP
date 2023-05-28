@@ -12,6 +12,7 @@
 #define VECTORADSCRIPCION
 
 #include <cstring>
+#include <fstream>
 
 #include "Adscripcion.h"
 
@@ -41,6 +42,11 @@ public:
     // Constructor con argumentos
 
     VectorAdscripcion(int capacidad);
+
+    /***********************************************************************/
+    // Constructor con argumentos (fichero)
+
+    VectorAdscripcion(const string & nombre);
 
     /***********************************************************************/
     // Constructor de copia
@@ -163,6 +169,25 @@ public:
     // Sobrecarga del operador += (vector += adscripcion)
 
     VectorAdscripcion operator += (const Adscripcion & adscripcion);
+
+
+    /***********************************************************************/
+    // Función de escritura de un vector en un fichero
+
+    void GuardarVectorAdscripcion (const string & nombre) const;
+
+    /***********************************************************************/
+    // Función de lectura de un vector de un fichero    
+
+    void RecuperarVectorAdscripcion (const string & nombre);
+
+    /***********************************************************************/
+    // Operadores >> y <<
+
+    friend ofstream & operator << (ofstream & fo, 
+                             const VectorAdscripcion & vector);
+    
+    friend ifstream & operator >> (ifstream & fi, VectorAdscripcion & vector);
 
 };
 

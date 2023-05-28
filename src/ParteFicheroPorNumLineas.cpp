@@ -18,7 +18,7 @@ using namespace std;
 
 // FUNCIONES
 
-int CuentaLineas (istream fichero)
+int CuentaLineas (istream & fichero)
 {
     string linea;
     int total_lineas = 0;
@@ -91,7 +91,7 @@ int main(int argc, char * argv[]){
     double num_ficheros = ceil((num_lineas + max_lineas - 1) / max_lineas);
 
 
-    fi.seekg(0,ios::beg);   
+    fi.seekg(0);   
 
 
 

@@ -119,6 +119,14 @@ public:
 
     Profesor & operator = (const Profesor & original);
 
+/**************************************************************************/
+// Operador << y >>
+
+friend ofstream & operator << (ofstream & fo, Profesor & dep);
+
+friend ifstream & operator >> (ifstream & fi, Profesor & dep);
+
+
 };
 
 #endif

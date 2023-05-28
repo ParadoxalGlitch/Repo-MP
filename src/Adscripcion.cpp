@@ -13,6 +13,7 @@
 
 #include <iostream>
 #include <cstring>
+#include <fstream>
 
 using namespace std;
 
@@ -296,5 +297,75 @@ Adscripcion & Adscripcion:: operator = (const Adscripcion & original)
 }
 
 
+/**************************************************************************/
+/**************************************************************************/
+// Operador << y >>
+
+ofstream & operator << (ofstream & fo, Adscripcion & adscripcion)
+{
+
+    // Guardo los datos separados por DELIMITADOR
+
+    //Guardo el ID del departamento:
+    fo << adscripcion.getDni() << '*';
+
+    // Guardo el Nombre del departamento
+
+    fo << adscripcion.getId_depto() << '*';
 
 
+    return fo;
+
+}
+
+ifstream & operator >> (ifstream & fi, Adscripcion & adscripcion)
+{
+
+    string linea;
+
+    // Sigo leyendo lineas, hasta encontrar una que
+    // no empiece por # (es decir, ignorar comentarios) 
+    
+    getline(fi,linea); // Lectura adelantada
+
+    while(linea.at(0) == '#'){
+
+        getline(fi,linea);
+
+    }
+
+    // Aquí deberiamos haber encontrado los datos. Si estos no están
+    // el departamento quedará vacío de todas formas
+
+    // Voy guardando en un string aux los datos hasta
+    // encontrar el delimitador, lo cual será el ID
+    string aux;
+    int i=0;
+
+    while(linea[i] != DELIMITADOR)
+    {
+        aux += linea[i];
+        i++;
+    }
+
+    adscripcion.setDni(aux); // Actualizo el valor de Id
+    aux = ""; //Reinicio aux
+
+    
+    // Ahora, toca leer el nombre
+
+    i++; // Ignorar el delimitador
+
+    while(linea[i] != DELIMITADOR)
+    {
+        aux += linea[i];
+        i++;
+    }
+
+    adscripcion.setId_depto(aux);
+
+    // Ya hemos acabado de leer los datos
+    
+    return fi;
+
+}

@@ -13,6 +13,7 @@
 
 #include <iostream>
 #include <cstring>
+#include <fstream>
 
 using namespace std;
 
@@ -435,4 +436,135 @@ Profesor & Profesor:: operator = (const Profesor & original)
         clona (original);
     }
     return *this;
+}
+
+/**************************************************************************/
+/**************************************************************************/
+// Operador << y >>
+
+ofstream & operator << (ofstream & fo, Profesor & profesor)
+{
+
+    // Guardo la cabecera
+
+    fo << "PROFESOR" << endl;
+
+    // Guardo un comentario
+
+    fo << "Datos sobre un profesor" << endl;
+
+    // Guardo los datos separados por DELIMITADOR
+
+    //Guardo el ID del departamento:
+    fo << profesor.getDni() << '*';
+
+    // Guardo el Nombre del departamento
+
+    fo << profesor.getNombre() << '*';
+
+    // Guardo los apellidos del profesor
+
+    fo << profesor.getApellidos() << '*';
+
+    // Guardo la fecha de nacimiento del profesor
+
+    fo << profesor.getFechaNacimiento() << '*';
+
+    // Guardo la categoria del profesor
+
+    fo << profesor.getCategoria() << '*';
+
+
+    return fo;
+
+}
+
+ifstream & operator >> (ifstream & fi, Profesor & profesor)
+{
+
+    string linea;
+
+    // Sigo leyendo lineas, hasta encontrar una que
+    // no empiece por # (es decir, ignorar comentarios) 
+    
+    getline(fi,linea); // Lectura adelantada
+
+    while(linea.at(0) == '#'){
+
+        getline(fi,linea);
+
+    }
+
+    // Aquí deberiamos haber encontrado los datos. Si estos no están
+    // el departamento quedará vacío de todas formas
+
+    // Voy guardando en un string aux los datos hasta
+    // encontrar el delimitador, lo cual será el ID
+    string aux;
+    int i=0;
+
+    while(linea[i] != DELIMITADOR)
+    {
+        aux += linea[i];
+        i++;
+    }
+
+    profesor.setDni(aux); // Actualizo el valor de Id
+    aux = ""; //Reinicio aux
+
+    
+    // Ahora, toca leer el nombre
+
+    i++; // Ignorar el delimitador
+
+    while(linea[i] != DELIMITADOR)
+    {
+        aux += linea[i];
+        i++;
+    }
+
+    profesor.setNombre(aux);
+    aux = "";
+
+    // Ahora leemos los apellidos
+
+    i++; // Ignorar el delimitador
+
+    while(linea[i] != DELIMITADOR)
+    {
+        aux += linea[i];
+        i++;
+    }
+
+    profesor.setApellidos(aux);
+    aux = "";
+
+    // Ahora leemos la fecha de nacimiento
+
+    i++; // Ignorar el delimitador
+
+    while(linea[i] != DELIMITADOR)
+    {
+        aux += linea[i];
+        i++;
+    }
+    
+    profesor.setFechaNacimiento(aux);
+    aux = "";
+
+    i++; // Ignorar el delimitador
+
+    while(linea[i] != DELIMITADOR)
+    {
+        aux += linea[i];
+        i++;
+    }
+
+    profesor.setCategoria(stoi(aux));
+
+    // Ya hemos acabado de leer los datos
+        
+    
+    return fi;
+
 }

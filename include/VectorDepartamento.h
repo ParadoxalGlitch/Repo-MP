@@ -11,6 +11,9 @@
 #ifndef VECTORDEPARTAMENTO
 #define VECTORDEPARTAMENTO
 
+#include <fstream>
+#include <sstream>
+
 #include "Departamento.h"
 
 /***************************************************************************/
@@ -38,6 +41,11 @@ public:
     // Constructor con argumentos
 
     VectorDepartamento(int capacidad);
+
+    /***********************************************************************/
+    // Constructor con argumentos (fichero)
+
+    VectorDepartamento(const string & nombre);
 
     /***********************************************************************/
     // Constructor de copia
@@ -106,7 +114,7 @@ public:
     /***********************************************************************/
     // Método toString
 
-    string toString() const;
+    string toString();
 
     /***********************************************************************/
     // Método de redimensionamiento del vector por bloques de tamaño fijo
@@ -234,8 +242,23 @@ public:
 
     VectorDepartamento operator -= (const string & cadena);
 
+    /***********************************************************************/
+    // Función de escritura de un vector en un fichero
 
+    void GuardarVectorDepartamento (const string & nombre) const;
 
+    /***********************************************************************/
+    // Función de lectura de un vector de un fichero    
+
+    void RecuperarVectorDepartamento (const string & nombre);
+
+    /***********************************************************************/
+    // Operadores >> y <<
+
+    friend ofstream & operator << (ofstream & fo, 
+                             const VectorDepartamento & vector);
+    
+    friend ifstream & operator >> (ifstream & fi, VectorDepartamento & vector);
 
 };
 
