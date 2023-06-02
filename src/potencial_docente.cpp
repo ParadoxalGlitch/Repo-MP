@@ -139,7 +139,6 @@ int main(int argc, char * argv[]){
 
     VectorProfesor profesores (ficheroProfesores);
 
-    exit(1);
 
     // Primero me piden que calcule el potencial
 
@@ -152,7 +151,7 @@ int main(int argc, char * argv[]){
     double potencial_docente[tam_potencial];
     int prof_por_dep[tam_potencial];
 
-    for (int i=0; i<departamentos.getUsados(); i++){
+    for (int i=1; i<=departamentos.getUsados(); i++){
 
         potencial_docente[i] = 0; // Inicialización
         prof_por_dep[i] = 0;
@@ -162,8 +161,7 @@ int main(int argc, char * argv[]){
         // Recorro el vector de Adscripciones en busca de aquellos profesores
         // que pertenezcan a este departamento
 
-        for (int j=0; j<adscripciones.getUsados(); j++){
-            
+        for (int j=1; j<=adscripciones.getUsados(); j++){
             // Si el profesor pertenece a ese departamento,
             // compruebo su encargo
 
@@ -178,16 +176,15 @@ int main(int argc, char * argv[]){
                 // Ahora busco al profesor con dicho dni y 
                 // extraigo su encargo
 
-                for (int k=0; k<profesores.getUsados(); k++){
-
+                for (int k=1; k<=profesores.getUsados(); k++){
+                    
                     if (profesores[k].getDni() == dni_profesor){
-
                         // Obtengo el número de encargo
                         // y compruebo su valor
 
                         int num_categoria = profesores[k].getCategoria();
 
-                        for (int l=0; l<encargos.getUsados(); l++){
+                        for (int l=1; l<=encargos.getUsados(); l++){
 
                             // Extraigo el valor y lo sumo al total
 
@@ -238,7 +235,7 @@ int main(int argc, char * argv[]){
 
     for (int i=0; i<tam_potencial; i++){
 
-        cout << departamentos[i].getId() << " --> Num.Profesores =   ";
+        cout << departamentos[i+1].getId() << " --> Num.Profesores =   ";
         cout << prof_por_dep[i] << "   Potencial =   " << potencial_docente[i];
         cout << endl;
 
@@ -248,7 +245,7 @@ int main(int argc, char * argv[]){
 
     for (int i=0; i<tam_potencial; i++){
 
-        cout << departamentos[i].getId() << " --> Potencial medio =   ";
+        cout << departamentos[i+1].getId() << " --> Potencial medio =   ";
         cout << potencial_docente_profesor[i] << endl;
 
     }
@@ -264,8 +261,8 @@ int main(int argc, char * argv[]){
 
         if (potencial_docente[i] >= media_global){
 
-            cout << departamentos[i].getId() << " ";
-            cout << departamentos[i].getNombre() << "      ";
+            cout << departamentos[i+1].getId() << " ";
+            cout << departamentos[i+1].getNombre() << "      ";
             cout << "Potencial medio =    " << potencial_docente[i] << endl;
 
         }
@@ -278,8 +275,8 @@ int main(int argc, char * argv[]){
 
         if (potencial_docente[i] < media_global){
 
-            cout << departamentos[i].getId() << " ";
-            cout << departamentos[i].getNombre() << "      ";
+            cout << departamentos[i+1].getId() << " ";
+            cout << departamentos[i+1].getNombre() << "      ";
             cout << "Potencial medio =    " << potencial_docente[i] << endl;
 
         }

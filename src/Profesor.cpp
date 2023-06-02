@@ -149,12 +149,19 @@ Profesor :: Profesor(string linea, char delimitador)
 
 Profesor :: ~Profesor()
 {
+
+    if (dni){
     delete [] dni;
     dni = nullptr;
+    }
+    if (nombre){
     delete [] nombre;
     nombre = nullptr;
+    }
+    if(apellidos){
     delete [] apellidos;
     apellidos = nullptr;
+    }
 }
 
 /***************************************************************************/
@@ -333,12 +340,6 @@ string Profesor :: ToString()
 void Profesor :: ReservaMemoria(const Profesor & objeto)
 {
 
-    // Me deshago de la memoria de lo que ya hay guardado
-
-    
-    LiberarMemoria();
-
-
     // Reservo memoria para el DNI
     dni = new char [strlen(objeto.dni) + 1];
 
@@ -430,6 +431,7 @@ Profesor & Profesor:: operator = (const Profesor & original)
 {
     if (this != &original)
     {
+        LiberarMemoria();
         clona (original);
     }
     return *this;

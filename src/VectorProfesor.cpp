@@ -215,9 +215,8 @@
     {
         if (this != &otro)
         {
-
             liberaMemoria();
-            reservaMemoria(otro.capacidad);
+            reservaMemoria(otro.getCapacidad());
             copiaDatos(otro);
         }
 
@@ -283,10 +282,9 @@
 
         // Copio los elementos del vector original al auxiliar
         aux.copiaDatos(*this);
-    
+
         // Igualo el vector original al auxiliar
         *this = aux;
-
 
     }
 
@@ -297,11 +295,7 @@
     void VectorProfesor::reservaMemoria(const int capacidad)
     {
 
-        // Me deshago de la memoria que pudiera tener reservada el vector
-        // y los datos que pudiera contener
-        liberaMemoria();
-
-        // Reservo memoria para el vector
+        //Reservo memoria para el vector
         datos = new Profesor[capacidad];
 
         // Actualizo los datos del vector
@@ -317,7 +311,7 @@
     void VectorProfesor::liberaMemoria()
     {
 
-        if (datos != nullptr)
+        if (datos)
         {
             
             delete[] datos;
@@ -336,12 +330,6 @@
     void VectorProfesor::copiaDatos(const VectorProfesor & otro)
     {
 
-        // Redimensiono el vector actual hasta que tenga suficiente capacidad
-        while (capacidad < otro.usados)
-        {
-            redimensiona();
-        }
-
         // Copio los datos de otro
         for (int i = 0; i < otro.usados; i++)
         {
@@ -349,9 +337,6 @@
         }
         
         usados = otro.usados; // Actualizo el número de elementos usados
-
-        cout << toString() << endl;
-        cout << otro.toString() << endl;
     }
 
     /***********************************************************************/
@@ -573,10 +558,8 @@
                 if (!fi.eof()){
 
                     Profesor aux(linea);
-                    //cout << aux.ToString() << endl;
 
                     vector.aniade(aux);
-
 
                 }   
 

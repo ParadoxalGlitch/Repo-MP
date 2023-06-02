@@ -1,0 +1,7 @@
+DEPARTAMENTOS
+# Colección de departamentos
+DEP1*Departamento primero*
+DEP2*Departamento numero dos*
+DEP3*Departamento tercero*
+DEP4*Departamento cuatro*
+DEP5*Quinto Departamento*
