@@ -206,7 +206,7 @@ void Profesor :: setDni(string d)
 // Me deshago de la memoria de lo que ya hay guardado
     // si es que lo hay
 
-    if (dni){
+    if (dni != nullptr){
 
         delete[] dni;
         dni = nullptr;
@@ -215,7 +215,7 @@ void Profesor :: setDni(string d)
 
     // Pido memoria para el nuevo string
 
-    char * aux = new char [d.size()];
+    char * aux = new char [d.size() + 1];
 
     // Copio los valores de nom en aux
 
@@ -237,7 +237,7 @@ void Profesor :: setNombre(string n)
     // Me deshago de la memoria de lo que ya hay guardado
     // si es que lo hay
 
-    if (nombre){
+    if (nombre != nullptr){
 
         delete[] nombre;
         nombre = nullptr;
@@ -246,7 +246,7 @@ void Profesor :: setNombre(string n)
 
     // Pido memoria para el nuevo string
 
-    char * aux = new char [n.size()];
+    char * aux = new char [n.size() + 1];
 
     // Copio los valores de nom en aux
 
@@ -268,7 +268,7 @@ void Profesor :: setApellidos(string a)
 // Me deshago de la memoria de lo que ya hay guardado
     // si es que lo hay
 
-    if (apellidos){
+    if (apellidos != nullptr){
 
         delete[] apellidos;
         apellidos = nullptr;
@@ -277,7 +277,7 @@ void Profesor :: setApellidos(string a)
 
     // Pido memoria para el nuevo string
 
-    char * aux = new char [a.size()];
+    char * aux = new char [a.size() + 1];
 
     // Copio los valores de nom en aux
 

@@ -80,7 +80,6 @@
     VectorProfesor::~VectorProfesor()
     {
         liberaMemoria();
-
     }
 
     /*****************************************************************************/
@@ -487,6 +486,7 @@
 
         } 
 
+        
         fi >> *this;
 
         // En este punto el vector ya debería estar relleno
@@ -551,11 +551,7 @@
 
             while (!fi.eof()){
 
-                while (linea.at(0) == '#'){
-                    getline(fi,linea);
-                }
-
-                if (!fi.eof()){
+                if (linea.at(0) != '#'){
 
                     Profesor aux(linea);
 
