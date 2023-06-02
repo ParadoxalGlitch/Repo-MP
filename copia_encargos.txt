@@ -1,7 +1,0 @@
-ENCARGOS
-# Colección de encargos
-1*24*
-2*20.5*
-3*16.5*
-4*12*
-5*6*

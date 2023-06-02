@@ -99,7 +99,7 @@ int main()
 	cout << profesores.toString() << endl;
 	cout << endl; 
 
-	profesores.RecuperarVectorProfesor ("copia_profesores.txt");
+	profesores.GuardarVectorProfesor ("copia_profesores.txt");
 
 	VectorProfesor copia_profesores ("copia_profesores.txt");
 

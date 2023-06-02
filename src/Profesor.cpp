@@ -216,6 +216,8 @@ void Profesor :: setDni(string d)
     {
         aux[i] = d[i];
     }
+    
+    aux[d.size()] = '\0';
 
     // Igualo id a aux
     dni = aux;
@@ -246,6 +248,8 @@ void Profesor :: setNombre(string n)
         aux[i] = n[i];
     }
 
+    aux[n.size()] = '\0';
+
     // Igualo id a aux
     nombre = aux;
     
@@ -274,6 +278,8 @@ void Profesor :: setApellidos(string a)
     {
         aux[i] = a[i];
     }
+
+    aux[a.size()] = '\0';
 
     // Igualo id a aux
     apellidos = aux;
@@ -334,22 +340,13 @@ void Profesor :: ReservaMemoria(const Profesor & objeto)
 
 
     // Reservo memoria para el DNI
-    char * aux = new char [strlen(objeto.dni) + 1];
-    
-
-    dni = aux;
+    dni = new char [strlen(objeto.dni) + 1];
 
     // Reservo memoria para el nombre
-    aux = new char [strlen(objeto.nombre) + 1];
-
-    nombre = aux;
+    nombre = new char [strlen(objeto.nombre) + 1];
 
     // Reservo memoria para los apellidos
-    aux = new char [strlen(objeto.apellidos) + 1];
-
-    apellidos = aux;
-
-    
+    apellidos = new char [strlen(objeto.apellidos) + 1];
 
 }
 
@@ -444,14 +441,6 @@ Profesor & Profesor:: operator = (const Profesor & original)
 
 ofstream & operator << (ofstream & fo, Profesor & profesor)
 {
-
-    // Guardo la cabecera
-
-    fo << "PROFESOR" << endl;
-
-    // Guardo un comentario
-
-    fo << "Datos sobre un profesor" << endl;
 
     // Guardo los datos separados por DELIMITADOR
 
