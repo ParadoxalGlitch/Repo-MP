@@ -153,8 +153,8 @@ int main(int argc, char * argv[]){
 
     for (int i=1; i<=departamentos.getUsados(); i++){
 
-        potencial_docente[i] = 0; // Inicialización
-        prof_por_dep[i] = 0;
+        potencial_docente[i-1] = 0; // Inicialización
+        prof_por_dep[i-1] = 0;
 
         string id_dep = departamentos[i].getId();
 
@@ -169,9 +169,9 @@ int main(int argc, char * argv[]){
 
             if(adscripciones[j].getId_depto() == id_dep){
                 
-                prof_por_dep[i]++;
+                prof_por_dep[i-1]++;
 
-                string dni_profesor = adscripciones[i].getDni();
+                string dni_profesor = adscripciones[j].getDni();
                 
                 // Ahora busco al profesor con dicho dni y 
                 // extraigo su encargo
@@ -188,12 +188,14 @@ int main(int argc, char * argv[]){
 
                             // Extraigo el valor y lo sumo al total
 
-                            if (encargos[l].getCategoria() == num_categoria)
+                            if (encargos[l].getCategoria() == num_categoria){
 
-                                potencial_docente[i] += \
+                                potencial_docente[i-1] += \
                                 encargos[l].getCreditos();
-                            
-                        }
+
+                                cout << encargos[l].getCreditos() << endl;
+                            }
+                        }   
                     }
                 }
             }
@@ -226,8 +228,16 @@ int main(int argc, char * argv[]){
         
     }
 
-    media_global = valor_acumulado / departamentos.getUsados();
+    media_global = valor_acumulado / profesores.getUsados();
 
+
+    cout << Cabecera("ENCARGOS") << endl << encargos.toString() << endl;
+
+    cout << Cabecera("DEPARTAMENTOS") << endl << departamentos.toString() << endl;
+
+    cout << Cabecera("PROFESORES") << endl << profesores.toString() << endl;
+
+    cout << Cabecera("ADSCRIPCIONES") << endl << adscripciones.toString() << endl;
 
     // Por ultimo, solo queda mostrar los resultados
 
@@ -259,11 +269,11 @@ int main(int argc, char * argv[]){
 
     for (int i=0; i<tam_potencial; i++){
 
-        if (potencial_docente[i] >= media_global){
+        if (potencial_docente_profesor[i] >= media_global){
 
             cout << departamentos[i+1].getId() << " ";
             cout << departamentos[i+1].getNombre() << "      ";
-            cout << "Potencial medio =    " << potencial_docente[i] << endl;
+            cout << "Potencial medio =    " << potencial_docente_profesor[i] << endl;
 
         }
 
@@ -273,11 +283,11 @@ int main(int argc, char * argv[]){
 
         for (int i=0; i<tam_potencial; i++){
 
-        if (potencial_docente[i] < media_global){
+        if (potencial_docente_profesor[i] < media_global){
 
             cout << departamentos[i+1].getId() << " ";
             cout << departamentos[i+1].getNombre() << "      ";
-            cout << "Potencial medio =    " << potencial_docente[i] << endl;
+            cout << "Potencial medio =    " << potencial_docente_profesor[i] << endl;
 
         }
 
